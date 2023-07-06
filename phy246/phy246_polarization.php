@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<style>
+table, th, td {
+  border:1px solid black;
+  border-collapse: collapse;
+summary {
+    font-weight: bold;
+    margin: -.5em -.5em 0;
+    padding: .5em;
+}
+
+details[open] {
+    padding: .5em;
+}
+
+details[open] summary {
+    border-bottom: 1px solid #aaa;
+    margin-bottom: .5em;
+}
+}
+
+h1{
+color:white;
+display: inline-block;
+}
+
+.btn {
+  background-color: Gold;
+  border: none;
+  color: black;
+  padding: 12px 16px;
+  font-size: 16px;
+  cursor: pointer;
+  float: right;
+  border-radius: 12px;
+}
+
+/* Darker background on mouse-over */
+.btn:hover {
+  background-color: #006633;
+}
+
+</style>
+<title>Polarization</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<body>
+
+<div class="w3-container" style="background-color:#006633">
+   <span><h1>Physics 246</h1></span>
+  <button class="btn" onclick="window.location.href='mainpage.php';"><i class="fa fa-home"></i> Home</button>
+</div>
+<table style="width:100%">
+  <tr>
+    <th style="width:5%">ID</th>
+    <th>Equipment</th> 
+    <th>Vendor/Catalog</th>
+    <th>Manufacture</th>
+    <th>Quantity</th>
+    <th>Room</th>
+    <th>Location</th>
+    <th>Equipment Photo</th>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td>Aperture Bracket</td>
+    <td>Pasco</td>
+    <td>OS-8534A</td>
+    <td>9</td>
+    <td>228</td>
+    <td>228A</td>
+    <td><a href="polarization/Aperture Bracket.JPG" target="_blank">aperture bracket.jpg</a></td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td>Flashlights</td>
+    <td>Home Depot</td>
+    <td></td>
+    <td>9</td>
+    <td>228</td>
+    <td>228A</td>
+    <td><a href="polarization/flashlights.jpg" target="_blank">flaslights.jpg</a></td>
+  </tr>
+  <tr>
+    <td>3</td>
+    <td>Light sensor</td>
+    <td>Pasco</td>
+    <td>CI-6504A</td>
+    <td>9</td>
+    <td>228</td>
+    <td>228A</td>
+    <td><a href="polarization/Light sensor.jpg" target="_blank">light sensor.jpg</a></td> 
+  </tr>
+  <tr>
+    <td>4</td>
+    <td>Optics Tracks 1.2m</td>
+    <td>Pasco</td>
+    <td>Pasco, OS-8508</td>
+    <td>9</td>
+    <td>228</td>
+    <td>228A</td>
+    <td><a href="polarization/optics track 1.2m.png" target="_blank">optics track 1.2m.jpg</a></td>
+  </tr>
+  <tr>
+    <td>5</td>
+    <td>Polarizers</td>
+    <td>Pasco</td>
+    <td>Pasco OS-8533A</td>
+    <td>9</td>
+    <td>228</td>
+    <td>228A</td>
+    <td><a href="polarization/Polarizers.JPG" target="_blank">polarizers.jpg</a></td>
+  </tr>
+  <tr>
+    <td>6</td>
+    <td>Precision Diffraction 2X slit</td>
+    <td>Pasco</td>
+    <td>OS-8453</td>
+    <td>9</td>
+    <td>228</td>
+    <td>228A</td>
+    <td><a href="polarization/Precision Diffraction 2X Slit.JPG" target="_blank">precision diffraction 2X slit.jpg</a></td>  
+  </tr>
+  <tr>
+    <td>7</td>
+    <td>Red Diode laser</td>
+    <td>Pasco</td>
+    <td>OS-8525A</td>
+    <td>9</td>
+    <td>228</td>
+    <td>228A</td>
+    <td><a href="polarization/Red Diode Laser.JPG" target="_blank">red diode laser.jpg</a></td>  
+  </tr>
+  <tr>
+    <td>8</td>
+    <td>Viewing Screens (Geometric Optics Kits)</td>
+    <td>Pasco</td>
+    <td>Pasco OS-8518</td>
+    <td>9</td>
+    <td>228</td>
+    <td>228A</td>
+    <td><a href="polarization/view screen (1).png" target="_blank">viewing screens.jpg</a></td>  
+  </tr>
+</table>
+</body>
+</html>

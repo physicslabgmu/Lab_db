@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<style>
+table, th, td {
+  border:1px solid black;
+  border-collapse: collapse;
+summary {
+    font-weight: bold;
+    margin: -.5em -.5em 0;
+    padding: .5em;
+}
+
+details[open] {
+    padding: .5em;
+}
+
+details[open] summary {
+    border-bottom: 1px solid #aaa;
+    margin-bottom: .5em;
+}
+}
+
+h1{
+color:white;
+display: inline-block;
+}
+
+.btn {
+  background-color: Gold;
+  border: none;
+  color: black;
+  padding: 12px 16px;
+  font-size: 16px;
+  cursor: pointer;
+  float: right;
+  border-radius: 12px;
+}
+
+/* Darker background on mouse-over */
+.btn:hover {
+  background-color: #006633;
+}
+
+</style>
+<title>Induction: Faraday's Law</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<body>
+
+<div class="w3-container" style="background-color:#006633">
+   <span><h1>Physics 246</h1></span>
+  <button class="btn" onclick="window.location.href='mainpage.php';"><i class="fa fa-home"></i> Home</button>
+</div>
+<table style="width:100%">
+  <tr>
+    <th style="width:5%">ID</th>
+    <th>Equipment</th> 
+    <th>Vendor/Catalog</th>
+    <th>Manufacture</th>
+    <th>Quantity</th>
+    <th>Room</th>
+    <th>Location</th>
+    <th>Equipment Photo</th>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td>Banana Plugs 24-48" Stacking Black & Red</td>
+    <td>Allied Electronics, 70197060</td>
+    <td>Pomona B- 18-0</td>
+    <td>All</td>
+    <td>228</td>
+    <td>closet A, C-4</td>
+    <td><a href="induction-faradayslaws/black ban.png" target="_blank">black banana plug.jpg</a>
+           <a href="induction-faradayslaws/red ban.png" target="_blank">red banana plug.jpg</a></td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td>Complete Coil Sets (box sets)</td>
+    <td>Pasco, SF-8617</td>
+    <td>Pasco</td>
+    <td>9</td>
+    <td>228</td>
+    <td>closet A, A-3</td>
+    <td><a href="induction-faradayslaws/complete coil set.tiff" target="_blank">complete coil sets.jpg</a></td>
+  </tr>
+  <tr>
+    <td>3</td>
+    <td>Hand Held Generators</td>
+    <td>Sargent Welch, WL2410</td>
+    <td>Gencon</td>
+    <td>2/bench</td>
+    <td>228</td>
+    <td>closet A, C-1</td>
+    <td><a href="induction-faradayslaws/hand generator.jpg" target="_blank">hand generator.jpg</a></td> 
+  </tr>
+  <tr>
+    <td>4</td>
+    <td>Long Bar Magnets w/ North/South poles marked</td>
+    <td>Pasco</td>
+    <td></td>
+    <td>9</td>
+    <td>328</td>
+    <td>Box 25</td>
+    <td><a href="induction-faradayslaws/bar mgnet with poles.jpg" target="_blank">bar magnets.jpg</a></td>
+  </tr>
+  <tr>
+    <td>5</td>
+    <td>Magnetic Field Sensors</td>
+    <td>Pasco, CI-6520A</td>
+    <td>Pasco</td>
+    <td>9</td>
+    <td>324</td>
+    <td>closet D, B-13</td>
+    <td><a href="induction-faradayslaws/mag. field sen.png" target="_blank">magnetic field sensor.jpg</a></td>
+  </tr>
+  <tr>
+    <td>6</td>
+    <td>Multimeters</td>
+    <td></td>
+    <td>Tenma, 72-7720</td>
+    <td>9</td>
+    <td>228</td>
+    <td>closet A, C-4</td>
+    <td><a href="induction-faradayslaws/Tenna 7720.png" target="_blank">multimeter.jpg</a></td>  
+  </tr>
+  <tr>
+    <td>7</td>
+    <td>Solenoids 3400 turns</td>
+    <td></td>
+    <td></td>
+    <td>9</td>
+    <td>320</td>
+    <td>closet 1, F-S35</td>
+    <td><a href="induction-faradayslaws/3400 turn solenoid.jpg" target="_blank">solenoid_3400 turns.jpg</a></td>
+  </tr>
+  <tr>
+    <td>8</td>
+    <td>Voltage Sensors</td>
+    <td>Pasco, CI-6503</td>
+    <td></td>
+    <td>2/bench</td>
+    <td>228</td>
+    <td>closet A, C-4</td>
+    <td><a href="induction-faradayslaws/voltage sensors.jpg" target="_blank">voltage sensor.jpg</a></td>
+  </tr>
+</table>
+</body>
+</html>

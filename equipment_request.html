@@ -1,0 +1,90 @@
+<?php
+require_once "db.php"; 
+if (isset($_POST['signup'])) {
+$ename = mysqli_real_escape_string($conn, $_POST['EquipmentName']);
+$erequest = mysqli_real_escape_string($conn, $_POST['requestedby']);
+$email = mysqli_real_escape_string($conn, $_POST['email']);
+$date = mysqli_real_escape_string($conn, $_POST['date']);
+$purpose = mysqli_real_escape_string($conn, $_POST['purpose']);
+$manufacturer = mysqli_real_escape_string($conn, $_POST['manufacturer']);
+$vendor = mysqli_real_escape_string($conn, $_POST['vendor']);
+$quantity = mysqli_real_escape_string($conn, $_POST['quantity']);
+$price = mysqli_real_escape_string($conn, $_POST['price']);
+$link = mysqli_real_escape_string($conn, $_POST['link']);
+
+if(mysqli_query($conn, "INSERT INTO equipment_request(ename, erequest, email, date, purpose, manufacturer, vendor, quantity, price, link) 
+VALUES('" . $ename . "', '" . $erequest . "','" . $email . "', '" . $date . "','" . $purpose . "','" . $manufacturer . "','" . $vendor . "','" . $quantity . "','" . $price . "','" . $link . "')")) {
+header("location: firstpage.php");
+exit();
+} 
+mysqli_close($conn);
+}
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Equipment Request</title>
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+<div class="w3-container w3-teal">
+  <h1>Equipment Request Form</h1>
+</div>
+<div class="container">
+<div class="row">
+<div class="col-lg-8 col-offset-2">
+
+<p>Please fill all fields in the form</p>
+<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+<div class="form-group">
+<label>Equipment Name</label>
+<input type="text" name="EquipmentName" class="form-control" value="" maxlength="50" required="">
+</div>
+<div class="form-group">
+<label>Requested By</label>
+<input type="text" name="requestedby" class="form-control" value="" maxlength="50" required="">
+</div>
+<div class="form-group">
+<label>Email</label>
+<input type="text" name="email" placeholder="******@gmu.edu" class="form-control" value="" maxlength="50" required="">
+</div>
+<div class="form-group ">
+<label>Date Requested</label>
+<input type="date" name="date" class="form-control" value="" maxlength="30" required="">
+</div>
+<div class="form-group">
+<label>Purpose/Equipment Description</label>
+<input type="text" name="purpose" placeholder="Description of the equipment" class="form-control" value="" required="">
+</div>
+<div class="form-group">
+<label>Manufacturer</label>
+<input type="text" name="manufacturer" class="form-control" value="" required="">
+</div>
+<div class="form-group">
+<label>Vendor</label>
+<input type="text" name="vendor" class="form-control" value=""  required="">
+</div>
+<div class="form-group">
+<label>Quantity</label>
+<input type="number" name="quantity" class="form-control" value="" required="">
+</div>
+<div class="form-group">
+<label>Unit Price</label>
+<input type="number" name="price" step="0.01" class="form-control" value="" required="">
+</div>
+<div class="form-group">
+<label>Order Link</label>
+<input type="text" name="link" class="form-control" value="" required="">
+</div>
+<input type="submit" class="btn btn-primary" name="signup" value="submit">
+</form>
+</div>
+</div>    
+</div>
+</body>
+</html>

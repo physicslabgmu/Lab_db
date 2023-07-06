@@ -1,0 +1,150 @@
+ <!DOCTYPE html>
+<html>
+<style>
+table, th, td {
+  border:1px solid black;
+  border-collapse: collapse;
+summary {
+    font-weight: bold;
+    margin: -.5em -.5em 0;
+    padding: .5em;
+}
+}
+
+h1{
+color:white;
+display: inline-block;
+}
+
+.btn {
+  background-color: Gold;
+  border: none;
+  color: black;
+  padding: 12px 16px;
+  font-size: 16px;
+  cursor: pointer;
+  float: right;
+  border-radius: 12px;
+}
+
+/* Darker background on mouse-over */
+.btn:hover {
+  background-color: #006633;
+}
+
+</style>
+<title>Free Fall</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<body>
+
+<div class="w3-container" style="background-color:#006633">
+   <span><h1>Free Fall</h1></span>
+  <button class="btn" onclick="window.location.href='mainpage.php';"><i class="fa fa-home"></i> Home</button>
+</div>
+<table style="width:100%">
+  <tr>
+    <th style="width:5%">ID</th>
+    <th>Equipment</th> 
+    <th>Vendor/Catalog</th>
+    <th>Manufacture</th>
+    <th>Quantity</th>
+    <th>Room</th>
+    <th>Location</th>
+    <th>Equipment Photo</th>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td>Basketballs</td>
+    <td>Target</td>
+    <td></td>
+    <td>9</td>
+    <td>228</td>
+    <td>closet floor</td>
+    <td><a href="freefall/collision cart.jpg" target="_blank">collision cart.jpg</a></td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td>Cardboard shims, for leveling</td>
+    <td></td>
+    <td></td>
+    <td>as needed</td>
+    <td>228</td>
+    <td>Closet A</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>3</td>
+    <td>Collision Carts w/ mass</td>
+    <td>Pasco, ME-9454</td>
+    <td></td>
+    <td>2/bench</td>
+    <td>228</td>
+    <td>closet A, floor under Shelf A</td>
+    <td><a href="freefall/collision cart.jpg" target="_blank">collision cart.jpg</a></td> 
+  </tr>
+  <tr>
+    <td>4</td>
+    <td>Digital Scales</td>
+    <td>Ozeri Precision</td>
+    <td></td>
+    <td>9</td>
+    <td>228</td>
+    <td>closet A, A-4</td>
+    <td><a href="freefall/Ozeri Sclae.jpg" target="_blank">dynamic track.jpg</a></td>
+  </tr>
+  <tr>
+    <td>5</td>		
+    <td>Dynamics Cart Accessory Track</td>
+    <td>Pasco, ME-9493</td>
+    <td></td>
+    <td>9</td>
+    <td>228</td>
+    <td>cardboard tubes</td>
+    <td><a href="freefall/dynamic track.png" target="_blank">dynamic track.jpg</a></td>
+  </tr>
+  <tr>
+    <td>6</td>
+    <td>Motion Sensor Cords (some sensors have attached cords)</td>
+    <td></td>
+    <td></td>
+    <td>as needed</td>
+    <td>228</td>
+    <td>closet A, B-2</td>
+    <td><a href="freefall/motion sensor cord.jpg" target="_blank">motion sensor cord.jpg</a></td>
+  </tr>
+  <tr>
+    <td>7</td>
+    <td>Motion Sensors II</td>
+    <td>Pasco, CI-6742A</td>
+    <td>Pasco</td>
+    <td>2/bench</td>
+    <td>228</td>
+    <td>closet A, B-2</td>
+    <td><a href="freefall/motion sen. II.jpg" target="_blank">motion sensor II.jpg</a></td>
+  </tr>
+  <tr>
+    <td>8</td>
+    <td>Pasco 850 Universal Interface</td>
+    <td>Pasco, CI-5000</td>
+    <td>Pasco</td>
+    <td>9</td>
+    <td>228</td>
+    <td>lab benches</td>
+    <td><a href="freefall/Pasco 850 (1).png" target="_blank">pasco 850.png</a></td>
+  </tr>
+  <tr>
+    <td>9</td>
+    <td>Plunger Carts w/ mass</td>
+    <td>Pasco, ME-9430</td>
+    <td></td>
+    <td>9</td>
+    <td>228</td>
+    <td>closet A, floor under Shelf A</td>
+    <td><a href="freefall/plunger cart.jpg" target="_blank">plunger cart.jpg</a></td>
+  </tr>
+</table>
+</body>
+</html>

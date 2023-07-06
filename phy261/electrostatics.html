@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<style>
+table, th, td {
+  border:1px solid black;
+  border-collapse: collapse;
+summary {
+    font-weight: bold;
+    margin: -.5em -.5em 0;
+    padding: .5em;
+}
+}
+
+h1{
+color:white;
+display: inline-block;
+}
+
+.btn {
+  background-color: Gold;
+  border: none;
+  color: black;
+  padding: 12px 16px;
+  font-size: 16px;
+  cursor: pointer;
+  float: right;
+  border-radius: 12px;
+}
+
+/* Darker background on mouse-over */
+.btn:hover {
+  background-color: #006633;
+}
+
+</style>
+<title>Electrostatics and The Standard Deviation</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<body>
+
+<div class="w3-container" style="background-color:#006633">
+   <span><h1>Physics 103</h1></span>
+  <button class="btn" onclick="window.location.href='mainpage.php';"><i class="fa fa-home"></i> Home</button>
+</div>
+<table style="width:100%">
+  <tr>
+    <th style="width:5%">ID</th>
+    <th>Equipment</th> 
+    <th>Vendor/Catalog</th>
+    <th>Manufacture</th>
+    <th>Quantity</th>
+    <th>Room</th>
+    <th>Location</th>
+    <th>Equipment Photo</th>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td>Banana Plugs 12" Stacking Black & Red</td>
+    <td>Allied Electronics, 70197059</td>
+    <td>Pomona Electronics B12-0</td>
+    <td>All</td>
+    <td>320</td>
+    <td>closet 1, D-S23</td>
+    <td><a href="phy261/electrostatistics/black ban.png" target="_blank">Black banana.jpg</a>
+           <a href="phy261/electrostatistics/red ban.png" target="_blank">Red banana.jpg</a></td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td>Basic Electrometer w/ BNC connector</td>
+    <td>Pasco, ES-9078A</td>
+    <td>Pasco</td>
+    <td>9</td>
+    <td>320</td>
+    <td>closet 1, H-S48</td>
+    <td><a href="phy261/electrostatistics/basic electrometer.png" target="_blank">Basic electrometer.jpg</a></td>
+  </tr>
+  <tr>
+    <td>3</td>
+    <td>Capstone Software</td>
+    <td>Pasco, UI-5406</td>
+    <td>Pasco</td>
+    <td>9</td>
+    <td>320</td>
+    <td>computers</td>
+    <td></td> 
+  </tr>
+  <tr>
+    <td>4</td>
+    <td>Charge Producers & Proof Planes- (set of 3, aluminum, dark & light surfaces)</td>
+    <td>Pasco, ES-9057C</td>
+    <td>Pasco</td>
+    <td>1/ bench</td>
+    <td>320</td>
+    <td>closet 1, H-S48</td>
+    <td><a href="phy261/electrostatistics/charge pro. proof pl.png" target="_blank">charge producers & proof planes.jpg</a>
+    </td>
+  </tr>
+  <tr>
+    <td>5</td>		
+    <td>Charge Sensor w/ BNC/Interface Cable</td>
+    <td>Pasco, CI-6555</td>
+    <td>Pasco</td>
+    <td>9</td>
+    <td>320</td>
+    <td>closet 1, H-S48</td>
+    <td><a href="phy261/electrostatistics/charge sen (2).png" target="_blank">charge sensor.jpg</a>
+    </td>
+  </tr> 	
+  <tr>
+    <td>6</td>		
+    <td>Conductive Spheres (set of 2)</td>
+    <td>Pasco, ES-9059C</td>
+    <td>Pasco</td>
+    <td>1 set/ bench</td>
+    <td>320</td>
+    <td>closet 1, H-46 & 47</td>
+    <td><a href="phy261/electrostatistics/conduct. spheres (1).tiff" target="_blank">conductive spheres.jpg</a>
+    </td>
+  </tr> 
+  <tr>
+    <td>7</td>		
+    <td>Electrostatic Voltage Source w/power adapter</td>
+    <td>Pasco, ES-9077</td>
+    <td>Pasco</td>
+    <td>9</td>
+    <td>320</td>
+    <td>closet 1, H-S48</td>
+    <td><a href="phy261/electrostatistics/electro. volt src.png" target="_blank">electrostatic voltage source.jpg</a>
+    </td>
+  </tr> 
+  <tr>
+    <td>8</td>		
+    <td>Faraday Ice Pails</td>
+    <td>Pasco, ES-9042A</td>
+    <td>Pasco</td>
+    <td>9</td>
+    <td>320</td>
+    <td>closet 1, H-S45</td>
+    <td><a href="phy261/electrostatistics/Faraday cages.jpg" target="_blank">faraday cages.jpg</a>
+    </td>
+  </tr> 
+  <tr>
+    <td>9</td>		
+    <td>Ground Wristbands</td>
+    <td></td>
+    <td></td>
+    <td>9</td>
+    <td>320</td>
+    <td>closet 1, H-S48</td>
+    <td><a href="phy261/electrostatistics/ground wristbands.tiff" target="_blank">ground wristbands.jpg</a>
+    </td>
+  </tr> 
+  <tr>
+    <td>10</td>		
+    <td>Pasco 850 Universal Interface</td>
+    <td>Pasco, CI-5000</td>
+    <td>Pasco</td>
+    <td>9</td>
+    <td>320</td>
+    <td>lab benches</td>
+    <td><a href="phy261/electrostatistics/Pasco 850 (1).png" target="_blank">Pasco 850.jpg</a>
+    </td>
+  </tr> 
+  <tr>
+    <td>11</td>		
+    <td>Purple Nitrile Gloves</td>
+    <td></td>
+    <td>Kimberly Clark, KC 500</td>
+    <td>1 box</td>
+    <td>320</td>
+    <td>closet 1, A-S2</td>
+    <td><a href="phy261/electrostatistics/purple nitrile glove.png" target="_blank">purple nitrile glove.jpg</a>
+    </td>
+  </tr> 
+</table>
+</body>
+</html>
