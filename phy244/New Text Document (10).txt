@@ -33,7 +33,7 @@ display: inline-block;
 }
 
 </style>
-<title>Free Fall</title>
+<title>Torque Lab</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -41,7 +41,7 @@ display: inline-block;
 <body>
 
 <div class="w3-container" style="background-color:#006633">
-   <span><h1>Free Fall</h1></span>
+   <span><h1>Torque Lab</h1></span>
   <button class="btn" onclick="window.location.href='mainpage.php';"><i class="fa fa-home"></i> Home</button>
 </div>
 <table style="width:100%">
@@ -57,93 +57,93 @@ display: inline-block;
   </tr>
   <tr>
     <td>1</td>
-    <td>Basketballs</td>
-    <td>Target</td>
+    <td>2 Pole Clamps</td>
+    <td>Sargent Welch, WLS78447-15</td>
     <td></td>
-    <td>9</td>
+    <td>2/bench</td>
     <td>228</td>
-    <td>closet floor</td>
-    <td><a href="freefall/collision cart.jpg" target="_blank">collision cart.jpg</a></td>
+    <td></td>
+    <td><a href="torquelab/2 pole.jpg" target="_blank">2 pole clamp.jpg</a></td>
   </tr>
   <tr>
     <td>2</td>
-    <td>Cardboard shims, for leveling</td>
-    <td></td>
-    <td></td>
-    <td>as needed</td>
+    <td>Force Sensors</td>
+    <td>Pasco, CI-6746</td>
+    <td>Pasco</td>
+    <td>2/bench</td>
     <td>228</td>
-    <td>Closet A</td>
+    <td></td>
     <td></td>
   </tr>
   <tr>
     <td>3</td>
-    <td>Collision Carts w/ mass</td>
-    <td>Pasco, ME-9454</td>
-    <td></td>
+    <td>Mass Sets</td>
+    <td>Pasco, SE-8705</td>
+    <td>Pasco</td>
     <td>2/bench</td>
     <td>228</td>
-    <td>closet A, floor under Shelf A</td>
-    <td><a href="freefall/collision cart.jpg" target="_blank">collision cart.jpg</a></td> 
+    <td></td>
+    <td></td> 
   </tr>
   <tr>
     <td>4</td>
-    <td>Digital Scales</td>
-    <td>Ozeri Precision</td>
+    <td>Meter Sticks</td>
+    <td>Sargent Welch WLS44685</td>
     <td></td>
-    <td>9</td>
+    <td>8</td>
     <td>228</td>
-    <td>closet A, A-4</td>
-    <td><a href="freefall/Ozeri Sclae.jpg" target="_blank">dynamic track.jpg</a></td>
+    <td></td>
+    <td></td>
   </tr>
   <tr>
     <td>5</td>		
-    <td>Dynamics Cart Accessory Track</td>
-    <td>Pasco, ME-9493</td>
-    <td></td>
-    <td>9</td>
+    <td>Pasco 850 Universal Interface</td>
+    <td>Pasco, CI-5000</td>
+    <td>Pasco</td>
+    <td>8</td>
     <td>228</td>
-    <td>cardboard tubes</td>
-    <td><a href="freefall/dynamic track.png" target="_blank">dynamic track.jpg</a></td>
+    <td></td>
+    <td></td>
   </tr>
   <tr>
     <td>6</td>
-    <td>Motion Sensor Cords (some sensors have attached cords)</td>
+    <td>Ring Hangers</td>
     <td></td>
     <td></td>
     <td>as needed</td>
     <td>228</td>
-    <td>closet A, B-2</td>
-    <td><a href="freefall/motion sensor cord.jpg" target="_blank">motion sensor cord.jpg</a></td>
+    <td>228A</td>
+    <td><a href="torquelab/ring hangers.jpg" target="_blank">ring hangers.jpg</a></td>
   </tr>
   <tr>
     <td>7</td>
-    <td>Motion Sensors II</td>
-    <td>Pasco, CI-6742A</td>
-    <td>Pasco</td>
-    <td>2/bench</td>
+    <td>Steel/Aluminum Rods ~32-40"</td>
+    <td>Sargent Welch</td>
+    <td></td>
+    <td>3/bench</td>
     <td>228</td>
-    <td>closet A, B-2</td>
-    <td><a href="freefall/motion sen. II.jpg" target="_blank">motion sensor II.jpg</a></td>
+    <td></td>
+    <td></td>
   </tr>
   <tr>
     <td>8</td>
-    <td>Pasco 850 Universal Interface</td>
-    <td>Pasco, CI-5000</td>
-    <td>Pasco</td>
-    <td>9</td>
+    <td>Steel/Aluminum Rods 23.5"</td>
+    <td></td>
+    <td></td>
+    <td>8</td>
     <td>228</td>
-    <td>lab benches</td>
-    <td><a href="freefall/Pasco 850 (1).png" target="_blank">pasco 850.png</a></td>
+    <td></td>
+    <td></td>
   </tr>
   <tr>
     <td>9</td>
-    <td>Plunger Carts w/ mass</td>
-    <td>Pasco, ME-9430</td>
+    <td>Table Clamps</td>
+    <td>Sargent Welch, WLS78430-10</td>
     <td></td>
-    <td>9</td>
+    <td>2/bench</td>
     <td>228</td>
-    <td>closet A, floor under Shelf A</td>
-    <td><a href="freefall/plunger cart.jpg" target="_blank">plunger cart.jpg</a></td>
+    <td></td>
+    <td></td>
   </tr>
 </table>
 </body>
