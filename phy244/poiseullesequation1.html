@@ -1,0 +1,240 @@
+ <!DOCTYPE html>
+<html>
+<style>
+table, th, td {
+  border:1px solid black;
+  border-collapse: collapse;
+summary {
+    font-weight: bold;
+    margin: -.5em -.5em 0;
+    padding: .5em;
+}
+}
+
+h1{
+color:white;
+display: inline-block;
+}
+
+.btn {
+  background-color: Gold;
+  border: none;
+  color: black;
+  padding: 12px 16px;
+  font-size: 16px;
+  cursor: pointer;
+  float: right;
+  border-radius: 12px;
+}
+
+/* Darker background on mouse-over */
+.btn:hover {
+  background-color: #006633;
+}
+
+</style>
+<title>Poiseulle's Equation I</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<body>
+
+<div class="w3-container" style="background-color:#006633">
+   <span><h1>Poiseulle's Equation I</h1></span>
+  <button class="btn" onclick="window.location.href='mainpage.php';"><i class="fa fa-home"></i> Home</button>
+</div>
+<table style="width:100%">
+  <tr>
+    <th style="width:5%">ID</th>
+    <th>Equipment</th> 
+    <th>Vendor/Catalog</th>
+    <th>Manufacture</th>
+    <th>Quantity</th>
+    <th>Room</th>
+    <th>Location</th>
+    <th>Equipment Photo</th>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td>2 Pole Clamps</td>
+    <td>Sargent Welch, WLS78447-15</td>
+    <td></td>
+    <td>9</td>
+    <td>228</td>
+    <td>closet A, B-4</td>
+    <td><a href="poiseullesequation1/2 pole.jpg" target="_blank">2 pole.jpg</a></td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td>Buret Clamps</td>
+    <td>Pasco, SE-9445</td>
+    <td></td>
+    <td>9</td>
+    <td>228</td>
+    <td>closet A, B-4</td>
+    <td><a href="poiseullesequation1/3 finger clamp (1).png" target="_blank">3 finger clamp (1).png</a></td>
+  </tr>
+  <tr>
+    <td>3</td>
+    <td>Capstone</td>
+    <td>Pasco</td>
+    <td></td>
+    <td>9</td>
+    <td>228</td>
+    <td>computers</td>
+    <td></td> 
+  </tr>
+  <tr>
+    <td>4</td>
+    <td>Digital Calipers</td>
+    <td>Pasco, SE-8710</td>
+    <td></td>
+    <td>9</td>
+    <td>228</td>
+    <td>closet A, A-4</td>
+    <td><a href="poiseullesequation1/digital caliper.jpg" target="_blank">digital caliper.jpg</a></td>
+  </tr>
+  <tr>
+    <td>5</td>		
+    <td>Funnels Red & Grey</td>
+    <td></td>
+    <td></td>
+    <td>6</td>
+    <td>328</td>
+    <td>box 14</td>
+    <td><a href="poiseullesequation1/collapsible funnels.jpg" target="_blank">collapsible funnels.jpg</a></td>
+  </tr>
+  <tr>
+    <td>6</td>
+    <td>Graduated Cylinders 250 ml</td>
+    <td>Sargent Welch, WL5260B</td>
+    <td></td>
+    <td>9</td>
+    <td>328</td>
+    <td>box 13</td>
+    <td><a href="poiseullesequation1/grad. cy. 250ml (1).png" target="_blank">grad. cy. 250ml (1).png</a></td>
+  </tr>
+  <tr>
+    <td>7</td>
+    <td>Motion Sensor Cords (some sensors have attached cords)</td>
+    <td></td>
+    <td></td>
+    <td>as needed</td>
+    <td>228</td>
+    <td>closet A, B-2</td>
+    <td><a href="poiseullesequation1/motion sensor cord.jpg" target="_blank">motion sensor cord.jpg</a></td>
+  </tr>
+  <tr>
+    <td>8</td>
+    <td>Motion Sensors II</td>
+    <td>Pasco, CI-6742A</td>
+    <td>Pasco</td>
+    <td>9</td>
+    <td>228</td>
+    <td>closet A, B-2</td>
+    <td><a href="poiseullesequation1/Motion Sensor II.jpg" target="_blank">Motion Sensor II.jpg</a></td>
+  </tr>
+  <tr>
+    <td>9</td>
+    <td>Pasco 850 Universal Interface</td>
+    <td>Pasco, CI-5000</td>
+    <td>Pasco</td>
+    <td>9</td>
+    <td>228</td>
+    <td>lab benches</td>
+    <td><a href="poiseullesequation1/Pasco 850 (1).png" target="_blank">Pasco 850 (1).png</a></td>
+  </tr>
+  <tr>
+    <td>10</td>
+    <td>Rubber Tubing (.6, .8, 1, 1.2, 1.4, & 1.6mm)</td>
+    <td></td>
+    <td></td>
+    <td>All</td>
+    <td>228</td>
+    <td>closet A, C-1 plastic bucket</td>
+    <td><a href="poiseullesequation1/rubber tubing.jpg" target="_blank">rubber tubing.jpg</a></td>
+  </tr>
+  <tr>
+    <td>11</td>
+    <td>Rulers w/ cm scales</td>
+    <td>Staples</td>
+    <td></td>
+    <td>9</td>
+    <td>228</td>
+    <td>closet A, B-4</td>
+    <td><a href="poiseullesequation1/rulers.jpg" target="_blank">rulers.jpg</a></td>
+  </tr>
+  <tr>
+    <td>12</td>
+    <td>Steel/Aluminum Rods ~32-39"</td>
+    <td>Sargent Welch</td>
+    <td></td>
+    <td>9</td>
+    <td>228</td>
+    <td>closet A, plastic bucket</td>
+    <td><a href="poiseullesequation1/steel poles.jpg" target="_blank">steel poles.jpg</a></td>
+  </tr>
+  <tr>
+    <td>13</td>
+    <td>Steel/Aluminum Rods 15.75"</td>
+    <td>Sargent Welch, WLS78379D</td>
+    <td></td>
+    <td>9</td>
+    <td>228</td>
+    <td>closet A, A-5</td>
+    <td><a href="poiseullesequation1/poles.png" target="_blank">poles.png</a></td>
+  </tr>
+  <tr>
+    <td>14</td>
+    <td>Stopwatches</td>
+    <td>Wal Mart</td>
+    <td>Sportline 240 Econosport</td>
+    <td>9</td>
+    <td>228</td>
+    <td>closet A, Shelf B-4, Resistor/Capacitor/LED Storage Compartments</td>
+    <td><a href="poiseullesequation1/stopwatch sprt. ln.png" target="_blank">stopwatch sprt. ln.png</a></td>
+  </tr>
+  <tr>
+    <td>15</td>
+    <td>Table Clamps</td>
+    <td>Sargent Welch, WLS78430-10</td>
+    <td></td>
+    <td>9</td>
+    <td>228</td>
+    <td>closet A, floor under Shelf A</td>
+    <td><a href="poiseullesequation1/Table Clamp.tiff" target="_blank">Table Clamp.tiff</a></td>
+  </tr>
+  <tr>
+    <td>16</td>
+    <td>Thermoses Red/White</td>
+    <td></td>
+    <td></td>
+    <td>9</td>
+    <td>228</td>
+    <td>under sink in the front</td>
+    <td><a href="poiseullesequation1/Thermoses.jpg" target="_blank">Thermoses.jpg</a></td>
+  </tr>
+  <tr>
+    <td>17</td>
+    <td>Water Resevoir 1,000ml (Venturi Apparatus)</td>
+    <td>Pasco, ME-8594</td>
+    <td></td>
+    <td>9</td>
+    <td>228</td>
+    <td>closet A, B-1</td>
+    <td><a href="poiseullesequation1/Water Resevoir.jpg" target="_blank">Water Resevoir.jpg</a></td>
+  </tr>
+  <tr>
+    <td>18</td>
+    <td>Wooden Blocks and Styrofoam blocks</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td>328</td>
+    <td>Box 8</td>
+    <td></td>
+  </tr>
+</table>
+</body>
+</html>
