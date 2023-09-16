@@ -40,7 +40,7 @@ mysqli_close($conn);
 <div class="col-lg-8 col-offset-2">
 
 <p>Please fill all fields in the form</p>
-<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); method="post" ?>
 <div class="form-group">
 <label>Equipment Name</label>
 <input type="text" name="EquipmentName" class="form-control" value="" maxlength="50" required="">
