@@ -1,4 +1,4 @@
-<?php
+<!-- <?php
 require_once "db.php"; 
 if (isset($_POST['signup'])) {
 $ename = mysqli_real_escape_string($conn, $_POST['EquipmentName']);
@@ -19,7 +19,7 @@ exit();
 } 
 mysqli_close($conn);
 }
-?>
+?> -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,13 +34,15 @@ mysqli_close($conn);
 <body>
 <div class="w3-container w3-teal">
   <h1>Equipment Request Form</h1>
+  <button class="btn" onclick="window.location.href='mainpage.html';"><i class="fa fa-home"></i> Home</button>
 </div>
 <div class="container">
 <div class="row">
 <div class="col-lg-8 col-offset-2">
 
 <p>Please fill all fields in the form</p>
-<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); method="post" ?>
+<!-- <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); method="post" ?> -->
+<form method="POST" action="insert.php">
 <div class="form-group">
 <label>Equipment Name</label>
 <input type="text" name="EquipmentName" class="form-control" value="" maxlength="50" required="">

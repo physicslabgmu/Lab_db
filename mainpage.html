@@ -5,9 +5,87 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<style>
+  .sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #006633;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+  }
+
+  .sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: white;
+    display: block;
+    transition: 0.3s;
+  }
+
+  .sidenav a:hover {
+    color: #006633;
+  }
+
+  .sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+  }
+
+  .container {
+    display: flex;
+    flex-direction: row;
+  }
+
+  @media screen and (max-height: 450px) {
+    .sidenav {
+      padding-top: 15px;
+    }
+
+    .sidenav a {
+      font-size: 18px;
+    }
+  }
+
+  .image:nth-of-type(1) {
+    animation-delay: 0s;
+  }
+
+  .image:nth-of-type(2) {
+    animation-delay: 10s;
+  }
+
+  @keyframes change-img-anim {
+    0% {
+      opacity: 0;
+    }
+
+    10% {
+      opacity: 1;
+    }
+
+    90% {
+      opacity: 1;
+    }
+
+    100% {
+      opacity: 0;
+    }
+  }
+</style>
+
 <body>
 
-<div class="w3-sidebar w3-bar-block w3-light-grey w3-card" style="width:200px;">
+  <!-- <div class="w3-sidebar w3-bar-block w3-light-grey w3-card" style="width:200px;">
   <h3 class="w3-bar-item">Menu</h3>
   <a href="#" class="w3-bar-item w3-button">Equipment Manual</a>
   <button class="w3-button w3-block w3-left-align" onclick="myAccFunc()">
@@ -26,33 +104,80 @@
   <a href="pa_database_fairfax.html" class="w3-bar-item w3-button">Physics & Astronomy Database Fairfax</a>
   <a href="pa_demonstration.html" class="w3-bar-item w3-button">Physics & Astronomy Demonstration</a>
   <a href="broken_equipment.php" class="w3-bar-item w3-button">Broken Equipment</a>
-  <a href="pa_shop.html" class="w3-bar-item w3-button">Physics and Astronomy Shop</a>
-</div>
+  <a href="pa_shop.php" class="w3-bar-item w3-button">Physics and Astronomy Shop</a>
+</div> -->
+  <div class="container">
 
-<!-- Page Content -->
-<div style="margin-left:13%">
+    <div id="mySidenav" class="sidenav">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
 
-<div class="w3-container" style="background-color:#006633">
-  <h1 style="color: white">Welcome to Physics and Astronomy Lab</h1>
-</div>
-<img src="images/pa_img.png" alt="Physics and Astronomy" style="width:100%" style="height:100%">
+      <!-- <a href="#">About</a>
+  <a href="#">Services</a>
+  <a href="#">Clients</a>
+  <a href="#">Contact</a> -->
+      <!-- <h3 class="w3-bar-item w3-button" style="text-align: center;">Menu</h3> -->
+      <a href="#" class="w3-bar-item w3-button">Equipment Manual</a>
+      <button class="w3-button w3-block " style="text-align: center; color: white;" onclick="myAccFunc()">
+        Physics Lab Setup <i class="fa fa-caret-down"></i>
+      </button>
+      <div id="demoAcc" class="w3-hide w3-#006633 w3-card">
+        <a href="phy103.html" class="w3-bar-item w3-button">PHYS103</a>
+        <a href="phy104.html" class="w3-bar-item w3-button">PHYS104</a>
+        <a href="phy161.html" class="w3-bar-item w3-button">PHYS161</a>
+        <a href="phy244.html" class="w3-bar-item w3-button">PHYS244</a>
+        <a href="phy246.html" class="w3-bar-item w3-button">PHYS246</a>
+        <a href="phy261.html" class="w3-bar-item w3-button">PHYS261</a>
+        <a href="phy263.html" class="w3-bar-item w3-button">PHYS263</a>
+      </div>
+      <a href="equipment_request.html" class="w3-bar-item w3-button">Equipment Request From</a>
+      <a href="pa_database_fairfax.html" class="w3-bar-item w3-button">Physics & Astronomy Database Fairfax</a>
+      <a href="pa_demonstration.html" class="w3-bar-item w3-button">Physics & Astronomy Demonstration</a>
+      <a href="broken_equipment.php" class="w3-bar-item w3-button">Broken Equipment</a>
+      <a href="pa_shop.php" class="w3-bar-item w3-button">Physics and Astronomy Shop</a>
+    </div>
+    <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
+    <!-- Page Content -->
+    <!-- <div style="margin-left:13%"> -->
 
-<div class="w3-container">
-</div>
 
-</div>
- <script>
-function myAccFunc() {
-  var x = document.getElementById("demoAcc");
-  if (x.className.indexOf("w3-show") == -1) {
-    x.className += " w3-show";
-    x.previousElementSibling.className += " w3-green";
-  } else { 
-    x.className = x.className.replace(" w3-show", "");
-    x.previousElementSibling.className = 
-    x.previousElementSibling.className.replace(" w3-green", "");
-  }
-}
-</script>     
+
+
+    <div class="w3-container">
+    </div>
+    <div class="w3-container" style="background-color:#006633; width: 100%;">
+      <h1 style="color: white; text-align: center;">Welcome to Physics and Astronomy Lab</h1>
+    </div>
+
+  </div>
+  </div>
+  <img src="images/pa_img.png" class="image" alt="Physics and Astronomy"
+    style=" object-fit: cover; width: 100%; border-radius: 8px;">
+  <!-- <img src="images/pa_new2.jpg" class="image" alt="Physics and Astronomy"
+    style=" object-fit: cover; width: 100%; border-radius: 8px;"> -->
+
+  <script>
+    function myAccFunc() {
+      var x = document.getElementById("demoAcc");
+      if (x.className.indexOf("w3-show") == -1) {
+        x.className += " w3-show";
+        x.previousElementSibling.className += " w3-green";
+      } else {
+        x.className = x.className.replace(" w3-show", "");
+        x.previousElementSibling.className =
+          x.previousElementSibling.className.replace(" w3-green", "");
+      }
+    }
+  </script>
+
+  <script>
+    function openNav() {
+      document.getElementById("mySidenav").style.width = "100%";
+    }
+
+    function closeNav() {
+      document.getElementById("mySidenav").style.width = "0";
+    }
+  </script>
 </body>
+
 </html>
