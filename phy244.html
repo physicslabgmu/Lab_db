@@ -1,177 +1,233 @@
 <!DOCTYPE html>
 <html>
 <style>
-table, th, td {
-  border:1px solid black;
-  border-collapse: collapse;
-summary {
-    font-weight: bold;
-    margin: -.5em -.5em 0;
-    padding: .5em;
-}
+  body{
+    width: auto;
+    height: auto;
+  }
+  table,
+  th,
+  td {
+    border: 1px solid black;
+    border-collapse: collapse;
 
-}
+    summary {
+      font-weight: bold;
+      margin: -.5em -.5em 0;
+      padding: .5em;
+    }
 
-h1{
-color:white;
-display: inline-block;
-}
+  }
 
-.btn {
-  background-color: Gold;
-  border: none;
-  color: black;
-  padding: 12px 16px;
-  font-size: 16px;
-  cursor: pointer;
-  float: right;
-  border-radius: 12px;
-}
+  h1 {
+    color: white;
+    display: inline-block;
+  }
 
-/* Darker background on mouse-over */
-.btn:hover {
-  background-color: #006633;
-}
+  .btn {
+    background-color: Gold;
+    border: none;
+    color: black;
+    padding: 12px 16px;
+    font-size: 16px;
+    cursor: pointer;
+    float: right;
+    border-radius: 12px;
+  }
 
+  /* Darker background on mouse-over */
+  .btn:hover {
+    background-color: #006633;
+  }
+
+  footer {
+    margin-top: 2px;
+    display: flex;
+    /* flex-direction: column; */
+    /* float: left; */
+    background-color: #FFCC33;
+    /* background-color: #006633; */
+    /* Transparent yellow background */
+    color: #006633;
+    /* color: white; */
+    align-items: flex-end;
+    /* Align items to the right */
+    padding: 10px;
+  }
+
+  footer .w3-container {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    /* margin-left: 50%; */
+  }
+
+  footer h2,
+  footer h3 {
+    margin: 0;
+    /* Remove default margin */
+  }
 </style>
 <title>Physics 244</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <body>
 
-<div class="w3-container" style="background-color:#006633">
-   <span><h1>Physics 244</h1></span>
-  <button class="btn" onclick="window.location.href='mainpage.html';"><i class="fa fa-home"></i> Home</button>
-</div>
-<table style="width:100%">
-  <tr>
-    <th style="width:5%">ID</th>
-    <th style="width:30%">Lab Activity</th> 
-    <th style="width:40%">Pictures</th>
-    <th>Lab Manuals</th>
-    <th>Details</th>
-  </tr>
-  <tr>
-    <td>1</td>
-    <td>1-D Motion</td>
-    <td><a href="phy244/1dmotion/1-D-Motion.JPG" target="_blank">1-D motion.jpg</a></td>
-    <td></td>
-    <td><a href="phy244/1dmotion.html"> More Details</a></td>
-  </tr>
-  <tr>
-    <td>2</td>
-    <td>Conservation of Energy</td>
-    <td><a href="phy244/conservationofenergy/Conservation of Energy_phys161.JPG" target="_blank">conservation of energy.jpg</a></td>
-    <td></td>
-    <td><a href="phy244/conservationofenergy.html"> More Details</a></td>
-  </tr>
-  <tr>
-    <td>3</td>
-    <td>Conseration of Linear Momentum </td>
-    <td><a href="phy244/conservationoflinearmomentum/Conservation of Linear Momentum_phys161.JPG" target="_blank">conservation of linear momentum.jpg</a></td>
-    <td><a href="phy244/conservationoflinearmomentum/MomentumConservation.pdf" target="_blank">conservation of linear momentum.pdf</a></td>
-    <td><a href="phy244/conservationoflinearmomentum.html"> More Details</a></td>
-  </tr>
-  <tr>
-    <td>4</td>
-    <td>Free Fall</td>
-    <td><a href="phy244/freefall/Free Fall_phys161_244.JPG" target="_blank">freefall.jpg</a></td>
-    <td><a href="phy244/freefall/FreeFall (1).pdf" target="_blank">freefall.pdf</a></td>
-    <td><a href="phy244/freefall.html"> More Details</a></td>
-  </tr>
-  <tr>
-    <td>5</td>
-    <td>Heat Engine Ideal Gas Law</td>
-    <td><a href="phy244/heatengine_idealgaslaw/Heat Engine and Idel Gas law_phys161-263.JPG" target="_blank">heat engine ideal gaas law.jpg</a></td>
-    <td></td>
-    <td><a href="phy244/heatengine_idealgaslaw.html"> More Details</a></td>
-  </tr>
-  <tr>
-    <td>6</td>
-    <td>Modelling Bone Fractures</td>
-    <td><a href="phy244/modelingbonefractures/Modeling Bone Fractures.JPG" target="_blank">modelling bone fracture.jpg</a></td>
-    <td></td>
-    <td><a href="phy244/modelingbonefractures.html"> More Details</a></td>
-  </tr>
-  <tr>
-    <td>7</td>
-    <td>Motion of an Amoeba</td>
-    <td></td>
-    <td><a href="phy244/motionofanamoeba/Amoeba Motion(1).pdf" target="_blank">motion of an amoeba.pdf</a</td>
-    <td><a href="phy244/motionofanamoeba.html"> More Details</a></td>
-  </tr>
-  <tr>
-    <td>8</td>
-    <td>Newtons Laws of Motion</td>
-    <td><a href="phy244/newtonslawsofmotion/Newton-law.JPG"target="_blank">newtons laws of motion.jpg</a></td>
-    <td><a href="phy244/newtonslawsofmotion/NewtonsLaws.pdf" target="_blank">newtons laws of motion.pdf</a></td>
-    <td><a href="phy244/newtonslawsofmotion.html"> More Details</a></td>
-  </tr>
-  <tr> 
-    <td>9</td>
-    <td>Simple Harmonic Motion</td>
-    <td><a href="phy244/simpleharmonicmotion/Mass on a Spring_phys244.JPG" target="_blank">simple harmonic motion.jpg</a></td>
-    <td><a href="phy244/simpleharmonicmotion/Phys 244 Simple pendulum F2F Fall 2022(1)(1).docx" target="_blank">simple harmonic motion.doc</a></td>
-    <td><a href="phy244/simpleharmonicmotion.html"> More Details</a></td>
-  </tr>
-  <tr>
-    <td>10</td>
-    <td>Standing Waves</td>
-    <td><a href="phy244/standingwavesonastring/Standing Waves.JPG" target="_blank">standing waves.jpg</a></td>
-    <td><a href="phy244/standingwavesonastring/StandingWaves.pdf" target="_blank">standing waves.pdf</a></td>
-    <td><a href="phy244/standingwaves.html"> More Details</a></td>
-  </tr>
-  <tr>
-    <td>11</td>
-    <td>Poiseulle's Equation I</td>
-    <td><a href="phy244/poiseullesequation1/Poiseulle's Equation I.jpeg" target="_blank">Poiseulle's Equation I.jpg</a></td>
-    <td></td>
-    <td><a href="phy244/poiseullesequation1.html"> More Details</a></td>
-  </tr>
-  <tr>
-    <td>12</td>
-    <td>Poiseulle's Equation II</td>
-    <td></td>
-    <td></td>
-    <td><a href="phy244/poiseullesequation2.html"> More Details</a></td>
-  </tr>
-  <tr>
-    <td>13</td>
-    <td>Sound & Resonance I</td>
-    <td><a href="phy244/sound_resonance1/Sound & Resonance I.jpeg" target="_blank">Sound & Resonance I.jpg</a></td>
-    <td></td>
-    <td><a href="phy244/sound_resonance1.html"> More Details</a></td>
-  </tr>
-  <tr>
-    <td>14</td>
-    <td>Sound & Resonance II</td>
-    <td></td>
-    <td></td>
-    <td><a href="phy244/sound_resonance2.html"> More Details</a></td>
-  </tr>
-  <tr>
-    <td>15</td>
-    <td>Torque Lab</td>
-    <td><a href="phy244/torquelab/static equilibrium 161.JPG" target="_blank">torque lab.jpg</a></td>
-    <td></td>
-    <td><a href="phy244/torquelab.html"> More Details</a></td>
-  </tr>
-  <tr>
-    <td>16</td>
-    <td>PASCO Pendulum</td>
-    <td><a href="phy244/pendulum/PASCO Pendulum-Phys244.jpg" target="_blank">PASCO Pendulum.jpg</a></td>
-    <td></td>
-    <td><a href="phy244/pendulum.html"> More Details</a></td>
-  </tr>
-  <tr>
-    <td>17</td>
-    <td>Venturi Apparatus</td>
-    <td><a href="phy244/Venturi Apparatus/Venturi Apparatus.jpeg" target="_blank">venturi apparatus.jpg</a></td>
-    <td><a href="phy244/Venturi Apparatus/Venturi Apparatus.pdf" target="_blank">venturi apparatus.pdf</a></td>
-    <td><a href="phy244/venturiapparatus.html"> More Details</a></td>
-  </tr>
-</table>
+  <div class="w3-container" style="background-color:#006633">
+    <span>
+      <h1>Physics 244</h1>
+    </span>
+    <button class="btn" onclick="window.location.href='mainpage.html';"><i class="fa fa-home"></i> Home</button>
+  </div>
+  <table style="width:100%">
+    <tr>
+      <th style="width:5%">ID</th>
+      <th style="width:30%">Lab Activity</th>
+      <th style="width:40%">Pictures</th>
+      <th>Lab Manuals</th>
+      <th>Details</th>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>1-D Motion</td>
+      <td><a href="phy244/1dmotion/1-D-Motion.JPG" target="_blank">1-D motion.jpg</a></td>
+      <td></td>
+      <td><a href="phy244/1dmotion.html"> More Details</a></td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>Conservation of Energy</td>
+      <td><a href="phy244/conservationofenergy/Conservation of Energy_phys161.JPG" target="_blank">conservation of
+          energy.jpg</a></td>
+      <td></td>
+      <td><a href="phy244/conservationofenergy.html"> More Details</a></td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>Conseration of Linear Momentum </td>
+      <td><a href="phy244/conservationoflinearmomentum/Conservation of Linear Momentum_phys161.JPG"
+          target="_blank">conservation of linear momentum.jpg</a></td>
+      <td><a href="phy244/conservationoflinearmomentum/MomentumConservation.pdf" target="_blank">conservation of linear
+          momentum.pdf</a></td>
+      <td><a href="phy244/conservationoflinearmomentum.html"> More Details</a></td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>Free Fall</td>
+      <td><a href="phy244/freefall/Free Fall_phys161_244.JPG" target="_blank">freefall.jpg</a></td>
+      <td><a href="phy244/freefall/FreeFall (1).pdf" target="_blank">freefall.pdf</a></td>
+      <td><a href="phy244/freefall.html"> More Details</a></td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>Heat Engine Ideal Gas Law</td>
+      <td><a href="phy244/heatengine_idealgaslaw/Heat Engine and Idel Gas law_phys161-263.JPG" target="_blank">heat
+          engine ideal gaas law.jpg</a></td>
+      <td></td>
+      <td><a href="phy244/heatengine_idealgaslaw.html"> More Details</a></td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>Modelling Bone Fractures</td>
+      <td><a href="phy244/modelingbonefractures/Modeling Bone Fractures.JPG" target="_blank">modelling bone
+          fracture.jpg</a></td>
+      <td></td>
+      <td><a href="phy244/modelingbonefractures.html"> More Details</a></td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>Motion of an Amoeba</td>
+      <td></td>
+      <td><a href="phy244/motionofanamoeba/Amoeba Motion(1).pdf" target="_blank">motion of an amoeba.pdf</a< /td>
+      <td><a href="phy244/motionofanamoeba.html"> More Details</a></td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td>Newtons Laws of Motion</td>
+      <td><a href="phy244/newtonslawsofmotion/Newton-law.JPG" target="_blank">newtons laws of motion.jpg</a></td>
+      <td><a href="phy244/newtonslawsofmotion/NewtonsLaws.pdf" target="_blank">newtons laws of motion.pdf</a></td>
+      <td><a href="phy244/newtonslawsofmotion.html"> More Details</a></td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td>Simple Harmonic Motion</td>
+      <td><a href="phy244/simpleharmonicmotion/Mass on a Spring_phys244.JPG" target="_blank">simple harmonic
+          motion.jpg</a></td>
+      <td><a href="phy244/simpleharmonicmotion/Phys 244 Simple pendulum F2F Fall 2022(1)(1).docx" target="_blank">simple
+          harmonic motion.doc</a></td>
+      <td><a href="phy244/simpleharmonicmotion.html"> More Details</a></td>
+    </tr>
+    <tr>
+      <td>10</td>
+      <td>Standing Waves</td>
+      <td><a href="phy244/standingwavesonastring/Standing Waves.JPG" target="_blank">standing waves.jpg</a></td>
+      <td><a href="phy244/standingwavesonastring/StandingWaves.pdf" target="_blank">standing waves.pdf</a></td>
+      <td><a href="phy244/standingwaves.html"> More Details</a></td>
+    </tr>
+    <tr>
+      <td>11</td>
+      <td>Poiseulle's Equation I</td>
+      <td><a href="phy244/poiseullesequation1/Poiseulle's Equation I.jpeg" target="_blank">Poiseulle's Equation
+          I.jpg</a></td>
+      <td></td>
+      <td><a href="phy244/poiseullesequation1.html"> More Details</a></td>
+    </tr>
+    <tr>
+      <td>12</td>
+      <td>Poiseulle's Equation II</td>
+      <td></td>
+      <td></td>
+      <td><a href="phy244/poiseullesequation2.html"> More Details</a></td>
+    </tr>
+    <tr>
+      <td>13</td>
+      <td>Sound & Resonance I</td>
+      <td><a href="phy244/sound_resonance1/Sound & Resonance I.jpeg" target="_blank">Sound & Resonance I.jpg</a></td>
+      <td></td>
+      <td><a href="phy244/sound_resonance1.html"> More Details</a></td>
+    </tr>
+    <tr>
+      <td>14</td>
+      <td>Sound & Resonance II</td>
+      <td></td>
+      <td></td>
+      <td><a href="phy244/sound_resonance2.html"> More Details</a></td>
+    </tr>
+    <tr>
+      <td>15</td>
+      <td>Torque Lab</td>
+      <td><a href="phy244/torquelab/static equilibrium 161.JPG" target="_blank">torque lab.jpg</a></td>
+      <td></td>
+      <td><a href="phy244/torquelab.html"> More Details</a></td>
+    </tr>
+    <tr>
+      <td>16</td>
+      <td>PASCO Pendulum</td>
+      <td><a href="phy244/pendulum/PASCO Pendulum-Phys244.jpg" target="_blank">PASCO Pendulum.jpg</a></td>
+      <td></td>
+      <td><a href="phy244/pendulum.html"> More Details</a></td>
+    </tr>
+    <tr>
+      <td>17</td>
+      <td>Venturi Apparatus</td>
+      <td><a href="phy244/Venturi Apparatus/Venturi Apparatus.jpeg" target="_blank">venturi apparatus.jpg</a></td>
+      <td><a href="phy244/Venturi Apparatus/Venturi Apparatus.pdf" target="_blank">venturi apparatus.pdf</a></td>
+      <td><a href="phy244/venturiapparatus.html"> More Details</a></td>
+    </tr>
+  </table>
+
+  <footer style="display:flex;">
+    <div class="w3-container">
+      <h2 style="font: bolder;">Contact Information</h2>
+      <h3>Daniel Thomas</h3>
+      <h3>Ph:no- +1 (703)-209-2485</h3>
+      <h3>Email: dthomas2@gmu.edu</h3>
+    </div>
+    <img src="/logo.png" alt="Logo" style="width: 13%; height: auto; margin-right: auto; display: flex;float: right;">
+  </footer>
 </body>
+
 </html>

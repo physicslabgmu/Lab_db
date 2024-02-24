@@ -33,6 +33,43 @@ display: inline-block;
   background-color: #006633;
 }
 
+footer {
+    margin-top: 2px;
+    display: flex;
+    /* flex-direction: column; */
+    /* float: left; */
+    background-color: #FFCC33;
+    /* background-color: #006633; */
+    /* Transparent yellow background */
+    color: #006633;
+    /* color: white; */
+    align-items: flex-end;
+    /* Align items to the right */
+    padding: 10px;
+  }
+
+  footer .w3-container {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    /* margin-left: 50%; */
+  }
+
+  footer h2,
+  footer h3 {
+    margin: 0;
+    /* Remove default margin */
+  }
+
+  footer img {
+    width: 13%;
+    /* Set the desired width for the logo */
+    height: auto;
+    /* Maintain aspect ratio */
+    /* display: flex;
+    flex-direction: row; */
+    float: right;
+  }
 </style>
 <title>Physics 312</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -104,5 +141,15 @@ display: inline-block;
   </tr>
   
 </table>
+
+<footer style="display:flex;">
+  <div class="w3-container" >
+  <h2 style="font: bolder;">Contact Information</h2>
+  <h3>Daniel Thomas</h3>
+  <h3>Ph:no- +1 (703)-209-2485</h3>
+  <h3>Email: dthomas2@gmu.edu</h3>
+</div>
+<img src="/logo.png" alt="Logo" style="width: 13%; height: auto; margin-right: auto; display: flex;float: right;">
+</footer>
 </body>
 </html>

@@ -41,6 +41,43 @@ display: inline-block;
   background-color: #006633;
 }
 
+footer {
+    margin-top: 2px;
+    display: flex;
+    /* flex-direction: column; */
+    /* float: left; */
+    background-color: #FFCC33;
+    /* background-color: #006633; */
+    /* Transparent yellow background */
+    color: #006633;
+    /* color: white; */
+    align-items: flex-end;
+    /* Align items to the right */
+    padding: 10px;
+  }
+
+  footer .w3-container {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    /* margin-left: 50%; */
+  }
+
+  footer h2,
+  footer h3 {
+    margin: 0;
+    /* Remove default margin */
+  }
+
+  footer img {
+    width: 13%;
+    /* Set the desired width for the logo */
+    height: auto;
+    /* Maintain aspect ratio */
+    /* display: flex;
+    flex-direction: row; */
+    float: right;
+  }
 </style>
 <title>Physics & Astronomy Demonstration</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -528,5 +565,15 @@ Warning: Do not touch the metal sphere while the generator is charged.</details>
     <td><details><summary></summary>The PASPORT Force Platform, used with a PASPORT interface, continuously measures force (up to 4400 N or 1000 pounds) applied by a person or object. You can use the Force Platform to measure the static weight of a per-son standing on it, or the dynamic vertical force involved in moving and jumping. It has the measurement range and strength to accommodate people of all sizes and the sensitivity to measure smaller forces such as the weight of a ball. Put the platform on the floor or tabletop to measure vertical force, or mount it on a wall to measure horizontal force. With the optional handle set, you can use the platform to measure both “pulling” and “pushing” force.</details></td>
   </tr>
 </table>
+
+<footer style="display:flex;">
+  <div class="w3-container" >
+  <h2 style="font: bolder;">Contact Information</h2>
+  <h3>Daniel Thomas</h3>
+  <h3>Ph:no- +1 (703)-209-2485</h3>
+  <h3>Email: dthomas2@gmu.edu</h3>
+</div>
+<img src="/logo.png" alt="Logo" style="width: 13%; height: auto; margin-right: auto; display: flex;float: right;">
+</footer>
 </body>
 </html>

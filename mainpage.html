@@ -44,6 +44,73 @@
   .container {
     display: flex;
     flex-direction: row;
+    margin-left: 0;
+  }
+
+  .container h1 {
+    text-align: center;
+    color: white;
+    margin: 0;
+    /* Remove default margin for h1 */
+  }
+
+  .container span {
+    font-size: 30px;
+    cursor: pointer;
+    margin-right: 15px;
+    /* Add some margin to the menu icon */
+  }
+
+  
+
+  footer {
+    margin-top: 2px;
+    display: flex;
+    /* flex-direction: column; */
+    /* float: left; */
+    background-color: #FFCC33;
+    /* background-color: #006633; */
+    /* Transparent yellow background */
+    color: #006633;
+    /* color: white; */
+    align-items: flex-end;
+    /* Align items to the right */
+    padding: 10px;
+  }
+
+  footer .w3-container {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    /* margin-left: 50%; */
+  }
+
+  footer h2,
+  footer h3 {
+    margin: 0;
+    /* Remove default margin */
+  }
+
+  footer img {
+    width: 13%;
+    /* Set the desired width for the logo */
+    height: auto;
+    /* Maintain aspect ratio */
+    /* display: flex;
+    flex-direction: row; */
+    float: right;
+  }
+
+
+  @media screen and (max-width: 600px) {
+    .container {
+      flex-direction: column;
+    }
+
+    .container span {
+      margin-right: 0;
+      margin-bottom: 10px;
+    }
   }
 
   @media screen and (max-height: 450px) {
@@ -137,16 +204,12 @@
       <a href="broken_equipment.php" class="w3-bar-item w3-button">Broken Equipment</a>
       <a href="pa_shop.php" class="w3-bar-item w3-button">Physics and Astronomy Shop</a>
     </div>
-    <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
+    <span style="font-size:30px;cursor:pointer;background-color: #006633; color: white; margin-left: 3px;"
+      onclick="openNav()">&#9776;</span>
     <!-- Page Content -->
     <!-- <div style="margin-left:13%"> -->
 
-
-
-
-    <div class="w3-container">
-    </div>
-    <div class="w3-container" style="background-color:#006633; width: 100%;">
+    <div class="w3-container" style="background-color:#006633; width: 100%; margin-left: 0; ">
       <h1 style="color: white; text-align: center;">Welcome to Physics and Astronomy Lab</h1>
     </div>
 
@@ -154,8 +217,19 @@
   </div>
   <img src="images/pa_img.png" class="image" alt="Physics and Astronomy"
     style=" object-fit: cover; width: 100%; border-radius: 8px;">
-  <!-- <img src="images/pa_new2.jpg" class="image" alt="Physics and Astronomy"
+    <!-- <img src="images/pa_new.jpg" class="image" alt="Physics and Astronomy"
     style=" object-fit: cover; width: 100%; border-radius: 8px;"> -->
+  
+  <br>
+  <footer>
+    <div class="w3-container">
+    <h2 style="font: bolder;">Contact Information</h2>
+    <h3>Daniel Thomas</h3>
+    <h3>Ph:no- +1 (703)-209-2485</h3>
+    <h3>Email: dthomas2@gmu.edu</h3>
+  </div>
+  <img src="/logo.png" alt="logo">
+  </footer>
 
   <script>
     function myAccFunc() {
