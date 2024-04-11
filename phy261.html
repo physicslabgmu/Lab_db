@@ -1,39 +1,42 @@
 <!DOCTYPE html>
 <html>
 <style>
-table, th, td {
-  border:1px solid black;
-  border-collapse: collapse;
-summary {
-    font-weight: bold;
-    margin: -.5em -.5em 0;
-    padding: .5em;
-}
+  table,
+  th,
+  td {
+    border: 1px solid black;
+    border-collapse: collapse;
 
-}
+    summary {
+      font-weight: bold;
+      margin: -.5em -.5em 0;
+      padding: .5em;
+    }
 
-h1{
-color:white;
-display: inline-block;
-}
+  }
 
-.btn {
-  background-color: Gold;
-  border: none;
-  color: black;
-  padding: 12px 16px;
-  font-size: 16px;
-  cursor: pointer;
-  float: right;
-  border-radius: 12px;
-}
+  h1 {
+    color: white;
+    display: inline-block;
+  }
 
-/* Darker background on mouse-over */
-.btn:hover {
-  background-color: #006633;
-}
+  .btn {
+    background-color: Gold;
+    border: none;
+    color: black;
+    padding: 12px 16px;
+    font-size: 16px;
+    cursor: pointer;
+    float: right;
+    border-radius: 12px;
+  }
 
-footer {
+  /* Darker background on mouse-over */
+  .btn:hover {
+    background-color: #006633;
+  }
+
+  footer {
     margin-top: 2px;
     display: flex;
     /* flex-direction: column; */
@@ -76,107 +79,116 @@ footer {
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <body>
 
-<div class="w3-container" style="background-color:#006633">
-   <span><h1>Physics 261</h1></span>
-  <button class="btn" onclick="window.location.href='mainpage.html';"><i class="fa fa-home"></i> Home</button>
-</div>
-<table style="width:100%">
-  <tr>
-    <th style="width:5%">ID</th>
-    <th style="width:30%">Lab Activity</th> 
-    <th style="width:40%">Pictures</th>
-    <th>Lab Manuals</th>
-    <th>Details</th>
-  </tr>
-  <tr>
-    <td>1</td>
-    <td>Capacitor</td>
-    <td><a href="phy261/capacitor/The Capacitor (1).jpg" target="_blank">Capacitor.jpg</a></td>
-    <td><a href="phy261/capacitor/Capacitor_S2015.pdf" target="_blank">Capacitor.pdf</a></td>
-    <td><a href="phy261/capacitor.html"> More Details</a></td>
-  </tr>
-  <tr>
-    <td>2</td>
-    <td>DC Circuit</td>
-    <td></td>
-    <td></td>
-    <td><a href="phy261/dccircuit.html"> More Details</a></td>
-  </tr>
-  <tr>
-    <td>3</td>
-    <td>Electron Charge to Mass Ratio</td>
-    <td><a href="phy261/electronchargetomassratio/ElectronChargetoMassRatio.JPG" target="_blank">electron charge to masss ratio.jpg</a></td>
-    <td></td>
-    <td><a href="phy261/electronchargetomassratio.html"> More Details</a></td>
-  </tr>
-  <tr>
-    <td>4</td>
-    <td>Electrostatics</td>
-    <td><a href="phy261/electrostatics/basic electrometer.png" target="_blank">electrostatics.jpg</a></td>
-    <td></td>
-    <td><a href="phy261/electrostatics.html"> More Details</a></td>
-  </tr>
-  <tr>
-    <td>5</td>
-    <td>Kirchoff's Law</td>
-    <td><a href="phy261/kirchoffslaw/kirchoffslaw1.jpg" target="_blank">kirchoffslaw.jpg</a></td>
-    <td></td>
-    <td><a href="phy261/kirchoffslaw.html"> More Details</a></td>
-  </tr> 
-  <tr>
-    <td>6</td>
-    <td>LC Circuit</td>
-    <td><a href="phy261/lccircuit/LC circuits 261.jpg" target="_blank">lc circuit.jpg</a></td>
-    <td></td>
-    <td><a href="phy261/lccircuit.html"> More Details</a></td>
-  </tr>
-  <tr>
-    <td>7</td>
-    <td>Magnetic Induction</td>
-    <td><a href="phy261/magneticinduction/magnetic induction.jpg" target="_blank">magnetic induction.jpg</a></td>
-    <td></td>
-    <td><a href="phy261/magneticinduction.html"> More Details</a></td>
-  </tr>
-  <tr>
-    <td>8</td>
-    <td>Multimeter, BreadBoard, Circuit Assembly</td>
-    <td><a href="phy261/multimeterbreadboard_circuitassembly/Multimeters Breadboards Circuit Assembly 261.jpg" target="_blank">multimeter,breadboard,circuit assembly.jpg</a></td>
-    <td></td>
-    <td><a href="phy261/multimeterbreadboard_circuitassembly.html"> More Details</a></td>
-  </tr>
-  <tr> 
-    <td>9</td>
-    <td>Multimeter, Power supplies in Active DC Circuit</td>
-    <td><a href="phy261/multimeters_powersuppliesinactivedccircuit/Using multimeters power supplies active DC circuits.jpg" target="_blank">multimeters, power supplies in active dc circuit.jpg</a></td>
-    <td></td>
-    <td><a href="phy261/multimeters_powersuppliesinactivedccircuit.html"> More Details</a></td>
-  </tr>
-  <tr>
-    <td>10</td>
-    <td>RC, RL</td>
-    <td><a href="phy261/rc_rl/RC RL AC sinusoidal input 261.jpg" target="_blank">rc,rl.jpg</a></td>
-    <td></td>
-    <td><a href="phy261/rc_rl.html"> More Details</a></td>
-  </tr>
-  <tr>
-    <td>11</td>
-    <td>RC, RL Decay DC Circuit</td>
-    <td><a href="phy261/rc_rl_decay/261 RC decay.JPG" target="_blank">radioactivity.jpg</a></td>
-    <td><a href="phy261/rc_rl_decay/Phys246 RC Decay Lab Handout March 2019 (1).pdf" target="_blank">radioactivity.pdf</a></td>
-    <td><a href="phy261/rc_rldecaydccircuit.html"> More Details</a></td>
-  </tr>
-</table>
+  <div class="w3-container" style="background-color:#006633">
+    <span>
+      <h1>Physics 261</h1>
+    </span>
+    <button class="btn" onclick="window.location.href='mainpage.html';"><i class="fa fa-home"></i> Home</button>
+  </div>
+  <table style="width:100%">
+    <tr>
+      <th style="width:5%">ID</th>
+      <th style="width:30%">Lab Activity</th>
+      <th style="width:40%">Pictures</th>
+      <th>Lab Manuals</th>
+      <th>Details</th>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>Capacitor</td>
+      <td><a href="phy261/capacitor/The Capacitor (1).jpg" target="_blank">Capacitor.jpg</a></td>
+      <td><a href="phy261/capacitor/Capacitor_S2015.pdf" target="_blank">Capacitor.pdf</a></td>
+      <td><a href="phy261/capacitor.html"> More Details</a></td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>DC Circuit</td>
+      <td></td>
+      <td></td>
+      <td><a href="phy261/dccircuit.html"> More Details</a></td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>Electron Charge to Mass Ratio</td>
+      <td><a href="phy261/electronchargetomassratio/ElectronChargetoMassRatio.JPG" target="_blank">electron charge to
+          masss ratio.jpg</a></td>
+      <td></td>
+      <td><a href="phy261/electronchargetomassratio.html"> More Details</a></td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>Electrostatics</td>
+      <td><a href="phy261/electrostatics/basic electrometer.png" target="_blank">electrostatics.jpg</a></td>
+      <td></td>
+      <td><a href="phy261/electrostatics.html"> More Details</a></td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>Kirchoff's Law</td>
+      <td><a href="phy261/kirchoffslaw/kirchoffslaw1.jpg" target="_blank">kirchoffslaw.jpg</a></td>
+      <td></td>
+      <td><a href="phy261/kirchoffslaw.html"> More Details</a></td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>LC Circuit</td>
+      <td><a href="phy261/lccircuit/LC circuits 261.jpg" target="_blank">lc circuit.jpg</a></td>
+      <td></td>
+      <td><a href="phy261/lccircuit.html"> More Details</a></td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>Magnetic Induction</td>
+      <td><a href="phy261/magneticinduction/magnetic induction.jpg" target="_blank">magnetic induction.jpg</a></td>
+      <td></td>
+      <td><a href="phy261/magneticinduction.html"> More Details</a></td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td>Multimeter, BreadBoard, Circuit Assembly</td>
+      <td><a href="phy261/multimeterbreadboard_circuitassembly/Multimeters Breadboards Circuit Assembly 261.jpg"
+          target="_blank">multimeter,breadboard,circuit assembly.jpg</a></td>
+      <td></td>
+      <td><a href="phy261/multimeterbreadboard_circuitassembly.html"> More Details</a></td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td>Multimeter, Power supplies in Active DC Circuit</td>
+      <td><a
+          href="phy261/multimeters_powersuppliesinactivedccircuit/Using multimeters power supplies active DC circuits.jpg"
+          target="_blank">multimeters, power supplies in active dc circuit.jpg</a></td>
+      <td><a href="phy261/multimeters_powersuppliesinactivedccircuit/Lab Manual.pdf">Active DC Circuit.pdf</a></td>
+      <td><a href="phy261/multimeters_powersuppliesinactivedccircuit.html"> More Details</a></td>
+    </tr>
+    <tr>
+      <td>10</td>
+      <td>RC, RL</td>
+      <td><a href="phy261/rc_rl/RC RL AC sinusoidal input 261.jpg" target="_blank">rc,rl.jpg</a></td>
+      <td></td>
+      <td><a href="phy261/rc_rl.html"> More Details</a></td>
+    </tr>
+    <tr>
+      <td>11</td>
+      <td>RC, RL Decay DC Circuit</td>
+      <td><a href="phy261/rc_rl_decay/261 RC decay.JPG" target="_blank">radioactivity.jpg</a></td>
+      <td><a href="phy261/rc_rl_decay/Phys246 RC Decay Lab Handout March 2019 (1).pdf"
+          target="_blank">radioactivity.pdf</a></td>
+      <td><a href="phy261/rc_rldecaydccircuit.html"> More Details</a></td>
+    </tr>
+  </table>
 
-<footer style="display:flex;">
-  <div class="w3-container" >
-  <h2 style="font: bolder;">Contact Information</h2>
-  <h3>Daniel Thomas</h3>
-  <h3>Ph:no- +1 (703)-992-1202</h3>
-  <h3>Email: dthomas2@gmu.edu</h3>
-</div>
-<img src="logo.png" alt="Logo" style="width: 13%; height: auto; margin-right: auto; display: flex;float: right;">
-</footer>
+  <footer style="display:flex;">
+    <div class="w3-container">
+      <h2 style="font: bolder;">Contact Information</h2>
+      <h3>Daniel Thomas</h3>
+      <h3>Ph:no- +1 (703)-992-1202</h3>
+      <h3>Email: dthomas2@gmu.edu</h3>
+    </div>
+    <img src="logo.png" alt="Logo" style="width: 13%; height: auto; margin-right: auto; display: flex;float: right;">
+  </footer>
 </body>
+
 </html>

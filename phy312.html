@@ -1,39 +1,42 @@
 <!DOCTYPE html>
 <html>
 <style>
-table, th, td {
-  border:1px solid black;
-  border-collapse: collapse;
-summary {
-    font-weight: bold;
-    margin: -.5em -.5em 0;
-    padding: .5em;
-}
+  table,
+  th,
+  td {
+    border: 1px solid black;
+    border-collapse: collapse;
 
-}
+    summary {
+      font-weight: bold;
+      margin: -.5em -.5em 0;
+      padding: .5em;
+    }
 
-h1{
-color:white;
-display: inline-block;
-}
+  }
 
-.btn {
-  background-color: Gold;
-  border: none;
-  color: black;
-  padding: 12px 16px;
-  font-size: 16px;
-  cursor: pointer;
-  float: right;
-  border-radius: 12px;
-}
+  h1 {
+    color: white;
+    display: inline-block;
+  }
 
-/* Darker background on mouse-over */
-.btn:hover {
-  background-color: #006633;
-}
+  .btn {
+    background-color: Gold;
+    border: none;
+    color: black;
+    padding: 12px 16px;
+    font-size: 16px;
+    cursor: pointer;
+    float: right;
+    border-radius: 12px;
+  }
 
-footer {
+  /* Darker background on mouse-over */
+  .btn:hover {
+    background-color: #006633;
+  }
+
+  footer {
     margin-top: auto;
     display: flex;
     background-color: #FFCC33;
@@ -61,7 +64,7 @@ footer {
     width: 13%;
     /* Set the desired width for the logo */
     height: auto;
-   
+
     float: right;
   }
 </style>
@@ -70,80 +73,141 @@ footer {
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <body>
 
-<div class="w3-container" style="background-color:#006633">
-   <span><h1>Physics 312</h1></span>
-  <button class="btn" onclick="window.location.href='mainpage.html';"><i class="fa fa-home"></i> Home</button>
-</div>
-<table style="width:100%">
-  <tr>
-    <th style="width:5%">ID</th>
-    <th style="width:30%">Lab Activity</th> 
-    <th style="width:40%">Pictures</th>
-    <th>Lab Manuals</th>
-    <th>Details</th>
-  </tr>
-  <tr>
-    <td>1</td>
-    <td>LED V vs I. Atomic Spectra through Ocean optics</td>
-    <td><a href="phy312/LEDs VS Atomic Spectra/LED V vs Atomic Spectra.jpg" target="_blank">LED vs Atomic Spectra.jpg</a></td>
-    <td></td>
-    <td><a href="phy312/phy312_LEDvsAtomic_Spectra.html"> More Details</a></td>
-  </tr>
-  <tr>
-    <td>2</td>
-    <td>Measurement Of wavelength with OCean Optics</td>
-    <!-- <td><a href="phy263/gammaray/Gamma Ray Detection.jpeg" target="_blank">gamma ray.jpg</a></td>
+  <div class="w3-container" style="background-color:#006633">
+    <span>
+      <h1>Physics 312</h1>
+    </span>
+    <button class="btn" onclick="window.location.href='mainpage.html';"><i class="fa fa-home"></i> Home</button>
+  </div>
+  <table style="width:100%">
+    <tr>
+      <th style="width:5%">ID</th>
+      <th style="width:30%">Lab Activity</th>
+      <th style="width:40%">Pictures</th>
+      <th>Lab Manuals</th>
+      <th>Details</th>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>LED V vs I. Atomic Spectra through Ocean optics</td>
+      <td><a href="phy312/LEDs VS Atomic Spectra/LED V vs Atomic Spectra.jpg" target="_blank">LED vs Atomic
+          Spectra.jpg</a></td>
+      <td></td>
+      <td><a href="phy312/phy312_LEDvsAtomic_Spectra.html"> More Details</a></td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>Measurement Of wavelength with OCean Optics</td>
+      <!-- <td><a href="phy263/gammaray/Gamma Ray Detection.jpeg" target="_blank">gamma ray.jpg</a></td>
     <td></td>
     <td><a href="phy263/phy263_gammaray.html"> More Details</a></td> -->
-  </tr>
-  <tr>
-    <td>3</td>
-    <td>Photoelectric effect</td>
-    <td><a href="phy263/photoelectriceffect/Pasco Photoelectric Effect.JPG" target="_blank">photo electric effect.jpg</a></td>
-    <td></td>
-    <td><a href="phy263/phy263_photoelectriceffect.html"> More Details</a></td>
-  </tr>
-  <tr>
-    <td>4</td>
-    <td>Refraction, Reflection, and Total Internal Reflection</td>
-    <!-- <td><a href="phy263/heatengine/Heat Engine and Idel Gas law_phys161-263.JPG" target="_blank">heat engine.jpg</a></td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>Photoelectric effect</td>
+      <td><a href="phy263/photoelectriceffect/Pasco Photoelectric Effect.JPG" target="_blank">photo electric
+          effect.jpg</a></td>
+      <td></td>
+      <td><a href="phy263/phy263_photoelectriceffect.html"> More Details</a></td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>Refraction, Reflection, and Total Internal Reflection</td>
+      <!-- <td><a href="phy263/heatengine/Heat Engine and Idel Gas law_phys161-263.JPG" target="_blank">heat engine.jpg</a></td>
     <td></td>
     <td><a href="phy263/phy263_heatengine.html"> More Details</a></td> -->
-  </tr>
-  <tr>
-    <td>5</td>
-    <td>Thin Lens Configuration</td>
-    <!-- <td><a href="phy263/intensityoflight/Intensity-vs-Angle-Reflections.JPG" target="_blank">intensity of light.jpg</a></td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>Thin Lens Configuration</td>
+      <!-- <td><a href="phy263/intensityoflight/Intensity-vs-Angle-Reflections.JPG" target="_blank">intensity of light.jpg</a></td>
     <td></td>
     <td><a href="phy263/phy263_intensityoflight.html"> More Details</a></td> -->
-  </tr> 
-  <tr>
-    <td>6</td>
-    <td>Measurement of the speed of light in matter</td>
-    <!-- <td><a href="phy263/LRCI/LRC Steady I.jpg" target="_blank">LRC I.jpg</a></td> -->
-    <td><a href="phy312/Measurement of speed of light in matter/312 .pdf">Measurement of speed of light in matter.pdf</a></td>
-    <!-- <td><a href="phy263/phy263_LRCI.html"> More Details</a></td> -->
-  </tr>
-  <tr>
-    <td>7</td>
-    <td>Blackbody Radiation and Wein's Law</td>
-    <td><a href="phy312/Black Body Radiation and Weins law/blackbody.jpg" target="_blank">Black Body.jpg</a></td>
-    <td><a href="phy312/Black Body Radiation and Weins law/Black_body.pdf">BlackBody.pdf</a></td>
-    <td><a href="phy312/phy312_BlackBody.html"> More Details</a></td>
-  </tr>
-  
-</table>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>Measurement of the speed of light in matter</td>
+      <!-- <td><a href="phy263/LRCI/LRC Steady I.jpg" target="_blank">LRC I.jpg</a></td> -->
+      <td><a href="phy312/Measurement of speed of light in matter/312 .pdf">Measurement of speed of light in
+          matter.pdf</a></td>
+      <!-- <td><a href="phy263/phy263_LRCI.html"> More Details</a></td> -->
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>Blackbody Radiation and Wein's Law</td>
+      <td><a href="phy312/Black Body Radiation and Weins law/blackbody.jpg" target="_blank">Black Body.jpg</a></td>
+      <td><a href="phy312/Black Body Radiation and Weins law/Black_body.pdf">BlackBody.pdf</a></td>
+      <td><a href="phy312/phy312_BlackBody.html"> More Details</a></td>
+    </tr>
 
-<footer style="display:flex;">
-  <div class="w3-container" >
-  <h2 style="font: bolder;">Contact Information</h2>
-  <h3>Daniel Thomas</h3>
-  <h3>Ph:no- +1 (703)-992-1202</h3>
-  <h3>Email: dthomas2@gmu.edu</h3>
-</div>
-<img src="logo.png" alt="Logo" style="width: 13%; height: auto; margin-right: auto; display: flex;float: right;">
-</footer>
+    <tr>
+      <td>8</td>
+      <td>Michelson Interface</td>
+      <!-- <td><a href="phy312/Black Body Radiation and Weins law/blackbody.jpg" target="_blank">Black Body.jpg</a></td>
+      <td><a href="phy312/Black Body Radiation and Weins law/Black_body.pdf">BlackBody.pdf</a></td>
+      <td><a href="phy312/phy312_BlackBody.html"> More Details</a></td> -->
+    </tr>
+
+    <tr>
+      <td>9</td>
+      <td>Fourier Analysis</td>
+      <!-- <td><a href="phy312/Black Body Radiation and Weins law/blackbody.jpg" target="_blank">Fourier Analysis.jpg</a></td>
+      <td><a href="phy312/Fourier Analysis/PHY 312- lab8.pdf">Fourier Analysis.pdf</a></td> -->
+      <!-- <td><a href="phy312/phy312_BlackBody.html"> More Details</a></td> -->
+    </tr>
+
+    <tr>
+      <td>10</td>
+      <td>Two-slit and measurement of wavelength via diffraction grating</td>
+      <!-- <td><a href="phy312/Black Body Radiation and Weins law/blackbody.jpg" target="_blank">Black Body.jpg</a></td>
+      <td><a href="phy312/Black Body Radiation and Weins law/Black_body.pdf">BlackBody.pdf</a></td>
+      <td><a href="phy312/phy312_BlackBody.html"> More Details</a></td> -->
+    </tr>
+    <tr>
+      <td>11</td>
+      <td>Malus's Law, 3D images with linear polarization</td>
+      <td><a href="phy312/Malus's Law/malus law.jpg" target="_blank">Malus Law.jpg</a></td>
+      <td><a href="phy312/Malus's Law/PHY312 Lab 10.pdf">Malus Law/ Linear polarization.pdf</a></td>
+      <td><a href="phy312/phy312_Malus Law.html"> More Details</a></td>
+    </tr>
+    <tr>
+      <td>12</td>
+      <td>3D images with circular polarization Strss induced birefrigence.</td>
+      <!-- <td><a href="phy312/Black Body Radiation and Weins law/blackbody.jpg" target="_blank">Black Body.jpg</a></td>
+    <td><a href="phy312/Black Body Radiation and Weins law/Black_body.pdf">BlackBody.pdf</a></td>
+    <td><a href="phy312/phy312_BlackBody.html"> More Details</a></td> -->
+    </tr>
+
+    <tr>
+      <td>13</td>
+      <td>Rotation by optically active material</td>
+      <!-- <td><a href="phy312/Black Body Radiation and Weins law/blackbody.jpg" target="_blank">Black Body.jpg</a></td>
+    <td><a href="phy312/Black Body Radiation and Weins law/Black_body.pdf">BlackBody.pdf</a></td>
+    <td><a href="phy312/phy312_BlackBody.html"> More Details</a></td> -->
+    </tr>
+
+    <tr>
+      <td>14</td>
+      <td>Fresnel</td>
+      <!-- <td><a href="phy312/Black Body Radiation and Weins law/blackbody.jpg" target="_blank">Black Body.jpg</a></td>
+    <td><a href="phy312/Black Body Radiation and Weins law/Black_body.pdf">BlackBody.pdf</a></td>
+    <td><a href="phy312/phy312_BlackBody.html"> More Details</a></td> -->
+    </tr>
+
+  </table>
+
+  <footer style="display:flex;">
+    <div class="w3-container">
+      <h2 style="font: bolder;">Contact Information</h2>
+      <h3>Daniel Thomas</h3>
+      <h3>Ph:no- +1 (703)-992-1202</h3>
+      <h3>Email: dthomas2@gmu.edu</h3>
+    </div>
+    <img src="logo.png" alt="Logo" style="width: 13%; height: auto; margin-right: auto; display: flex;float: right;">
+  </footer>
 </body>
+
 </html>
