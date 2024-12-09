@@ -11,6 +11,45 @@
         .course-card {
             margin-bottom: 20px;
         }
+        
+        @media (max-width: 768px) {
+            .navbar-brand img {
+                height: 40px;
+            }
+            .navbar-brand {
+                font-size: 1.2rem;
+            }
+            .header-banner {
+                padding-top: 80px !important;
+            }
+            .container {
+                padding-left: 15px;
+                padding-right: 15px;
+            }
+            .sidebar {
+                width: 100%;
+                left: -100%;
+            }
+            .sidebar.active {
+                left: 0;
+                width: 100%;
+            }
+            .card {
+                margin: 10px 0;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .navbar-brand {
+                font-size: 1rem;
+            }
+            .header-content h1 {
+                font-size: 1.8rem;
+            }
+            .header-content p {
+                font-size: 1rem;
+            }
+        }
     </style>
 </head>
 <body class="d-flex flex-column min-vh-100">
