@@ -1,213 +1,253 @@
 <!DOCTYPE html>
-<html>
-<style>
-  table,
-  th,
-  td {
-    border: 1px solid black;
-    border-collapse: collapse;
+<html lang="en">
 
-    summary {
-      font-weight: bold;
-      margin: -.5em -.5em 0;
-      padding: .5em;
-    }
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Physics 312</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet">
+    <style>
+        table,
+        th,
+        td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+    </style>
+</head>
 
-  }
+<body class="d-flex flex-column min-vh-100">
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg fixed-top">
+      <div class="container-fluid">
+          <button class="btn text-light" id="sidebarToggle">
+              <i class="fas fa-bars"></i>
+          </button>
+          <a class="navbar-brand ms-3" href="#">
+              <img src="logo.png" alt="GMU Logo" height="30" class="d-inline-block align-text-top me-2">
+              Physics Lab Setup - PHY 312
+          </a>
 
-  h1 {
-    color: white;
-    display: inline-block;
-  }
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav ms-auto">
+                  <li class="nav-item">
+                      <a class="nav-link active" aria-current="page" href="#">Home</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="#">Courses</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="#">Resources</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="#">Contact</a>
+                  </li>
+              </ul>
+          </div>
+      </div>
+  </nav>
 
-  .btn {
-    background-color: Gold;
-    border: none;
-    color: black;
-    padding: 12px 16px;
-    font-size: 16px;
-    cursor: pointer;
-    float: right;
-    border-radius: 12px;
-  }
-
-  /* Darker background on mouse-over */
-  .btn:hover {
-    background-color: #006633;
-  }
-
-  footer {
-    margin-top: auto;
-    display: flex;
-    background-color: #FFCC33;
-    color: #006633;
-    /* color: white; */
-    align-items: flex-end;
-    /* Align items to the right */
-    padding: 10px;
-  }
-
-  footer .w3-container {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    /* margin-left: 50%; */
-  }
-
-  footer h2,
-  footer h3 {
-    margin: 0;
-    /* Remove default margin */
-  }
-
-  footer img {
-    width: 13%;
-    /* Set the desired width for the logo */
-    height: auto;
-
-    float: right;
-  }
-</style>
-<title>Physics 312</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-<body>
-
-  <div class="w3-container" style="background-color:#006633">
-    <span>
-      <h1>Physics 312</h1>
-    </span>
-    <button class="btn" onclick="window.location.href='mainpage.html';"><i class="fa fa-home"></i> Home</button>
+  <!-- Header Banner -->
+  <div class="header-banner">
+      <div class="header-content">
+          <h1>Physics Lab Setup</h1>
+          <p>Advanced Lab (PHY 312)</p>
+      </div>
   </div>
-  <table style="width:100%">
-    <tr>
-      <th style="width:5%">ID</th>
-      <th style="width:30%">Lab Activity</th>
-      <th style="width:40%">Pictures</th>
-      <th>Lab Manuals</th>
-      <th>Details</th>
-    </tr>
-    <tr>
-      <td>1</td>
-      <td>LED V vs I. Atomic Spectra through Ocean optics</td>
-      <td><a href="phy312/LEDs VS Atomic Spectra/LED V vs Atomic Spectra.jpg" target="_blank">LED vs Atomic
-          Spectra.jpg</a></td>
-      <td></td>
-      <td><a href="phy312/phy312_LEDvsAtomic_Spectra.html"> More Details</a></td>
-    </tr>
-    <tr>
-      <td>2</td>
-      <td>Measurement Of wavelength with OCean Optics</td>
-      <!-- <td><a href="phy263/gammaray/Gamma Ray Detection.jpeg" target="_blank">gamma ray.jpg</a></td>
-    <td></td>
-    <td><a href="phy263/phy263_gammaray.html"> More Details</a></td> -->
-    </tr>
-    <tr>
-      <td>3</td>
-      <td>Photoelectric effect</td>
-      <td><a href="phy263/photoelectriceffect/Pasco Photoelectric Effect.JPG" target="_blank">photo electric
-          effect.jpg</a></td>
-      <td></td>
-      <td><a href="phy263/phy263_photoelectriceffect.html"> More Details</a></td>
-    </tr>
-    <tr>
-      <td>4</td>
-      <td>Refraction, Reflection, and Total Internal Reflection</td>
-      <!-- <td><a href="phy263/heatengine/Heat Engine and Idel Gas law_phys161-263.JPG" target="_blank">heat engine.jpg</a></td>
-    <td></td>
-    <td><a href="phy263/phy263_heatengine.html"> More Details</a></td> -->
-    </tr>
-    <tr>
-      <td>5</td>
-      <td>Thin Lens Configuration</td>
-      <!-- <td><a href="phy263/intensityoflight/Intensity-vs-Angle-Reflections.JPG" target="_blank">intensity of light.jpg</a></td>
-    <td></td>
-    <td><a href="phy263/phy263_intensityoflight.html"> More Details</a></td> -->
-    </tr>
-    <tr>
-      <td>6</td>
-      <td>Measurement of the speed of light in matter</td>
-      <!-- <td><a href="phy263/LRCI/LRC Steady I.jpg" target="_blank">LRC I.jpg</a></td> -->
-      <td><a href="phy312/Measurement of speed of light in matter/312 .pdf">Measurement of speed of light in
-          matter.pdf</a></td>
-      <!-- <td><a href="phy263/phy263_LRCI.html"> More Details</a></td> -->
-    </tr>
-    <tr>
-      <td>7</td>
-      <td>Blackbody Radiation and Wein's Law</td>
-      <td><a href="phy312/Black Body Radiation and Weins law/blackbody.jpg" target="_blank">Black Body.jpg</a></td>
-      <td><a href="phy312/Black Body Radiation and Weins law/Black_body.pdf">BlackBody.pdf</a></td>
-      <td><a href="phy312/phy312_BlackBody.html"> More Details</a></td>
-    </tr>
 
-    <tr>
-      <td>8</td>
-      <td>Michelson Interface</td>
-      <!-- <td><a href="phy312/Black Body Radiation and Weins law/blackbody.jpg" target="_blank">Black Body.jpg</a></td>
-      <td><a href="phy312/Black Body Radiation and Weins law/Black_body.pdf">BlackBody.pdf</a></td>
-      <td><a href="phy312/phy312_BlackBody.html"> More Details</a></td> -->
-    </tr>
+  <!-- Sidebar -->
+  <div class="sidebar" id="sidebar">
+      <span class="close-btn" id="closeSidebar">&times;</span>
+      <a href="phy103.html"><i class="fas fa-atom"></i> PHY 103 - Physics and Society</a>
+      <a href="phy104.html"><i class="fas fa-magnet"></i> PHY 104 - Physics and Technology</a>
+      <a href="phy161.html"><i class="fas fa-wave-square"></i> PHY 161 - Physics I</a>
+      <a href="phy244.html"><i class="fas fa-microscope"></i> PHY 244 - Modern Physics</a>
+      <a href="phy246.html"><i class="fas fa-laser"></i> PHY 246 - Electronics</a>
+      <a href="phy261.html"><i class="fas fa-atom"></i> PHY 261 - Physics II</a>
+      <a href="phy263.html"><i class="fas fa-radiation"></i> PHY 263 - Waves and Fluids</a>
+      <a href="phy311.html"><i class="fas fa-microchip"></i> PHY 311 - Instrumentation</a>
+      <a href="phy312.html"><i class="fas fa-flask"></i> PHY 312 - Advanced Lab</a>
+  </div>
 
-    <tr>
-      <td>9</td>
-      <td>Fourier Analysis</td>
-      <!-- <td><a href="phy312/Black Body Radiation and Weins law/blackbody.jpg" target="_blank">Fourier Analysis.jpg</a></td>
-      <td><a href="phy312/Fourier Analysis/PHY 312- lab8.pdf">Fourier Analysis.pdf</a></td> -->
-      <!-- <td><a href="phy312/phy312_BlackBody.html"> More Details</a></td> -->
-    </tr>
+  <!-- Main Content -->
+  <div class="container mt-5 pt-5">
+      <!-- Your content for PHY 312 goes here -->
+      <h2>Welcome to PHY 312 - Advanced Lab</h2>
+      <p>This page contains all the resources and instructions for the Advanced Lab (PHY 312).</p>
+  </div>
+</body>
 
-    <tr>
-      <td>10</td>
-      <td>Two-slit and measurement of wavelength via diffraction grating</td>
-      <!-- <td><a href="phy312/Black Body Radiation and Weins law/blackbody.jpg" target="_blank">Black Body.jpg</a></td>
-      <td><a href="phy312/Black Body Radiation and Weins law/Black_body.pdf">BlackBody.pdf</a></td>
-      <td><a href="phy312/phy312_BlackBody.html"> More Details</a></td> -->
-    </tr>
-    <tr>
-      <td>11</td>
-      <td>Malus's Law, 3D images with linear polarization</td>
-      <td><a href="phy312/Malus's Law/malus law.jpg" target="_blank">Malus Law.jpg</a></td>
-      <td><a href="phy312/Malus's Law/PHY312 Lab 10.pdf">Malus Law/ Linear polarization.pdf</a></td>
-      <td><a href="phy312/phy312_Malus Law.html"> More Details</a></td>
-    </tr>
-    <tr>
-      <td>12</td>
-      <td>3D images with circular polarization Strss induced birefrigence.</td>
-      <!-- <td><a href="phy312/Black Body Radiation and Weins law/blackbody.jpg" target="_blank">Black Body.jpg</a></td>
-    <td><a href="phy312/Black Body Radiation and Weins law/Black_body.pdf">BlackBody.pdf</a></td>
-    <td><a href="phy312/phy312_BlackBody.html"> More Details</a></td> -->
-    </tr>
+    
 
-    <tr>
-      <td>13</td>
-      <td>Rotation by optically active material</td>
-      <!-- <td><a href="phy312/Black Body Radiation and Weins law/blackbody.jpg" target="_blank">Black Body.jpg</a></td>
-    <td><a href="phy312/Black Body Radiation and Weins law/Black_body.pdf">BlackBody.pdf</a></td>
-    <td><a href="phy312/phy312_BlackBody.html"> More Details</a></td> -->
-    </tr>
+    <!-- Main Content -->
+    <div class="container my-4">
+      <h2 class="text-center">Lab Activities</h2>
 
-    <tr>
-      <td>14</td>
-      <td>Fresnel</td>
-      <!-- <td><a href="phy312/Black Body Radiation and Weins law/blackbody.jpg" target="_blank">Black Body.jpg</a></td>
-    <td><a href="phy312/Black Body Radiation and Weins law/Black_body.pdf">BlackBody.pdf</a></td>
-    <td><a href="phy312/phy312_BlackBody.html"> More Details</a></td> -->
-    </tr>
-
-  </table>
-
-  <footer style="display:flex;">
-    <div class="w3-container">
-      <h2 style="font: bolder;">Contact Information</h2>
-      <h3>Daniel Thomas</h3>
-      <h3>Ph:no- +1 (703)-992-1202</h3>
-      <h3>Email: dthomas2@gmu.edu</h3>
+        <table class="lab-table" style="width:100%">
+            <tr>
+                <th style="width:5%">ID</th>
+                
+                <th style="width:30%">Lab Activity</th>
+                <th style="width:40%">Pictures</th>
+                <th>Lab Manuals</th>
+                <th>Details</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>LED V vs I. Atomic Spectra through Ocean optics</td>
+                <td><a href="phy312/LEDs VS Atomic Spectra/LED V vs Atomic Spectra.jpg" target="_blank">LED vs Atomic Spectra.jpg</a></td>
+                <td><a href="phy312/LEDs VS Atomic Spectra/LED V vs Atomic Spectra.pdf">LED V vs Atomic Spectra</a></td>
+                <td><a href="phy312/phy312_LEDvsAtomic_Spectra.html"> More Details</a></td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Measurement Of wavelength with OCean Optics</td>
+                <td><a href="phy312/Measurement Of wavelength with Ocean Optics.jpg" target="_blank">Measurement of wavelength.jpg</a></td>
+                <td><a href="phy312/Measurement Of wavelength with Ocean Optics.pdf">Measurement of wavelength</a></td>
+                <td><a href="phy312/phy312_measurement_wavelength.html"> More Details</a></td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Photoelectric effect</td>
+                <td><a href="phy312/photoelectriceffect/Pasco Photoelectric Effect.JPG" target="_blank">photo electric effect.jpg</a></td>
+                <td><a href="phy312/photoelectriceffect/Photoelectric Effect Lab.pdf">Photoelectric Effect Lab</a></td>
+                <td><a href="phy312/phy312_photoelectriceffect.html"> More Details</a></td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>Refraction, Reflection, and Total Internal Reflection</td>
+                <td><a href="phy312/Refraction Reflection and Total Internal Reflection.jpg" target="_blank">Refraction Reflection.jpg</a></td>
+                <td><a href="phy312/Refraction Reflection and Total Internal Reflection.pdf">Refraction Reflection Lab</a></td>
+                <td><a href="phy312/phy312_refraction.html"> More Details</a></td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>Thin Lens Configuration</td>
+                <td><a href="phy312/Thin Lens Configuration.jpg" target="_blank">Thin Lens Configuration.jpg</a></td>
+                <td><a href="phy312/Thin Lens Configuration.pdf">Thin Lens Configuration Lab</a></td>
+                <td><a href="phy312/phy312_thin_lens.html"> More Details</a></td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td>Measurement of the speed of light in matter</td>
+                <td><a href="phy312/Measurement of speed of light in matter/312 .jpg" target="_blank">Speed of light in matter.jpg</a></td>
+                <td><a href="phy312/Measurement of speed of light in matter/Measurement of speed of light in matter.pdf">Speed of light in matter Lab</a></td>
+                <td><a href="phy312/phy312_speed_of_light.html"> More Details</a></td>
+            </tr>
+            <tr>
+                <td>7</td>
+                <td>Blackbody Radiation and Wein's Law</td>
+                <td><a href="phy312/Black Body Radiation and Weins law/blackbody.jpg" target="_blank">Black Body.jpg</a></td>
+                <td><a href="phy312/Black Body Radiation and Weins law/Black_body.pdf">BlackBody Lab</a></td>
+                <td><a href="phy312/phy312_BlackBody.html"> More Details</a></td>
+            </tr>
+            <tr>
+                <td>8</td>
+                <td>Michelson Interface</td>
+                <td><a href="phy312/Michelson Interface/michelson.jpg" target="_blank">Michelson Interface.jpg</a></td>
+                <td><a href="phy312/Michelson Interface/Michelson Interface Lab.pdf">Michelson Interface Lab</a></td>
+                <td><a href="phy312/phy312_michelson.html"> More Details</a></td>
+            </tr>
+            <tr>
+                <td>9</td>
+                <td>Fourier Analysis</td>
+                <td><a href="phy312/Fourier Analysis/fourier_analysis.jpg" target="_blank">Fourier Analysis.jpg</a></td>
+                <td><a href="phy312/Fourier Analysis/Fourier Analysis Lab.pdf">Fourier Analysis Lab</a></td>
+                <td><a href="phy312/phy312_fourier.html"> More Details</a></td>
+            </tr>
+            <tr>
+                <td>10</td>
+                <td>Two-slit and measurement of wavelength via diffraction grating</td>
+                <td><a href="phy312/Two-slit and measurement of wavelength via diffraction grating.jpg" target="_blank">Two-slit.jpg</a></td>
+                <td><a href="phy312/Two-slit and measurement of wavelength via diffraction grating.pdf">Two-slit Lab</a></td>
+                <td><a href="phy312/phy312_twoslit.html"> More Details</a></td>
+            </tr>
+            <tr>
+                <td>11</td>
+                <td>Malus's Law, 3D images with linear polarization</td>
+                <td><a href="phy312/Malus's Law/malus law.jpg" target="_blank">Malus Law.jpg</a></td>
+                <td><a href="phy312/Malus's Law/PHY312 Lab 10.pdf">Malus Law Lab</a></td>
+                <td><a href="phy312/phy312_Malus Law.html"> More Details</a></td>
+            </tr>
+            <tr>
+                <td>12</td>
+                <td>3D images with circular polarization Strss induced birefrigence.</td>
+                <td><a href="phy312/3D images with circular polarization/3D_circular_polarization.jpg" target="_blank">3D Circular Polarization.jpg</a></td>
+                <td><a href="phy312/3D images with circular polarization/3D_circular_polarization.pdf">3D Circular Polarization Lab</a></td>
+                <td><a href="phy312/phy312_circular_polarization.html"> More Details</a></td>
+            </tr>
+            <tr>
+                <td>13</td>
+                <td>Rotation by optically active material</td>
+                <td><a href="phy312/Rotation by optically active material/rotation.jpg" target="_blank">Rotation.jpg</a></td>
+                <td><a href="phy312/Rotation by optically active material/rotation_lab.pdf">Rotation Lab</a></td>
+                <td><a href="phy312/phy312_rotation.html"> More Details</a></td>
+            </tr>
+            <tr>
+                <td>14</td>
+                <td>Fresnel</td>
+                <td><a href="phy312/Fresnel/fresnel.jpg" target="_blank">Fresnel.jpg</a></td>
+                <td><a href="phy312/Fresnel/Fresnel Lab.pdf">Fresnel Lab</a></td>
+                <td><a href="phy312/phy312_fresnel.html"> More Details</a></td>
+            </tr>
+        </table>
     </div>
-    <img src="logo.png" alt="Logo" style="width: 13%; height: auto; margin-right: auto; display: flex;float: right;">
-  </footer>
+
+    <!-- Footer -->
+    <footer class="lab-footer mt-auto">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col">
+                    <h2>Contact Information</h2>
+                    <h3>Daniel Thomas</h3>
+                    <h3>Ph:no- +1 (703)-992-1202</h3>
+                    <h3>Email: dthomas2@gmu.edu</h3>
+                </div>
+                <div class="col-auto">
+                    <img src="logo.png" alt="GMU Logo" class="lab-footer-logo">
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script> -->
+    <script src="js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const sidebar = document.getElementById('sidebar');
+            const content = document.getElementById('content');
+            const sidebarToggle = document.getElementById('sidebarToggle');
+            const closeSidebar = document.getElementById('closeSidebar');
+
+            sidebarToggle.addEventListener('click', function() {
+                sidebar.classList.toggle('active');
+                content.classList.toggle('active');
+            });
+
+            closeSidebar.addEventListener('click', function() {
+                sidebar.classList.remove('active');
+                content.classList.remove('active');
+            });
+
+            // Close sidebar when clicking outside
+            document.addEventListener('click', function(event) {
+                const isClickInsideSidebar = sidebar.contains(event.target);
+                const isClickInsideToggle = sidebarToggle.contains(event.target);
+                
+                if (!isClickInsideSidebar && !isClickInsideToggle && sidebar.classList.contains('active')) {
+                    sidebar.classList.remove('active');
+                    content.classList.remove('active');
+                }
+            });
+        });
+    </script>
+
 </body>
 
 </html>

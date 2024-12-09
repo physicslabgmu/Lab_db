@@ -1,175 +1,243 @@
 <!DOCTYPE html>
-<html>
-<style>
-  table,
-  th,
-  td {
-    border: 1px solid black;
-    border-collapse: collapse;
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PHY 311 - GMU Physics Lab Setup</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet">
+    <style>
+        table,
+        th,
+        td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+    </style>
+</head>
 
-    summary {
-      font-weight: bold;
-      margin: -.5em -.5em 0;
-      padding: .5em;
-    }
+<body class="d-flex flex-column min-vh-100">
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg fixed-top">
+      <div class="container-fluid">
+          <button class="btn text-light" id="sidebarToggle">
+              <i class="fas fa-bars"></i>
+          </button>
+          <a class="navbar-brand ms-3" href="#">
+              <img src="logo.png" alt="GMU Logo" height="30" class="d-inline-block align-text-top me-2">
+              Physics Lab Setup - PHY 311
+          </a>
 
-  }
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav ms-auto">
+                  <li class="nav-item">
+                      <a class="nav-link active" aria-current="page" href="#">Home</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="#">Courses</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="#">Resources</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="#">Contact</a>
+                  </li>
+              </ul>
+          </div>
+      </div>
+  </nav>
 
-  h1 {
-    color: white;
-    display: inline-block;
-  }
-
-  .btn {
-    background-color: Gold;
-    border: none;
-    color: black;
-    padding: 12px 16px;
-    font-size: 16px;
-    cursor: pointer;
-    float: right;
-    border-radius: 12px;
-  }
-
-  /* Darker background on mouse-over */
-  .btn:hover {
-    background-color: #006633;
-  }
-
-  footer {
-    margin-top: 2px;
-    display: flex;
-    /* flex-direction: column; */
-    /* float: left; */
-    background-color: #FFCC33;
-    /* background-color: #006633; */
-    /* Transparent yellow background */
-    color: #006633;
-    /* color: white; */
-    align-items: flex-end;
-    /* Align items to the right */
-    padding: 10px;
-  }
-
-  footer .w3-container {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    /* margin-left: 50%; */
-  }
-
-  footer h2,
-  footer h3 {
-    margin: 0;
-    /* Remove default margin */
-  }
-
-  footer img {
-    width: 13%;
-    /* Set the desired width for the logo */
-    height: auto;
-    /* Maintain aspect ratio */
-    /* display: flex;
-    flex-direction: row; */
-    float: right;
-  }
-</style>
-<title>Physics 311</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-<body>
-
-  <div class="w3-container" style="background-color:#006633">
-    <span>
-      <h1>Physics 311</h1>
-    </span>
-    <button class="btn" onclick="window.location.href='mainpage.html';"><i class="fa fa-home"></i> Home</button>
+  <!-- Header Banner -->
+  <div class="header-banner">
+      <div class="header-content">
+          <h1>Physics Lab Setup</h1>
+          <p>Advanced Lab (PHY 311)</p>
+      </div>
   </div>
-  <table style="width:100%">
-    <tr>
-      <th style="width:5%">ID</th>
-      <th style="width:30%">Lab Activity</th>
-      <th style="width:40%">Pictures</th>
-      <th>Lab Manuals</th>
-      <th>Details</th>
-    </tr>
-    <tr>
-      <td>1</td>
-      <td>The Basics</td>
-      <td><a href="" target="_blank">The Basics</a></td>
-      <td><a href="phy311/The Basics/Lab 1 Phys 311.pdf">The Basics</a></td>
-      <td><a href=""> More Details</a></td>
-    </tr>
-    <tr>
-      <td>2</td>
-      <td>LabView and MultiSim</td>
-      <td><a href="phy311/LabView and MultiSim/1.jpg" target="_blank">LabView and MultiSim.jpg</a> <br>
-        <a href="phy311/LabView and MultiSim/cables.jpg">Cables</a>
-        <br>
-        <a href="phy311/LabView and MultiSim/resistors.jpg ">Resistors</a>
-      </td>
-      <td> <a href="phy311/LabView and MultiSim/Phys 311 Lab 2 Multisim and LabView (2)(1).pdf">LabView and MultiSim</a>
-      </td>
-      <td><a href="phy311/phy311_Labview_Multisim.html"> More Details</a></td>
-    </tr>
-    <tr>
-      <td>3</td>
-      <td>Voltage Divider</td>
-      <!-- <td><a href="phy263/geometricoptics/geometric optics.jpg" target="_blank">geometric optics.jpg</a></td>
-    <td></td>
-    <td><a href="phy263/phy263_geometricoptics.html"> More Details</a></td> -->
-    </tr>
-    <tr>
-      <td>4</td>
-      <td>Passive Filter Circuits</td>
-      <!-- <td><a href="phy263/heatengine/Heat Engine and Idel Gas law_phys161-263.JPG" target="_blank">heat engine.jpg</a></td>
-    <td></td>
-    <td><a href="phy263/phy263_heatengine.html"> More Details</a></td> -->
-    </tr>
-    <tr>
-      <td>5</td>
-      <td>Semiconductors: Diodes</td>
-      <!-- <td><a href="phy263/intensityoflight/Intensity-vs-Angle-Reflections.JPG" target="_blank">intensity of light.jpg</a></td>
-    <td></td>
-    <td><a href="phy263/phy263_intensityoflight.html"> More Details</a></td> -->
-    </tr>
-    <tr>
-      <td>6</td>
-      <td>LabVIEW Virtual Instruments</td>
-      <!-- <td><a href="phy263/LRCI/LRC Steady I.jpg" target="_blank">LRC I.jpg</a></td>
-    <td></td>
-    <td><a href="phy263/phy263_LRCI.html"> More Details</a></td> -->
-    </tr>
-    <tr>
-      <td>7</td>
-      <td>Transistors Circuits </td>
-      <!-- <td><a href="phy263/LRCII/LRC Steady I.jpg" target="_blank">LRC II.jpg</a></td>
-    <td></td>
-    <td><a href="phy263/phy263_LRCII.html"> More Details</a></td> -->
-    </tr>
 
-    <tr>
-      <td>8</td>
-      <td>OPAMP I Amplifier </td>
-      <!-- <td><a href="phy263/LRCII/LRC Steady I.jpg" target="_blank">LRC II.jpg</a></td>
-    <td></td>
-    <td><a href="phy263/phy263_LRCII.html"> More Details</a></td> -->
-    </tr>
+  <!-- Sidebar -->
+  <div class="sidebar" id="sidebar">
+      <span class="close-btn" id="closeSidebar">&times;</span>
+      <a href="phy103.html"><i class="fas fa-atom"></i> PHY 103 - Physics and Society</a>
+      <a href="phy104.html"><i class="fas fa-magnet"></i> PHY 104 - Physics and Technology</a>
+      <a href="phy161.html"><i class="fas fa-wave-square"></i> PHY 161 - Physics I</a>
+      <a href="phy244.html"><i class="fas fa-microscope"></i> PHY 244 - Modern Physics</a>
+      <a href="phy246.html"><i class="fas fa-laser"></i> PHY 246 - Electronics</a>
+      <a href="phy261.html"><i class="fas fa-atom"></i> PHY 261 - Physics II</a>
+      <a href="phy263.html"><i class="fas fa-radiation"></i> PHY 263 - Waves and Fluids</a>
+      <a href="phy311.html"><i class="fas fa-microchip"></i> PHY 311 - Instrumentation</a>
+      <a href="phy312.html"><i class="fas fa-flask"></i> PHY 312 - Advanced Lab</a>
+  </div>
 
-  </table>
+  <!-- Main Content -->
+  <div class="container mt-5 pt-5">
+      <!-- Your content for PHY 312 goes here -->
+      <h2>Welcome to PHY 311 - Instrumentation Lab</h2>
+      <p>This page contains all the resources and instructions for the Instrumentation Lab (PHY 311).</p>
+  </div>
+</body>
 
-  <footer style="display:flex;">
-    <div class="w3-container">
-      <h2 style="font: bolder;">Contact Information</h2>
-      <h3>Daniel Thomas</h3>
-      <h3>Ph:no- +1 (703)-992-1202</h3>
-      <h3>Email: dthomas2@gmu.edu</h3>
+<!-- <body class="d-flex flex-column min-vh-100"> -->
+    <!-- Header Banner -->
+    <!-- <div class="lab-header-banner">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col">
+                    <h1 class="text-white">Physics 311</h1>
+                </div>
+                <div class="col-auto">
+                    <button class="btn btn-warning" onclick="window.location.href='mainpage.html';"><i class="fa fa-home"></i> Home</button>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+    <!-- Main Content -->
+    <!-- <div class="container my-5">
+        <h2 class="text-center">Course Overview</h2>
+        <p>This course explores advanced topics in classical mechanics.</p>
+        <h3>Topics Covered:</h3>
+        <ul>
+            <li>Dynamics of Particles</li>
+            <li>Rigid Body Dynamics</li>
+            <li>Oscillations</li>
+            <li>Nonlinear Dynamics</li>
+        </ul>
+        <div class="text-center">
+            <a href="materials.html" class="btn btn-primary">View Course Materials</a>
+            <a href="registration.php" class="btn btn-outline-secondary">Register for the Course</a>
+        </div>
+    </div> -->
+
+    <!-- Lab Activities Table -->
+    <div class="container my-5">
+        <h2 class="text-center">Lab Activities</h2>
+        <table class="lab-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Lab Activity</th>
+                    <th>Pictures</th>
+                    <th>Lab Manuals</th>
+                    <th>Details</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>The Basics</td>
+                    <td><a href="phy311/The Basics/1.jpg" target="_blank">The Basics</a></td>
+                    <td><a href="phy311/The Basics/Lab 1 Phys 311.pdf">The Basics</a></td>
+                    <td><a href="phy311/phy311_basics.html"> More Details</a></td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>LabView and MultiSim</td>
+                    <td><a href="phy311/LabView and MultiSim/1.jpg" target="_blank">LabView and MultiSim.jpg</a><br>
+                        <a href="phy311/LabView and MultiSim/cables.jpg">Cables</a><br>
+                        <a href="phy311/LabView and MultiSim/resistors.jpg">Resistors</a>
+                    </td>
+                    <td><a href="phy311/LabView and MultiSim/Phys 311 Lab 2 Multisim and LabView (2)(1).pdf">LabView and MultiSim</a></td>
+                    <td><a href="phy311/phy311_Labview_Multisim.html"> More Details</a></td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Voltage Divider</td>
+                    <td><a href="phy311/Voltage Divider/voltage_divider.jpg" target="_blank">Voltage Divider.jpg</a></td>
+                    <td><a href="phy311/Voltage Divider/Lab 3 Phys 311.pdf">Voltage Divider</a></td>
+                    <td><a href="phy311/phy311_voltage_divider.html"> More Details</a></td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>Passive Filter Circuits</td>
+                    <td><a href="phy311/Passive Filter Circuits/passive_filter.jpg" target="_blank">Passive Filter.jpg</a></td>
+                    <td><a href="phy311/Passive Filter Circuits/Lab 4 Phys 311.pdf">Passive Filter Circuits</a></td>
+                    <td><a href="phy311/phy311_passive_filter.html"> More Details</a></td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>Semiconductors: Diodes</td>
+                    <td><a href="phy311/Semiconductors/diodes.jpg" target="_blank">Diodes.jpg</a></td>
+                    <td><a href="phy311/Semiconductors/Lab 5 Phys 311.pdf">Semiconductors</a></td>
+                    <td><a href="phy311/phy311_semiconductors.html"> More Details</a></td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>LabVIEW Virtual Instruments</td>
+                    <td><a href="phy311/LabVIEW/virtual_instruments.jpg" target="_blank">Virtual Instruments.jpg</a></td>
+                    <td><a href="phy311/LabVIEW/Lab 6 Phys 311.pdf">LabVIEW Virtual Instruments</a></td>
+                    <td><a href="phy311/phy311_labview.html"> More Details</a></td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td>Transistors Circuits </td>
+                    <td><a href="phy311/Transistors/transistors.jpg" target="_blank">Transistors.jpg</a></td>
+                    <td><a href="phy311/Transistors/Lab 7 Phys 311.pdf">Transistors Circuits</a></td>
+                    <td><a href="phy311/phy311_transistors.html"> More Details</a></td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td>OPAMP I Amplifier </td>
+                    <td><a href="phy311/OPAMP/opamp.jpg" target="_blank">OPAMP.jpg</a></td>
+                    <td><a href="phy311/OPAMP/Lab 8 Phys 311.pdf">OPAMP I Amplifier</a></td>
+                    <td><a href="phy311/phy311_opamp.html"> More Details</a></td>
+                </tr>
+            </tbody>
+        </table>
     </div>
-    <img src="logo.png" alt="Logo" style="width: 13%; height: auto; margin-right: auto; display: flex;float: right;">
-  </footer>
+
+    <!-- Footer -->
+    <footer class="lab-footer mt-auto">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col">
+                    <h2>Contact Information</h2>
+                    <h3>Daniel Thomas</h3>
+                    <h3>Ph:no- +1 (703)-992-1202</h3>
+                    <h3>Email: dthomas2@gmu.edu</h3>
+                </div>
+                <div class="col-auto">
+                    <img src="logo.png" alt="GMU Logo" class="lab-footer-logo">
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+          const sidebar = document.getElementById('sidebar');
+          const content = document.getElementById('content');
+          const sidebarToggle = document.getElementById('sidebarToggle');
+          const closeSidebar = document.getElementById('closeSidebar');
+
+          sidebarToggle.addEventListener('click', function() {
+              sidebar.classList.toggle('active');
+              content.classList.toggle('active');
+          });
+
+          closeSidebar.addEventListener('click', function() {
+              sidebar.classList.remove('active');
+              content.classList.remove('active');
+          });
+
+          // Close sidebar when clicking outside
+          document.addEventListener('click', function(event) {
+              const isClickInsideSidebar = sidebar.contains(event.target);
+              const isClickInsideToggle = sidebarToggle.contains(event.target);
+              
+              if (!isClickInsideSidebar && !isClickInsideToggle && sidebar.classList.contains('active')) {
+                  sidebar.classList.remove('active');
+                  content.classList.remove('active');
+              }
+          });
+      });
+  </script>
 </body>
 
 </html>

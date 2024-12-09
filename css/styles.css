@@ -1,0 +1,272 @@
+:root {
+    --primary-color: #006633;
+    --secondary-color: #FFCC33;
+    --text-light: #ffffff;
+    --text-dark: #333333;
+    --gmu-green: #006633;
+    --gmu-gold: #FFCC33;
+}
+
+/* Common styles */
+body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    overflow-x: hidden;
+}
+
+/* Header Banner */
+.header-banner {
+    position: relative;
+    height: 300px;
+    background: linear-gradient(rgba(0, 102, 51, 0.8), rgba(0, 102, 51, 0.9)),
+                url('../images/physics-banner.jpg');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+
+.header-content {
+    text-align: center;
+    color: var(--text-light);
+    z-index: 2;
+}
+
+.header-content h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+}
+
+.header-content p {
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Navigation */
+.navbar {
+    background-color: var(--primary-color);
+    padding: 1rem;
+}
+
+.navbar-brand {
+    color: var(--text-light) !important;
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.nav-link {
+    color: var(--text-light) !important;
+    transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+    color: var(--secondary-color) !important;
+}
+
+/* Sidebar */
+.sidebar {
+    height: 100vh;
+    width: 250px;
+    position: fixed;
+    top: 0;
+    left: -250px;
+    background-color: var(--primary-color);
+    transition: 0.3s;
+    padding-top: 60px;
+    z-index: 1040;
+}
+
+.sidebar.active {
+    left: 0;
+}
+
+.sidebar a {
+    padding: 15px 25px;
+    text-decoration: none;
+    font-size: 1.1rem;
+    color: var(--text-light);
+    display: block;
+    transition: 0.3s;
+}
+
+.sidebar a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.sidebar .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 2rem;
+    cursor: pointer;
+    color: var(--text-light);
+}
+
+/* Content */
+.content {
+    margin-left: 0;
+    padding: 20px;
+    transition: 0.3s;
+}
+
+.content.active {
+    margin-left: 250px;
+}
+
+/* Cards */
+.card {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    margin-bottom: 1.5rem;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card-title {
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+/* Lab Table Styles */
+.lab-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.lab-table th {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 1rem;
+    text-align: left;
+    font-weight: 600;
+}
+
+.lab-table td {
+    padding: 1rem;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.lab-table tr:last-child td {
+    border-bottom: none;
+}
+
+.lab-table tr:hover {
+    background-color: #f5f5f5;
+}
+
+.lab-table a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.lab-table a:hover {
+    color: var(--secondary-color);
+    text-decoration: underline;
+}
+
+/* Header Banner for Lab Pages */
+.lab-header-banner {
+    background: var(--primary-color);
+    padding: 2rem 0;
+    margin-bottom: 2rem;
+}
+
+.lab-header-banner h1 {
+    margin: 0;
+    font-size: 2.5rem;
+    font-weight: 600;
+}
+
+/* Footer Styles for Lab Pages */
+.lab-footer {
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    padding: 2rem 0;
+    margin-top: 3rem;
+}
+
+.lab-footer h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.lab-footer h3 {
+    font-size: 1rem;
+    font-weight: normal;
+    margin-bottom: 0.5rem;
+}
+
+.lab-footer-logo {
+    max-width: 150px;
+    height: auto;
+}
+
+/* Footer */
+.footer {
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    padding: 2rem 0;
+    margin-top: auto;
+}
+
+.footer img {
+    max-width: 150px;
+    height: auto;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 100%;
+        left: -100%;
+    }
+    .content.active {
+        margin-left: 0;
+    }
+    .header-banner {
+        height: 200px;
+    }
+    .header-content h1 {
+        font-size: 2rem;
+    }
+}
+
+/* GMU specific styles */
+.gmu-accent {
+    color: var(--gmu-gold);
+}
+
+.gmu-bg {
+    background-color: var(--gmu-green);
+}
+
+/* Physics elements */
+.physics-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+}
+
+.experiment-card {
+    background: linear-gradient(135deg, #fff, #f8f9fa);
+}
+
+.lab-equipment-icon {
+    font-size: 1.5rem;
+    margin-right: 0.5rem;
+    color: var(--primary-color);
+}

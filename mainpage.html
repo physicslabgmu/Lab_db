@@ -1,259 +1,361 @@
 <!DOCTYPE html>
-<html>
-<title>Main Page</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GMU Physics Lab Setup</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #006633;
+            --secondary-color: #FFCC33;
+            --text-light: #ffffff;
+            --text-dark: #333333;
+        }
 
-<style>
-  .sidenav {
-    height: 100%;
-    width: 0;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    background-color: #006633;
-    overflow-x: hidden;
-    transition: 0.5s;
-    padding-top: 60px;
-  }
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            overflow-x: hidden;
+        }
 
-  .sidenav a {
-    padding: 8px 8px 8px 32px;
-    text-decoration: none;
-    font-size: 25px;
-    color: white;
-    display: block;
-    transition: 0.3s;
-  }
+        .navbar {
+            background-color: var(--primary-color);
+            padding: 1rem;
+        }
 
-  .sidenav a:hover {
-    color: #006633;
-  }
+        .navbar-brand {
+            color: var(--text-light) !important;
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
 
-  .sidenav .closebtn {
-    position: absolute;
-    top: 0;
-    right: 25px;
-    font-size: 36px;
-    margin-left: 50px;
-  }
+        .nav-link {
+            color: var(--text-light) !important;
+            transition: all 0.3s ease;
+        }
 
-  .container {
-    display: flex;
-    flex-direction: row;
-    margin-left: 0;
-  }
+        .nav-link:hover {
+            color: var(--secondary-color) !important;
+        }
 
-  .container h1 {
-    text-align: center;
-    color: white;
-    margin: 0;
-    /* Remove default margin for h1 */
-  }
+        .sidebar {
+            height: 100vh;
+            width: 250px;
+            position: fixed;
+            top: 0;
+            left: -250px;
+            background-color: var(--primary-color);
+            transition: 0.3s;
+            padding-top: 60px;
+            z-index: 1040;
+        }
 
-  .container span {
-    font-size: 30px;
-    cursor: pointer;
-    margin-right: 15px;
-    /* Add some margin to the menu icon */
-  }
+        .sidebar.active {
+            left: 0;
+        }
 
+        .sidebar a {
+            padding: 15px 25px;
+            text-decoration: none;
+            font-size: 1.1rem;
+            color: var(--text-light);
+            display: block;
+            transition: 0.3s;
+        }
 
+        .sidebar a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
 
-  footer {
-    margin-top: 2px;
-    display: flex;
-    /* flex-direction: column; */
-    /* float: left; */
-    background-color: #FFCC33;
-    /* background-color: #006633; */
-    /* Transparent yellow background */
-    color: #006633;
-    /* color: white; */
-    align-items: flex-end;
-    /* Align items to the right */
-    padding: 10px;
-  }
+        .sidebar .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 2rem;
+            cursor: pointer;
+            color: var(--text-light);
+        }
 
-  footer .w3-container {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    /* margin-left: 50%; */
-  }
+        .content {
+            margin-left: 0;
+            padding: 20px;
+            transition: 0.3s;
+        }
 
-  footer h2,
-  footer h3 {
-    margin: 0;
-    /* Remove default margin */
-  }
+        .content.active {
+            margin-left: 250px;
+        }
 
-  footer img {
-    width: 13%;
-    /* Set the desired width for the logo */
-    height: auto;
-    /* Maintain aspect ratio */
-    /* display: flex;
-    flex-direction: row; */
-    float: right;
-  }
+        .card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
 
+        .card:hover {
+            transform: translateY(-5px);
+        }
 
-  @media screen and (max-width: 600px) {
-    .container {
-      flex-direction: column;
-    }
+        .footer {
+            background-color: var(--secondary-color);
+            color: var(--primary-color);
+            padding: 2rem 0;
+            margin-top: auto;
+        }
 
-    .container span {
-      margin-right: 0;
-      margin-bottom: 10px;
-    }
-  }
+        .footer img {
+            max-width: 150px;
+            height: auto;
+        }
 
-  @media screen and (max-height: 450px) {
-    .sidenav {
-      padding-top: 15px;
-    }
+        .header-banner {
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            padding: 2rem;
+            text-align: center;
+            margin-top: 60px; /* Add this line to adjust the margin */
+        }
 
-    .sidenav a {
-      font-size: 18px;
-    }
-  }
+        .header-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
 
-  .image:nth-of-type(1) {
-    animation-delay: 0s;
-  }
+        .header-content h1 {
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
 
-  .image:nth-of-type(2) {
-    animation-delay: 10s;
-  }
+        .header-content p {
+            font-size: 1.5rem;
+        }
 
-  @keyframes change-img-anim {
-    0% {
-      opacity: 0;
-    }
+        .physics-icon {
+            margin-right: 10px;
+        }
 
-    10% {
-      opacity: 1;
-    }
+        .lab-equipment-icon {
+            margin-right: 10px;
+        }
 
-    90% {
-      opacity: 1;
-    }
+        .experiment-card {
+            background-color: #f7f7f7;
+            border: 1px solid #ddd;
+        }
 
-    100% {
-      opacity: 0;
-    }
-  }
-</style>
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                left: -100%;
+            }
+            .content.active {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body class="d-flex flex-column min-vh-100">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container-fluid">
+            <button class="btn text-light" id="sidebarToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <img src="logo.png" alt="GMU Logo" height="60" class="d-inline-block align-text-top me-2">
+                <span class="h5 mb-0 text-light">Physics Lab Setup</span>
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://science.gmu.edu/physics" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Physics Department
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="logout.php">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
-<body>
-
-  <!-- <div class="w3-sidebar w3-bar-block w3-light-grey w3-card" style="width:200px;">
-  <h3 class="w3-bar-item">Menu</h3>
-  <a href="#" class="w3-bar-item w3-button">Equipment Manual</a>
-  <button class="w3-button w3-block w3-left-align" onclick="myAccFunc()">
-  Physics Lab Setup <i class="fa fa-caret-down"></i>
-  </button>
-  <div id="demoAcc" class="w3-hide w3-white w3-card">
-    <a href="phy103.html" class="w3-bar-item w3-button">PHYS103</a>
-    <a href="phy104.html" class="w3-bar-item w3-button">PHYS104</a>
-    <a href="phy161.html" class="w3-bar-item w3-button">PHYS161</a>
-    <a href="phy244.html" class="w3-bar-item w3-button">PHYS244</a>
-    <a href="phy246.html" class="w3-bar-item w3-button">PHYS246</a>
-    <a href="phy261.html" class="w3-bar-item w3-button">PHYS261</a>
-    <a href="phy263.html" class="w3-bar-item w3-button">PHYS263</a>
-  </div>
-  <a href="equipment_request.html" class="w3-bar-item w3-button">Equipment Request From</a>
-  <a href="pa_database_fairfax.html" class="w3-bar-item w3-button">Physics & Astronomy Database Fairfax</a>
-  <a href="pa_demonstration.html" class="w3-bar-item w3-button">Physics & Astronomy Demonstration</a>
-  <a href="broken_equipment.php" class="w3-bar-item w3-button">Broken Equipment</a>
-  <a href="pa_shop.php" class="w3-bar-item w3-button">Physics and Astronomy Shop</a>
-</div> -->
-  <div class="container">
-
-    <div id="mySidenav" class="sidenav">
-      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-
-      <!-- <a href="#">About</a>
-  <a href="#">Services</a>
-  <a href="#">Clients</a>
-  <a href="#">Contact</a> -->
-      <!-- <h3 class="w3-bar-item w3-button" style="text-align: center;">Menu</h3> -->
-      <a href="#" class="w3-bar-item w3-button">Equipment Manual</a>
-      <button class="w3-button w3-block " style="text-align: center; color: white;" onclick="myAccFunc()">
-        Physics Lab Setup <i class="fa fa-caret-down"></i>
-      </button>
-      <div id="demoAcc" class="w3-hide w3-#006633 w3-card">
-        <a href="phy103.html" class="w3-bar-item w3-button">PHYS103</a>
-        <a href="phy104.html" class="w3-bar-item w3-button">PHYS104</a>
-        <a href="phy161.html" class="w3-bar-item w3-button">PHYS161</a>
-        <a href="phy244.html" class="w3-bar-item w3-button">PHYS244</a>
-        <a href="phy246.html" class="w3-bar-item w3-button">PHYS246</a>
-        <a href="phy261.html" class="w3-bar-item w3-button">PHYS261</a>
-        <a href="phy263.html" class="w3-bar-item w3-button">PHYS263</a>
-        <a href="phy311.html" class="w3-bar-item w3-button">PHYS311</a>
-        <a href="phy312.html" class="w3-bar-item w3-button">PHYS312</a>
-      </div>
-      <a href="equipment_request.html" class="w3-bar-item w3-button">Equipment Request From</a>
-      <a href="pa_database_fairfax.html" class="w3-bar-item w3-button">Physics & Astronomy Database Fairfax</a>
-      <a href="pa_demonstration.html" class="w3-bar-item w3-button">Physics & Astronomy Demonstration</a>
-      <a href="broken_equipment.php" class="w3-bar-item w3-button">Broken Equipment</a>
-      <a href="pa_shop.php" class="w3-bar-item w3-button">Physics and Astronomy Shop</a>
-    </div>
-    <!-- Page Content -->
-    <!-- <div style="margin-left:13%"> -->
-
-    <div class="w3-container" style="background-color:#006633; width: 100%; display: flex; align-items: center;">
-      <span style="font-size:30px;cursor:pointer;background-color: #006633; color: white; margin-left: 0;"
-        onclick="openNav()">&#9776;</span>
-      <h1 style="color: white; text-align: center; margin: 0 auto;">Welcome to Physics and Astronomy Lab</h1>
+    <!-- Header Banner -->
+    <div class="header-banner">
+        <div class="header-content p-4">
+            <h1 class="text-white">George Mason University</h1>
+            <p class="text-white">Department of Physics and Astronomy Laboratory Management System</p>
+        </div>
     </div>
 
-  </div>
-  </div>
-  <img src="images/pa_img.png" class="image" alt="Physics and Astronomy"
-    style=" object-fit: cover; width: 100%; border-radius: 8px;">
-  <!-- <img src="images/pa_new.jpg" class="image" alt="Physics and Astronomy"
-    style=" object-fit: cover; width: 100%; border-radius: 8px;"> -->
-
-  <br>
-  <footer>
-    <div class="w3-container">
-      <h2 style="font: bolder;">Contact Information</h2>
-      <h3>Daniel Thomas</h3>
-      <h3>Ph:no- +1 (703)-992-1202</h3>
-      <h3>Email: dthomas2@gmu.edu</h3>
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <span class="close-btn" id="closeSidebar">&times;</span>
+        <a href="phy103.html"><i class="fas fa-atom"></i> PHY 103 - Physics and Society</a>
+        <a href="phy104.html"><i class="fas fa-magnet"></i> PHY 104 - Physics and Technology</a>
+        <a href="phy161.html"><i class="fas fa-wave-square"></i> PHY 161 - Physics I</a>
+        <a href="phy244.html"><i class="fas fa-microscope"></i> PHY 244 - Modern Physics</a>
+        <a href="phy246.html"><i class="fas fa-laser"></i> PHY 246 - Electronics</a>
+        <a href="phy261.html"><i class="fas fa-atom"></i> PHY 261 - Physics II</a>
+        <a href="phy263.html"><i class="fas fa-radiation"></i> PHY 263 - Waves and Fluids</a>
+        <a href="phy311.html"><i class="fas fa-microchip"></i> PHY 311 - Instrumentation</a>
+        <a href="phy312.html"><i class="fas fa-flask"></i> PHY 312 - Advanced Lab</a>
     </div>
-    <img src="logo.png" alt="logo">
-  </footer>
 
-  <script>
-    function myAccFunc() {
-      var x = document.getElementById("demoAcc");
-      if (x.className.indexOf("w3-show") == -1) {
-        x.className += " w3-show";
-        x.previousElementSibling.className += " w3-green";
-      } else {
-        x.className = x.className.replace(" w3-show", "");
-        x.previousElementSibling.className =
-          x.previousElementSibling.className.replace(" w3-green", "");
-      }
-    }
-  </script>
+    <!-- Main Content -->
+    <div class="content" id="content">
+        <!-- <div class="container my-5 text-center">
+            <img src="/images/Astro.jpg" alt="Astronomy Image" class="img-fluid mb-4" style="max-width: 100%; height: auto; border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+            <h2>Explore Our Physics Lab Courses</h2>
+            <p>Join us in exploring the fascinating world of physics through our hands-on lab courses.</p>
+        </div> -->
+        <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="/images/pa_new2.jpg" class="d-block w-100" alt="Physics Lab Image" style="height: 100vh; object-fit: cover;">
+                </div>
+                <div class="carousel-item">
+                    <img src="/images/Astro.jpg" class="d-block w-100" alt="Physics Lab Image" style="height: 100vh; object-fit: cover;">
+                </div>
+                <!-- Add more carousel items here if needed -->
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+        <div class="container mt-4">
+            <div class="row g-4">
+                <!-- Quick Actions -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <i class="fas fa-tools physics-icon"></i> Equipment Management
+                            </h5>
+                            <div class="list-group mt-3">
+                                <a href="equipment_request.html" class="list-group-item list-group-item-action">
+                                    <i class="fas fa-clipboard-list lab-equipment-icon"></i> Request Equipment
+                                </a>
+                                <a href="broken_equipment.php" class="list-group-item list-group-item-action">
+                                    <i class="fas fa-exclamation-triangle lab-equipment-icon"></i> Report Issues
+                                </a>
+                                <a href="equipment_manual.html" class="list-group-item list-group-item-action">
+                                    <i class="fas fa-book lab-equipment-icon"></i> Equipment Manuals
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-  <script>
-    function openNav() {
-      document.getElementById("mySidenav").style.width = "100%";
-    }
+                <!-- Lab Resources -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card experiment-card">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <i class="fas fa-flask physics-icon"></i> Lab Resources
+                            </h5>
+                            <div class="list-group mt-3">
+                                <a href="pa_demonstration.html" class="list-group-item list-group-item-action">
+                                    <i class="fas fa-chalkboard-teacher lab-equipment-icon"></i> Demonstrations
+                                </a>
+                                <a href="torque.html" class="list-group-item list-group-item-action">
+                                    <i class="fas fa-sync lab-equipment-icon"></i> Torque Experiments
+                                </a>
+                                <a href="workandenergy.html" class="list-group-item list-group-item-action">
+                                    <i class="fas fa-bolt lab-equipment-icon"></i> Work and Energy
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-    function closeNav() {
-      document.getElementById("mySidenav").style.width = "0";
-    }
-  </script>
+                <!-- Quick Links -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <i class="fas fa-link physics-icon"></i> Quick Links
+                            </h5>
+                            <div class="list-group mt-3">
+                                <a href="pa_database_fairfax.html" class="list-group-item list-group-item-action">
+                                    <i class="fas fa-database lab-equipment-icon"></i> PA Database
+                                </a>
+                                <a href="pa_shop.html" class="list-group-item list-group-item-action">
+                                    <i class="fas fa-shopping-cart lab-equipment-icon"></i> PA Shop
+                                </a>
+                                <a href="https://science.gmu.edu/academics/departments-units/physics-astronomy" 
+                                   class="list-group-item list-group-item-action" target="_blank">
+                                    <i class="fas fa-university lab-equipment-icon"></i> Department Website
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer mt-auto">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <h4>George Mason University</h4>
+                    <p>Department of Physics and Astronomy</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Fairfax, VA 22030</p>
+                    <p><i class="fas fa-phone"></i> (703) 993-1000</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <img src="logo.png" alt="GMU Logo" class="img-fluid" style="max-width: 200px;">
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const sidebar = document.getElementById('sidebar');
+            const content = document.getElementById('content');
+            const sidebarToggle = document.getElementById('sidebarToggle');
+            const closeSidebar = document.getElementById('closeSidebar');
+
+            sidebarToggle.addEventListener('click', function() {
+                sidebar.classList.toggle('active');
+                content.classList.toggle('active');
+            });
+
+            closeSidebar.addEventListener('click', function() {
+                sidebar.classList.remove('active');
+                content.classList.remove('active');
+            });
+
+            // Close sidebar when clicking outside
+            document.addEventListener('click', function(event) {
+                const isClickInsideSidebar = sidebar.contains(event.target);
+                const isClickInsideToggle = sidebarToggle.contains(event.target);
+                
+                if (!isClickInsideSidebar && !isClickInsideToggle && sidebar.classList.contains('active')) {
+                    sidebar.classList.remove('active');
+                    content.classList.remove('active');
+                }
+            });
+        });
+    </script>
 </body>
-
 </html>
