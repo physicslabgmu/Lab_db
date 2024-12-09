@@ -16,7 +16,7 @@
                 <i class="fas fa-bars"></i>
             </button>
             <a class="navbar-brand ms-3" href="#">
-                <img src="logo.png" alt="GMU Logo" height="30" class="d-inline-block align-text-top me-2">
+                <img src="logo.png" alt="GMU Logo" height="60" class="d-inline-block align-text-top me-2">
                 Physics Lab Setup - PHY 263
             </a>
   
@@ -26,16 +26,16 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        <a class="nav-link active" aria-current="page" href="/index.html">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Courses</a>
+                        <a class="nav-link" href="/courses.html">Courses</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Resources</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Contact</a>
+                        <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#contactModal">Contact</a>
                     </li>
                 </ul>
             </div>
@@ -256,6 +256,27 @@
                 </tr>
         </table>
     </div>
+
+    <!-- Contact Modal -->
+<div class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="contactModalLabel">Contact Information</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <h6>Daniel Thomas</h6>
+                <p>Email: dthomas2@gmu.edu</p>
+                <p>Phone: +1 (703) 992-1202</p>
+                <p>Office: Planetary Hall, Room 328A</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 
     <!-- Footer -->
     <footer class="lab-footer mt-auto">
