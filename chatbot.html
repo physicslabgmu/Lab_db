@@ -183,8 +183,8 @@
         // Add this at the top of your script
         const isProduction = window.location.hostname !== 'localhost';
         const API_URL = isProduction
-            ? 'https://lab-db-dt81.onrender.com/api/chat'  // Production URL
-            : 'http://localhost:10000/api/chat';  // Updated local port to match server config
+            ? 'https://lab-db-dt81.onrender.com/api/chat'
+            : 'http://localhost:10000/api/chat';
 
         // Fix chat window toggle
         document.getElementById('chatbot-icon').onclick = function () {
@@ -209,14 +209,20 @@
                 fetch(API_URL, {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
                     },
                     body: JSON.stringify({
                         prompt: userInput,
                         sessionId: sessionId
                     })
                 })
-                    .then(response => response.json())
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! status: ${response.status}`);
+                        }
+                        return response.json();
+                    })
                     .then(data => {
                         const botResponse = data?.candidates?.[0]?.content?.parts?.[0]?.text || "Sorry, I couldn't generate a response.";
                         const messageDiv = document.createElement('div');

@@ -36,11 +36,10 @@ app.use(cors({
     origin: [
         'https://lab-db-dt81.onrender.com',
         'https://physicslabgmu.github.io',
-        'http://localhost:10000',
-        'http://127.0.0.1:10000'
+        'http://localhost:10000'
     ],
-    methods: ['POST', 'GET', 'OPTIONS'],
-    allowedHeaders: ['Content-Type'],
+    methods: ['GET', 'POST', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Accept'],
     credentials: true
 }));
 
@@ -174,11 +173,29 @@ setInterval(() => {
 }, 5 * 60 * 1000); // Clean up every 5 minutes
 
 // Update server start configuration
-const PORT = process.env.PORT || 10000;  // Changed default port to match render.yaml
-const HOST = '0.0.0.0';  // Add this line
+const PORT = process.env.PORT || 10000;  // Gets port from environment variable or uses 10000 as fallback
+const HOST = '0.0.0.0';  // Allows connections from all network interfaces
 
 app.listen(PORT, HOST, () => {
     console.log(`Server running on http://${HOST}:${PORT}`);
+});
+
+// Add basic health check endpoint
+app.get('/', (req, res) => {
+    res.json({ status: 'Server is running' });
+});
+
+app.get('/health', (req, res) => {
+    res.json({ status: 'healthy' });
+});
+
+// Update error handling
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).json({
+        error: 'Something broke!',
+        details: err.message
+    });
 });
 
 // Modify the run function to handle input properly

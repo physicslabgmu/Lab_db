@@ -1,13 +1,23 @@
 services:
   - type: web
-    name: physics-lab-chatbot
+    name: lab-db-dt81  # Your Render service name
     runtime: node
     plan: free
     buildCommand: npm install
-    startCommand: npm start
-    nodeVersion: 16.20.0  # Add specific node version
+    startCommand: node js/server.js
+    nodeVersion: 16.20.0
     envVars:
       - key: NODE_ENV
         value: production
       - key: PORT
         value: 10000
+      - key: GEMINI_API_KEY  # Make sure this is set in Render's environment variables
+        sync: false
+    headers:
+      - path: /*
+        name: Access-Control-Allow-Origin
+        value: "*"
+    routes:
+      - type: rewrite
+        source: /api/*
+        destination: /api/$1
