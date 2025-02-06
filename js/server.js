@@ -31,9 +31,9 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Update CORS configuration
+// Update CORS configuration for production
 app.use(cors({
-    origin: '*', // In production, replace with your specific domain
+    origin: ['https://your-frontend-domain.com', 'http://localhost:3000'],
     methods: ['POST', 'GET', 'OPTIONS'],
     allowedHeaders: ['Content-Type']
 }));
@@ -167,10 +167,12 @@ setInterval(() => {
     }
 }, 5 * 60 * 1000); // Clean up every 5 minutes
 
-// Start server
-const PORT = 3000;
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
+// Update server start configuration
+const PORT = process.env.PORT || 3000;
+const HOST = '0.0.0.0';  // Add this line
+
+app.listen(PORT, HOST, () => {
+    console.log(`Server running on http://${HOST}:${PORT}`);
 });
 
 // Modify the run function to handle input properly
