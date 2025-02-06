@@ -15,51 +15,57 @@ const model = genAI.getGenerativeModel({
 
 });
 
-const generationConfig = {
-    temperature: 0.15,
-    topP: 0.95,
-    topK: 40,
-    maxOutputTokens: 8192,
-    responseMimeType: "text/plain",
-};
-
 const express = require('express');
 const cors = require('cors');
+const fetch = require('node-fetch'); // Ensure to install this with `npm install node-fetch`
 const app = express();
 
-// Add middleware
+// Load environment variables
+require('dotenv').config();
+
+// Middleware
 app.use(cors());
 app.use(express.json());
 
-// Update CORS configuration for production
+// CORS Configuration
+const allowedOrigins = [
+    'https://physicslabgmu.github.io',
+    'http://localhost:10000',
+    'http://localhost:3000',
+    'http://127.0.0.1:5500'
+];
+
 app.use(cors({
-    origin: [
-        'https://physicslabgmu.github.io',
-        'http://localhost:10000',
-        'http://localhost:3000',
-        'http://127.0.0.1:5500' // For local development
-    ],
+    origin: function (origin, callback) {
+        // Allow requests with no origin (like mobile apps or curl requests)
+        if (!origin) return callback(null, true);
+
+        if (allowedOrigins.indexOf(origin) === -1) {
+            return callback(new Error('CORS policy violation'), false);
+        }
+        return callback(null, true);
+    },
     methods: ['GET', 'POST', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Accept'],
     credentials: true
 }));
 
-// Add logging for debugging
+// Debugging middleware
 app.use((req, res, next) => {
-    console.log(`${req.method} ${req.path} - Origin: ${req.headers.origin}`);
+    if (req.path !== '/health') { // Don't log health checks
+        console.log(`${req.method} ${req.path} from ${req.origin || 'Unknown origin'}`);
+    }
     next();
 });
 
-// Store chat histories in memory (in production, use a proper database)
+// Session storage
 const chatSessions = new Map();
+const SESSION_TIMEOUT = 30 * 60 * 1000; // 30 minutes
 
-// Add URL validation function
+// Function to validate URLs
 async function validateUrl(url) {
     try {
-        const response = await fetch(url, {
-            method: 'HEAD',
-            timeout: 5000 // 5 second timeout
-        });
+        const response = await fetch(url, { method: 'HEAD', timeout: 5000 });
         return response.ok;
     } catch (error) {
         console.error(`Error validating URL ${url}:`, error.message);
@@ -67,10 +73,10 @@ async function validateUrl(url) {
     }
 }
 
-// Update URL regex pattern to better match GitHub raw images
-const urlPattern = /https:\/\/raw\.githubusercontent\.com\/physicslabgmu\/Lab_db\/main\/[^)\s<>'"]+\.(jpg|jpeg|png|gif|JPG|JPEG|PNG|GIF|pdf|PDF)/g;
+// Regex pattern for GitHub raw image URLs
+const urlPattern = /https:\/\/raw\.githubusercontent\.com\/physicslabgmu\/Lab_db\/main\/[^)\s<>'"]+\.(jpg|jpeg|png|gif|pdf)/gi;
 
-// Modify the convertUrlsToEmbeds function for better handling
+// Convert URLs to embeds
 async function convertUrlsToEmbeds(text) {
     try {
         const matches = text.match(urlPattern) || [];
@@ -79,97 +85,48 @@ async function convertUrlsToEmbeds(text) {
         for (const url of matches) {
             const extension = url.split('.').pop().toLowerCase();
             if (['jpg', 'jpeg', 'png', 'gif'].includes(extension)) {
-                const replacement = `
-                    <div class="preview-container">
-                        <img src="${url}" 
-                            alt="Lab Equipment" 
-                            class="preview-image"
-                            loading="lazy"
-                            onclick="window.open('${url}', '_blank')"
-                            style="cursor: pointer"
-                            onerror="this.onerror=null;this.src='https://via.placeholder.com/300x200?text=Image+Not+Available';this.classList.add('error-image');">
-                    </div>`;
-                processedText = processedText.replace(url, replacement);
+                processedText = processedText.replace(url, `<img src="${url}" alt="Image" style="cursor:pointer;" onclick="window.open('${url}', '_blank')">`);
             } else if (extension === 'pdf') {
-                const fileName = url.split('/').pop();
-                const replacement = `
-                    <div class="preview-container">
-                        <a href="${url}" target="_blank" class="pdf-link">
-                            <i class="far fa-file-pdf"></i> ${fileName}
-                        </a>
-                    </div>`;
-                processedText = processedText.replace(url, replacement);
+                processedText = processedText.replace(url, `<a href="${url}" target="_blank">${url}</a>`);
             }
         }
         return processedText;
     } catch (error) {
-        console.error('Error in convertUrlsToEmbeds:', error);
+        console.error('Error processing URLs:', error);
         return text;
     }
 }
 
-// Modify the API endpoint to properly validate input
+// API Endpoint
 app.post('/api/chat', async (req, res) => {
     try {
         const userInput = req.body.prompt?.trim();
         const sessionId = req.body.sessionId || 'default';
 
-        // Validate input more strictly
-        if (!userInput || userInput.length === 0) {
-            return res.status(400).json({
-                error: "Please provide a non-empty message"
-            });
+        if (!userInput) {
+            return res.status(400).json({ error: "Please provide a non-empty message" });
         }
 
-        // Get or create chat session
+        // Initialize session if not exists
         if (!chatSessions.has(sessionId)) {
-            chatSessions.set(sessionId, model.startChat({
-                generationConfig,
-                history: []
-            }));
+            chatSessions.set(sessionId, { history: [], lastAccess: Date.now() });
         }
 
         const chatSession = chatSessions.get(sessionId);
+        chatSession.lastAccess = Date.now();
 
-        try {
-            // Send message to Gemini API
-            const result = await chatSession.sendMessage(userInput);
+        // Simulated AI Response (Replace with actual AI API call)
+        const botResponse = `Mock AI Response for: ${userInput}`;
 
-            // Validate response
-            if (!result?.response) {
-                throw new Error("Invalid or empty response from AI");
-            }
-
-            const responseText = result.response.text();
-
-            // Process response only if it contains text
-            if (responseText && responseText.trim()) {
-                const processedResponse = await convertUrlsToEmbeds(responseText);
-                return res.json({
-                    candidates: [{
-                        content: {
-                            parts: [{ text: processedResponse }]
-                        }
-                    }]
-                });
-            } else {
-                throw new Error("Empty response from AI");
-            }
-        } catch (error) {
-            console.error("Chat error:", error);
-            throw error; // Re-throw to be caught by outer try-catch
-        }
+        const processedResponse = await convertUrlsToEmbeds(botResponse);
+        res.json({ response: processedResponse });
     } catch (error) {
         console.error("Server error:", error);
-        return res.status(500).json({
-            error: "An error occurred while processing your request",
-            details: error.message
-        });
+        res.status(500).json({ error: "Internal server error", details: error.message });
     }
 });
 
-// Add session cleanup (optional)
-const SESSION_TIMEOUT = 30 * 60 * 1000; // 30 minutes
+// Session Cleanup
 setInterval(() => {
     const now = Date.now();
     for (const [sessionId, session] of chatSessions.entries()) {
@@ -177,71 +134,22 @@ setInterval(() => {
             chatSessions.delete(sessionId);
         }
     }
-}, 5 * 60 * 1000); // Clean up every 5 minutes
+}, 5 * 60 * 1000); // Every 5 minutes
 
-// Update server start configuration
-const PORT = process.env.PORT || 10000;  // Gets port from environment variable or uses 10000 as fallback
-const HOST = '0.0.0.0';  // Allows connections from all network interfaces
+// Health check endpoints
+app.get('/', (req, res) => res.json({ status: 'Server is running' }));
+app.get('/health', (req, res) => res.json({ status: 'healthy' }));
 
-app.listen(PORT, HOST, () => {
-    console.log(`Server running on http://${HOST}:${PORT}`);
-});
-
-// Add basic health check endpoint
-app.get('/', (req, res) => {
-    res.json({ status: 'Server is running' });
-});
-
-app.get('/health', (req, res) => {
-    res.json({ status: 'healthy' });
-});
-
-// Update error handling
+// Global error handling
 app.use((err, req, res, next) => {
     console.error(err.stack);
-    res.status(500).json({
-        error: 'Something broke!',
-        details: err.message
-    });
+    res.status(500).json({ error: 'Something went wrong!', details: err.message });
 });
 
-// Modify the run function to handle input properly
-async function run() {
-    try {
-        const userInput = process.argv.slice(2).join(" ").trim();
+// Start Server
+const PORT = process.env.PORT || 10000;
+const HOST = '0.0.0.0';
 
-        if (!userInput) {
-            console.log("Please provide some input text as a command line argument.");
-            return;
-        }
-
-        console.log("Processing query:", userInput);
-
-        const chatSession = model.startChat({
-            generationConfig,
-            history: []
-        });
-
-        const result = await chatSession.sendMessage(userInput);
-
-        if (result?.response) {
-            console.log("Response:", result.response.text());
-        } else {
-            console.log("No response received from AI");
-        }
-    } catch (error) {
-        console.error("Error:", error.message);
-    }
-}
-
-// Add error handler for uncaught exceptions
-process.on('unhandledRejection', (err) => {
-    console.error('Unhandled promise rejection:', err);
+app.listen(PORT, HOST, () => {
+    console.log(`Server running at http://${HOST}:${PORT}`);
 });
-
-if (require.main === module) {
-    run().catch(err => {
-        console.error('Error in main process:', err);
-        process.exit(1);
-    });
-}
