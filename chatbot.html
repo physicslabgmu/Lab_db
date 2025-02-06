@@ -183,7 +183,7 @@
         // Update the isProduction check to specifically look for GitHub Pages domain
         const isProduction = window.location.hostname === 'physicslabgmu.github.io';
         const API_URL = isProduction
-            ? 'https://lab-db-dt81.onrender.com/api/chat'
+            ? 'https://physicslabgmu.onrender.com/api/chat'
             : 'http://localhost:10000/api/chat';
 
         console.log('Current API URL:', API_URL); // Add this for debugging
