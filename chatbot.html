@@ -183,8 +183,8 @@
         // Add this at the top of your script
         const isProduction = window.location.hostname !== 'localhost';
         const API_URL = isProduction
-            ? 'https://lab-db-dt81.onrender.com/api/chat'  // Update with your correct Render URL
-            : 'http://localhost:3000/api/chat';
+            ? 'https://lab-db-dt81.onrender.com/api/chat'  // Production URL
+            : 'http://localhost:10000/api/chat';  // Updated local port to match server config
 
         // Fix chat window toggle
         document.getElementById('chatbot-icon').onclick = function () {

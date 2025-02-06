@@ -1,11 +1,22 @@
 const config = {
     development: {
-        apiUrl: 'http://localhost:3000/api/chat',
-        host: 'localhost'
+        apiUrl: 'http://localhost:10000/api/chat', // Updated port
+        host: 'localhost',
+        cors: {
+            origin: ['http://localhost:10000'],
+            methods: ['GET', 'POST', 'OPTIONS']
+        }
     },
     production: {
-        apiUrl: 'https://lab-db-dt81.onrender.com/api/chat', // Updated Render URL
-        host: '0.0.0.0'
+        apiUrl: 'https://lab-db-dt81.onrender.com/api/chat',
+        host: '0.0.0.0',
+        cors: {
+            origin: [
+                'https://lab-db-dt81.onrender.com',
+                'https://physicslabgmu.github.io'
+            ],
+            methods: ['GET', 'POST', 'OPTIONS']
+        }
     }
 };
 

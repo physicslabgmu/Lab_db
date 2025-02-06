@@ -168,7 +168,7 @@ setInterval(() => {
 }, 5 * 60 * 1000); // Clean up every 5 minutes
 
 // Update server start configuration
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 10000;  // Changed default port to match render.yaml
 const HOST = '0.0.0.0';  // Add this line
 
 app.listen(PORT, HOST, () => {
@@ -208,5 +208,8 @@ async function run() {
 process.on('unhandledRejection', (error) => {
     console.error('Unhandled promise rejection:', error);
 });
+
+run();
+console.error('Unhandled promise rejection:', error);
 
 run();
