@@ -180,11 +180,13 @@
         // Add session ID generation
         const sessionId = 'session_' + Date.now();
 
-        // Add this at the top of your script
-        const isProduction = window.location.hostname !== 'localhost';
+        // Update the isProduction check to specifically look for GitHub Pages domain
+        const isProduction = window.location.hostname === 'physicslabgmu.github.io';
         const API_URL = isProduction
             ? 'https://lab-db-dt81.onrender.com/api/chat'
             : 'http://localhost:10000/api/chat';
+
+        console.log('Current API URL:', API_URL); // Add this for debugging
 
         // Fix chat window toggle
         document.getElementById('chatbot-icon').onclick = function () {
@@ -198,57 +200,56 @@
 
 
 
-        function sendMessage() {
+        async function sendMessage() {
             const userInput = document.getElementById('user-input').value.trim();
             const chatMessages = document.getElementById('chat-messages');
 
             if (userInput) {
-                chatMessages.innerHTML += `<div><strong>User:</strong> ${userInput}</div>`;
-                document.getElementById('user-input').value = '';
+                try {
+                    chatMessages.innerHTML += `<div><strong>User:</strong> ${userInput}</div>`;
+                    document.getElementById('user-input').value = '';
 
-                fetch(API_URL, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        prompt: userInput,
-                        sessionId: sessionId
-                    })
-                })
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error(`HTTP error! status: ${response.status}`);
-                        }
-                        return response.json();
-                    })
-                    .then(data => {
-                        const botResponse = data?.candidates?.[0]?.content?.parts?.[0]?.text || "Sorry, I couldn't generate a response.";
-                        const messageDiv = document.createElement('div');
-                        messageDiv.innerHTML = `<strong>Assistant:</strong> ${botResponse}`;
-
-                        // Enhanced image handling
-                        messageDiv.querySelectorAll('img').forEach(img => {
-                            img.loading = "lazy";
-                            img.style.opacity = "0";
-                            img.onload = function () {
-                                this.style.opacity = "1";
-                            };
-                            img.onerror = function () {
-                                this.onerror = null;
-                                this.src = 'https://via.placeholder.com/300x200?text=Image+Not+Available';
-                                this.classList.add('error-image');
-                            };
-                        });
-
-                        chatMessages.appendChild(messageDiv);
-                        chatMessages.scrollTop = chatMessages.scrollHeight;
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
-                        chatMessages.innerHTML += `<div><strong>Assistant:</strong> Error occurred while processing your request.</div>`;
+                    const response = await fetch(API_URL, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            prompt: userInput,
+                            sessionId: sessionId
+                        })
                     });
+
+                    if (!response.ok) {
+                        throw new Error(`Server returned ${response.status}: ${response.statusText}`);
+                    }
+
+                    const data = await response.json();
+                    const botResponse = data?.candidates?.[0]?.content?.parts?.[0]?.text || "Sorry, I couldn't generate a response.";
+                    const messageDiv = document.createElement('div');
+                    messageDiv.innerHTML = `<strong>Assistant:</strong> ${botResponse}`;
+
+                    // Enhanced image handling
+                    messageDiv.querySelectorAll('img').forEach(img => {
+                        img.loading = "lazy";
+                        img.style.opacity = "0";
+                        img.onload = function () {
+                            this.style.opacity = "1";
+                        };
+                        img.onerror = function () {
+                            this.onerror = null;
+                            this.src = 'https://via.placeholder.com/300x200?text=Image+Not+Available';
+                            this.classList.add('error-image');
+                        };
+                    });
+
+                    chatMessages.appendChild(messageDiv);
+                    chatMessages.scrollTop = chatMessages.scrollHeight;
+                } catch (error) {
+                    console.error('Fetch error:', error);
+                    chatMessages.innerHTML += `<div><strong>Assistant:</strong> Error connecting to server. Please try again later. (${error.message})</div>`;
+                }
             }
         }
 

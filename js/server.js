@@ -34,14 +34,21 @@ app.use(express.json());
 // Update CORS configuration for production
 app.use(cors({
     origin: [
-        'https://lab-db-dt81.onrender.com',
         'https://physicslabgmu.github.io',
-        'http://localhost:10000'
+        'http://localhost:10000',
+        'http://localhost:3000',
+        'http://127.0.0.1:5500' // For local development
     ],
     methods: ['GET', 'POST', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Accept'],
     credentials: true
 }));
+
+// Add logging for debugging
+app.use((req, res, next) => {
+    console.log(`${req.method} ${req.path} - Origin: ${req.headers.origin}`);
+    next();
+});
 
 // Store chat histories in memory (in production, use a proper database)
 const chatSessions = new Map();
