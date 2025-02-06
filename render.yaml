@@ -5,6 +5,7 @@ services:
     plan: free
     buildCommand: npm install
     startCommand: npm start
+    nodeVersion: 16.20.0  # Add specific node version
     envVars:
       - key: NODE_ENV
         value: production

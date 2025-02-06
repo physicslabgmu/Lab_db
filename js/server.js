@@ -33,9 +33,15 @@ app.use(express.json());
 
 // Update CORS configuration for production
 app.use(cors({
-    origin: ['https://your-frontend-domain.com', 'http://localhost:3000'],
+    origin: [
+        'https://lab-db-dt81.onrender.com',
+        'https://physicslabgmu.github.io',
+        'http://localhost:10000',
+        'http://127.0.0.1:10000'
+    ],
     methods: ['POST', 'GET', 'OPTIONS'],
-    allowedHeaders: ['Content-Type']
+    allowedHeaders: ['Content-Type'],
+    credentials: true
 }));
 
 // Store chat histories in memory (in production, use a proper database)
@@ -205,11 +211,13 @@ async function run() {
 }
 
 // Add error handler for uncaught exceptions
-process.on('unhandledRejection', (error) => {
-    console.error('Unhandled promise rejection:', error);
+process.on('unhandledRejection', (err) => {
+    console.error('Unhandled promise rejection:', err);
 });
 
-run();
-console.error('Unhandled promise rejection:', error);
-
-run();
+if (require.main === module) {
+    run().catch(err => {
+        console.error('Error in main process:', err);
+        process.exit(1);
+    });
+}
