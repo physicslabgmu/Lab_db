@@ -177,91 +177,146 @@
 
 
     <script>
-        // Add session ID generation
-        const sessionId = 'session_' + Date.now();
+        // // Add session ID generation
+        // const sessionId = 'session_' + Date.now();
 
-        // Update the isProduction check to specifically look for GitHub Pages domain
-        const isProduction = window.location.hostname === 'physicslabgmu.github.io';
-        const API_URL = isProduction
-            ? 'https://physicslabgmu.onrender.com/api/chat'
-            : 'http://localhost:10000/api/chat';
+        // // Update the isProduction check to specifically look for GitHub Pages domain
+        // const isProduction = window.location.hostname === 'physicslabgmu.github.io';
+        // const API_URL = isProduction
+        //     ? 'https://physicslabgmu.onrender.com/api/chat'
+        //     : 'http://localhost:10000/api/chat';
 
-        console.log('Current API URL:', API_URL); // Add this for debugging
+        // console.log('Current API URL:', API_URL); // Add this for debugging
 
-        // Fix chat window toggle
-        document.getElementById('chatbot-icon').onclick = function () {
-            const chatWindow = document.getElementById('chat-window');
-            chatWindow.style.display = chatWindow.style.display === 'none' ? 'block' : 'none';
-        };
+        // // Fix chat window toggle
+        // document.getElementById('chatbot-icon').onclick = function () {
+        //     const chatWindow = document.getElementById('chat-window');
+        //     chatWindow.style.display = chatWindow.style.display === 'none' ? 'block' : 'none';
+        // };
 
-        document.getElementById('close-chat').onclick = function () {
-            document.getElementById('chat-window').style.display = 'none';
-        };
+        // document.getElementById('close-chat').onclick = function () {
+        //     document.getElementById('chat-window').style.display = 'none';
+        // };
 
 
+
+        // async function sendMessage() {
+        //     const userInput = document.getElementById('user-input').value.trim();
+        //     const chatMessages = document.getElementById('chat-messages');
+
+        //     if (userInput) {
+        //         try {
+        //             chatMessages.innerHTML += `<div><strong>User:</strong> ${userInput}</div>`;
+        //             document.getElementById('user-input').value = '';
+
+        //             const response = await fetch(API_URL, {
+        //                 method: 'POST',
+        //                 headers: {
+        //                     'Content-Type': 'application/json',
+        //                     'Accept': 'application/json'
+        //                 },
+        //                 body: JSON.stringify({
+        //                     prompt: userInput,
+        //                     sessionId: sessionId
+        //                 })
+        //             });
+
+        //             if (!response.ok) {
+        //                 throw new Error(`Server returned ${response.status}: ${response.statusText}`);
+        //             }
+
+        //             const data = await response.json();
+        //             const botResponse = data?.candidates?.[0]?.content?.parts?.[0]?.text || "Sorry, I couldn't generate a response.";
+        //             const messageDiv = document.createElement('div');
+        //             messageDiv.innerHTML = `<strong>Assistant:</strong> ${botResponse}`;
+
+        //             // Enhanced image handling
+        //             messageDiv.querySelectorAll('img').forEach(img => {
+        //                 img.loading = "lazy";
+        //                 img.style.opacity = "0";
+        //                 img.onload = function () {
+        //                     this.style.opacity = "1";
+        //                 };
+        //                 img.onerror = function () {
+        //                     this.onerror = null;
+        //                     this.src = 'https://via.placeholder.com/300x200?text=Image+Not+Available';
+        //                     this.classList.add('error-image');
+        //                 };
+        //             });
+
+        //             chatMessages.appendChild(messageDiv);
+        //             chatMessages.scrollTop = chatMessages.scrollHeight;
+        //         } catch (error) {
+        //             console.error('Fetch error:', error);
+        //             chatMessages.innerHTML += `<div><strong>Assistant:</strong> Error connecting to server. Please try again later. (${error.message})</div>`;
+        //         }
+        //     }
+        // }
+
+        // document.getElementById('send-button').onclick = sendMessage;
+
+        // document.getElementById('user-input').addEventListener('keypress', function (event) {
+        //     if (event.key === 'Enter') {
+        //         sendMessage();
+        //     }
+        // });
+
+
+        const messageInput = document.getElementById('message-input');
+        const sendButton = document.getElementById('send-button');
+        const chatMessages = document.getElementById('chat-messages');
+        const typingIndicator = document.getElementById('typing-indicator');
 
         async function sendMessage() {
-            const userInput = document.getElementById('user-input').value.trim();
-            const chatMessages = document.getElementById('chat-messages');
+            const message = messageInput.value.trim();
+            if (!message) return;
 
-            if (userInput) {
-                try {
-                    chatMessages.innerHTML += `<div><strong>User:</strong> ${userInput}</div>`;
-                    document.getElementById('user-input').value = '';
+            // Add user message to chat
+            addMessage(message, 'user');
+            messageInput.value = '';
 
-                    const response = await fetch(API_URL, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Accept': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            prompt: userInput,
-                            sessionId: sessionId
-                        })
-                    });
+            // Show typing indicator
+            typingIndicator.style.display = 'block';
 
-                    if (!response.ok) {
-                        throw new Error(`Server returned ${response.status}: ${response.statusText}`);
-                    }
+            try {
+                const response = await fetch('/api/chat', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ message })
+                });
 
-                    const data = await response.json();
-                    const botResponse = data?.candidates?.[0]?.content?.parts?.[0]?.text || "Sorry, I couldn't generate a response.";
-                    const messageDiv = document.createElement('div');
-                    messageDiv.innerHTML = `<strong>Assistant:</strong> ${botResponse}`;
+                const data = await response.json();
+                
+                // Hide typing indicator
+                typingIndicator.style.display = 'none';
 
-                    // Enhanced image handling
-                    messageDiv.querySelectorAll('img').forEach(img => {
-                        img.loading = "lazy";
-                        img.style.opacity = "0";
-                        img.onload = function () {
-                            this.style.opacity = "1";
-                        };
-                        img.onerror = function () {
-                            this.onerror = null;
-                            this.src = 'https://via.placeholder.com/300x200?text=Image+Not+Available';
-                            this.classList.add('error-image');
-                        };
-                    });
-
-                    chatMessages.appendChild(messageDiv);
-                    chatMessages.scrollTop = chatMessages.scrollHeight;
-                } catch (error) {
-                    console.error('Fetch error:', error);
-                    chatMessages.innerHTML += `<div><strong>Assistant:</strong> Error connecting to server. Please try again later. (${error.message})</div>`;
+                // Add bot response to chat
+                if (data.reply) {
+                    addMessage(data.reply, 'bot');
                 }
+            } catch (error) {
+                console.error('Error:', error);
+                typingIndicator.style.display = 'none';
+                addMessage('Sorry, something went wrong. Please try again.', 'bot');
             }
         }
 
-        document.getElementById('send-button').onclick = sendMessage;
+        function addMessage(text, sender) {
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('message', `${sender}-message`);
+            messageDiv.textContent = text;
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
 
-        document.getElementById('user-input').addEventListener('keypress', function (event) {
-            if (event.key === 'Enter') {
+        sendButton.addEventListener('click', sendMessage);
+        messageInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
                 sendMessage();
             }
         });
-
-
 
     </script>
 </body>
