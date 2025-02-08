@@ -261,7 +261,8 @@
         //     }
         // });
 
-
+        const BACKEND_URL = 'https://lab-backend-nwko.onrender.com';
+        
         const messageInput = document.getElementById('message-input');
         const sendButton = document.getElementById('send-button');
         const chatMessages = document.getElementById('chat-messages');
@@ -271,15 +272,13 @@
             const message = messageInput.value.trim();
             if (!message) return;
 
-            // Add user message to chat
             addMessage(message, 'user');
             messageInput.value = '';
-
-            // Show typing indicator
             typingIndicator.style.display = 'block';
 
             try {
-                const response = await fetch('/api/chat', {
+                // Updated fetch URL to use Render backend
+                const response = await fetch(`${BACKEND_URL}/api/chat`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -288,11 +287,8 @@
                 });
 
                 const data = await response.json();
-                
-                // Hide typing indicator
                 typingIndicator.style.display = 'none';
 
-                // Add bot response to chat
                 if (data.reply) {
                     addMessage(data.reply, 'bot');
                 }
