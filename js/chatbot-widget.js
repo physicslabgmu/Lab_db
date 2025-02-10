@@ -2,7 +2,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Create chatbot HTML
     const chatbotHTML = `
-        <div id="chatbot" class="chatbot-container" style="display: none;">
+        <div id="chatbot" class="chatbot-container" style="display: none; width: 600px; height: 570px;">
             <div class="chat-header">
                 <h3>GMU Physics Lab Assistant</h3>
                 <div class="chat-controls">
