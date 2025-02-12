@@ -171,11 +171,11 @@
     
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Navbar close functionality
-            const navbarCollapse = document.getElementById('navbarNav');
-            const navbarCloseBtn = document.getElementById('navbarClose');
+        const navbarCollapse = document.getElementById('navbarNav');
+        const navbarCloseBtn = document.getElementById('navbarClose');
     
-            navbarCloseBtn?.addEventListener('click', () => {
+        if (navbarCloseBtn && navbarCollapse) { // ✅ Ensure elements exist before using them
+            navbarCloseBtn.addEventListener('click', () => {
                 new bootstrap.Collapse(navbarCollapse).hide();
             });
     
@@ -184,7 +184,9 @@
                     new bootstrap.Collapse(navbarCollapse).hide();
                 }
             });
-        });
+        }
+    });
+
     </script>
 
 </body>
