@@ -1,9 +1,9 @@
 const config = {
     development: {
-        apiUrl: 'http://localhost:10000/api/chat', // Updated port
+        apiUrl: 'http://localhost:3000/api/chat',
         host: 'localhost',
         cors: {
-            origin: ['http://localhost:10000'],
+            origin: ['http://localhost:3000', 'http://localhost:5500', 'http://127.0.0.1:5500'],
             methods: ['GET', 'POST', 'OPTIONS']
         }
     },
@@ -13,7 +13,7 @@ const config = {
         cors: {
             origin: [
                 'https://physicslabgmu.onrender.com',
-                'https://physicslabgmu.github.io'
+                'https://physicslabgmu.github.io/Lab_db'
             ],
             methods: ['GET', 'POST', 'OPTIONS']
         }

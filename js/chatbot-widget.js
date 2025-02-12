@@ -319,31 +319,42 @@ document.addEventListener('DOMContentLoaded', function() {
     // Clear chat button handler
     clearChatBtn.addEventListener('click', clearChat);
 
-    let clearTimeout;
-
-    // Toggle chatbot visibility
+    // Handle chat toggle
     chatToggle.addEventListener('click', () => {
-        const isVisible = chatbot.style.display === 'flex';
-        chatbot.style.display = isVisible ? 'none' : 'flex';
-        if (!isVisible) {
-            userInput.focus();
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-            // Clear any existing timeout
-            if (clearTimeout) {
-                clearTimeout(clearTimeout);
-            }
-        } else {
-            // Set timeout to clear chat after 5 seconds when closing
-            clearTimeout = setTimeout(clearChat, 5000);
+        chatbot.style.display = chatbot.style.display === 'none' ? 'flex' : 'none';
+        if (chatbot.style.display === 'none') {
+            // Set a timeout to clear chat after 5 seconds when closed
+            setTimeout(() => {
+                if (chatbot.style.display === 'none') {
+                    clearChat();
+                    chatHistory = [];
+                    saveChatHistory();
+                }
+            }, 5000);
         }
     });
 
-    // Close chatbot
+    // Handle page reload
+    window.addEventListener('beforeunload', () => {
+        clearChat();
+        chatHistory = [];
+        saveChatHistory();
+    });
+
+    // Close button functionality
     closeChat.addEventListener('click', () => {
         chatbot.style.display = 'none';
-        // Set timeout to clear chat after 5 seconds
-        clearTimeout = setTimeout(clearChat, 5000);
+        // Set a timeout to clear chat after 5 seconds when closed
+        setTimeout(() => {
+            if (chatbot.style.display === 'none') {
+                clearChat();
+                chatHistory = [];
+                saveChatHistory();
+            }
+        }, 5000);
     });
+
+    let clearTimeout;
 
     // Send message function
     async function sendMessage(message) {
@@ -358,15 +369,26 @@ document.addEventListener('DOMContentLoaded', function() {
         typingIndicator.style.display = 'block';
 
         try {
-            const response = await fetch('http://localhost:3000/api/chat', {
+            // Get the current hostname
+            const hostname = window.location.hostname;
+            // Determine API URL based on hostname
+            let apiUrl;
+            if (hostname === 'localhost' || hostname === '127.0.0.1') {
+                apiUrl = 'http://localhost:3000/api/chat';
+            } else if (window.location.href.includes('127.0.0.1:5500')) {
+                apiUrl = 'http://127.0.0.1:5500/api/chat';
+            } else {
+                apiUrl = 'https://physicslabgmu.onrender.com/api/chat';
+            }
+
+            console.log('Using API URL:', apiUrl); // Debug log
+
+            const response = await fetch(apiUrl, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ 
-                    prompt: message,
-                    history: chatHistory.slice(-10) // Send last 10 messages for context
-                }),
+                body: JSON.stringify({ prompt: message })
             });
 
             const data = await response.json();
@@ -374,28 +396,33 @@ document.addEventListener('DOMContentLoaded', function() {
             // Hide typing indicator
             typingIndicator.style.display = 'none';
 
+            if (!response.ok || data.error) {
+                console.error('Server error:', data);
+                throw new Error(data.message || 'An error occurred while processing your request');
+            }
+
             // Add assistant message to chat
             const assistantMessageDiv = document.createElement('div');
             assistantMessageDiv.className = 'message assistant';
             
-            let messageText = data.response;
-            if (typeof messageText === 'string') {
-                // Convert URLs to clickable links
-                messageText = messageText.replace(
-                    /\[([^\]]+)\](https?:\/\/[^\s]+)/g,
-                    (match, text, url) => {
-                        const extension = url.split('.').pop().toLowerCase();
-                        let className = '';
-                        if (['.pdf', '.PDF'].includes('.' + extension)) {
-                            className = 'pdf-link';
-                        } else if (['.jpg', '.jpeg', '.png', '.gif', '.JPG', '.PNG', '.GIF'].includes('.' + extension)) {
-                            className = 'image-link';
-                        }
-                        return `<a href="${url}" target="_blank" class="${className}">${text}</a>`;
-                    }
-                );
+            if (!data.message) {
+                throw new Error('No response received from server');
             }
-            
+
+            let messageText = data.message;
+
+            // Convert markdown links to HTML
+            messageText = messageText.replace(
+                /\[([^\]]+)\]\(([^)]+)\)/g,
+                (match, text, url) => {
+                    const cleanUrl = url.trim();
+                    const fileExt = cleanUrl.split('.').pop().toLowerCase();
+                    const icon = fileExt === 'pdf' ? '📄' : 
+                               ['jpg', 'jpeg', 'png', 'gif'].includes(fileExt) ? '🖼️' : '🔗';
+                    return `${icon} <a href="${cleanUrl}" target="_blank" rel="noopener noreferrer">${text}</a>`;
+                }
+            );
+
             assistantMessageDiv.innerHTML = messageText;
             chatMessages.appendChild(assistantMessageDiv);
             addToHistory('assistant', messageText);
@@ -407,9 +434,9 @@ document.addEventListener('DOMContentLoaded', function() {
             
             const errorMessageDiv = document.createElement('div');
             errorMessageDiv.className = 'message assistant error';
-            errorMessageDiv.textContent = 'Sorry, I encountered an error. Please try again.';
+            errorMessageDiv.textContent = error.message || 'Sorry, I encountered an error. Please try again.';
             chatMessages.appendChild(errorMessageDiv);
-            addToHistory('assistant', 'Sorry, I encountered an error. Please try again.');
+            addToHistory('assistant', 'Error: ' + error.message);
             
             chatMessages.scrollTop = chatMessages.scrollHeight;
         }
