@@ -8,11 +8,11 @@ const config = {
         }
     },
     production: {
-        apiUrl: 'https://physicslabgmu.onrender.com/api/chat',
+        apiUrl: 'https://lab-backend-nwko.onrender.com/api/chat',
         host: '0.0.0.0',
         cors: {
             origin: [
-                'https://physicslabgmu.onrender.com',
+                'https://lab-backend-nwko.onrender.com',
                 'https://physicslabgmu.github.io/Lab_db'
             ],
             methods: ['GET', 'POST', 'OPTIONS']
