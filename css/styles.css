@@ -66,10 +66,11 @@ body {
     color: var(--secondary-color) !important;
 }
 
-nav img{
-    height: 55px;
-    /* width: 50px; */
+nav a.navbar-brand img {
+    height: 55px; /* or whatever you need */
+    /* width: auto;  maintain aspect ratio */
 }
+
 
 /* Sidebar */
 .sidebar {
