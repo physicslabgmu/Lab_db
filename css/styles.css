@@ -66,6 +66,11 @@ body {
     color: var(--secondary-color) !important;
 }
 
+nav img{
+    height: 55px;
+    /* width: 50px; */
+}
+
 /* Sidebar */
 .sidebar {
     height: 100vh;
