@@ -378,7 +378,7 @@ document.addEventListener('DOMContentLoaded', function() {
             } else if (window.location.href.includes('127.0.0.1:5500')) {
                 apiUrl = 'http://127.0.0.1:5500/api/chat';
             } else {
-                apiUrl = 'https://physicslabgmu.onrender.com/api/chat';
+                apiUrl = 'https://lab-backend-nwko.onrender.com/api/chat';
             }
 
             console.log('Using API URL:', apiUrl); // Debug log
