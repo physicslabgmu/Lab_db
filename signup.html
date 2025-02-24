@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign Up - GMU Physics Lab</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://unpkg.com/@clerk/clerk-js@latest/dist/clerk.browser.js"></script>
+    <script src="https://unpkg.com/@clerk/clerk-js"></script>
     <style>
         :root {
             --primary-color: #006633;
@@ -127,83 +127,104 @@
     </div>
 
     <script>
-        // Initialize Clerk
-        const clerk = window.Clerk.init({
-            publishableKey: 'pk_test_cG93ZXJmdWwtbG9ic3Rlci0zMC5jbGVyay5hY2NvdW50cy5kZXYk'
-        });
+        // Initialize Clerk properly
+        const startClerk = async () => {
+            await new Promise((resolve) => {
+                if (window.Clerk) {
+                    resolve();
+                } else {
+                    document.addEventListener('load', () => resolve());
+                }
+            });
 
-        document.getElementById('signupForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
-    
-            const errorAlert = document.getElementById('errorAlert');
-            const successAlert = document.getElementById('successAlert');
-            const loadingSpinner = document.getElementById('loading-spinner');
-            const signupForm = document.getElementById('signupForm');
-            const verificationForm = document.getElementById('verificationForm');
-    
-            errorAlert.style.display = 'none';
-            successAlert.style.display = 'none';
-            loadingSpinner.style.display = 'block';
-    
             try {
-                const email = document.getElementById('email').value;
-                const password = document.getElementById('password').value;
-                const name = document.getElementById('name').value;
-                const [firstName, ...lastNameParts] = name.split(' ');
-                const lastName = lastNameParts.join(' ');
-
-                // Create user with Clerk
-                const signUpAttempt = await clerk.signUp.create({
-                    emailAddress: email,
-                    password,
-                    firstName,
-                    lastName
+                const clerk = await window.Clerk.init({
+                    publishableKey: 'pk_test_cG93ZXJmdWwtbG9ic3Rlci0zMC5jbGVyay5hY2NvdW50cy5kZXYk'
                 });
 
-                if (signUpAttempt.status === 'missing_requirements') {
-                    signupForm.style.display = 'none';
-                    verificationForm.style.display = 'block';
-                    
-                    // Handle verification
-                    document.getElementById('verifyButton').addEventListener('click', async () => {
-                        const code = document.getElementById('verificationCode').value;
-                        try {
-                            const completeSignUp = await signUpAttempt.attemptEmailAddressVerification({
-                                code
-                            });
-                            
-                            if (completeSignUp.status === 'complete') {
-                                successAlert.textContent = 'Email verified! Redirecting to login...';
-                                successAlert.style.display = 'block';
-                                setTimeout(() => {
-                                    window.location.href = 'login.html';
-                                }, 1500);
-                            }
-                        } catch (error) {
-                            errorAlert.textContent = 'Invalid verification code';
-                            errorAlert.style.display = 'block';
-                        }
-                    });
+                document.getElementById('signupForm').addEventListener('submit', async (e) => {
+                    e.preventDefault();
+            
+                    const errorAlert = document.getElementById('errorAlert');
+                    const successAlert = document.getElementById('successAlert');
+                    const loadingSpinner = document.getElementById('loading-spinner');
+                    const signupForm = document.getElementById('signupForm');
+                    const verificationForm = document.getElementById('verificationForm');
+            
+                    errorAlert.style.display = 'none';
+                    successAlert.style.display = 'none';
+                    loadingSpinner.style.display = 'block';
+            
+                    try {
+                        const email = document.getElementById('email').value;
+                        const password = document.getElementById('password').value;
+                        const name = document.getElementById('name').value;
+                        const [firstName, ...lastNameParts] = name.split(' ');
+                        const lastName = lastNameParts.join(' ');
 
-                    // Handle resend code
-                    document.getElementById('resendCode').addEventListener('click', async () => {
-                        try {
-                            await signUpAttempt.prepareEmailAddressVerification();
-                            successAlert.textContent = 'New verification code sent!';
-                            successAlert.style.display = 'block';
-                        } catch (error) {
-                            errorAlert.textContent = 'Failed to resend code';
-                            errorAlert.style.display = 'block';
+                        // Create user with Clerk
+                        const signUpAttempt = await clerk.signUp.create({
+                            emailAddress: email,
+                            password,
+                            firstName,
+                            lastName
+                        });
+
+                        if (signUpAttempt.status === 'missing_requirements') {
+                            signupForm.style.display = 'none';
+                            verificationForm.style.display = 'block';
+                            
+                            // Handle verification
+                            document.getElementById('verifyButton').addEventListener('click', async () => {
+                                const code = document.getElementById('verificationCode').value;
+                                try {
+                                    const completeSignUp = await signUpAttempt.attemptEmailAddressVerification({
+                                        code
+                                    });
+                                    
+                                    if (completeSignUp.status === 'complete') {
+                                        successAlert.textContent = 'Email verified! Redirecting to login...';
+                                        successAlert.style.display = 'block';
+                                        setTimeout(() => {
+                                            window.location.href = 'login.html';
+                                        }, 1500);
+                                    }
+                                } catch (error) {
+                                    errorAlert.textContent = 'Invalid verification code';
+                                    errorAlert.style.display = 'block';
+                                }
+                            });
+
+                            // Handle resend code
+                            document.getElementById('resendCode').addEventListener('click', async () => {
+                                try {
+                                    await signUpAttempt.prepareEmailAddressVerification();
+                                    successAlert.textContent = 'New verification code sent!';
+                                    successAlert.style.display = 'block';
+                                } catch (error) {
+                                    errorAlert.textContent = 'Failed to resend code';
+                                    errorAlert.style.display = 'block';
+                                }
+                            });
                         }
-                    });
-                }
+                    } catch (error) {
+                        errorAlert.textContent = error.message || 'An error occurred during signup';
+                        errorAlert.style.display = 'block';
+                    } finally {
+                        loadingSpinner.style.display = 'none';
+                    }
+                });
             } catch (error) {
-                errorAlert.textContent = error.message || 'An error occurred during signup';
-                errorAlert.style.display = 'block';
-            } finally {
-                loadingSpinner.style.display = 'none';
+                console.error('Error initializing Clerk:', error);
             }
-        });
+        };
+
+        // Start Clerk when the page loads
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', startClerk);
+        } else {
+            startClerk();
+        }
     </script>
 </body>
 </html>
