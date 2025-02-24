@@ -133,7 +133,6 @@
     </div>
 
     <script>
-        // Wait for Clerk to load
         window.addEventListener('load', async () => {
             const errorAlert = document.getElementById('errorAlert');
             const successAlert = document.getElementById('successAlert');
@@ -146,10 +145,12 @@
             successAlert.style.display = 'none';
 
             try {
-                // Wait for Clerk to be available
-                await window.Clerk.load();
+                // Make sure Clerk is loaded
+                if (!window.Clerk) {
+                    throw new Error('Clerk not initialized');
+                }
 
-                document.getElementById('signupForm').addEventListener('submit', async (e) => {
+                signupForm.addEventListener('submit', async (e) => {
                     e.preventDefault();
                     
                     errorAlert.style.display = 'none';
@@ -161,10 +162,10 @@
                         const password = document.getElementById('password').value;
                         const name = document.getElementById('name').value;
                         const [firstName, ...lastNameParts] = name.split(' ');
-                        const lastName = lastNameParts.join(' ') || ''; // Handle single name
+                        const lastName = lastNameParts.join(' ') || '';
 
                         // Create user with Clerk
-                        const signUpAttempt = await window.Clerk.signUp.create({
+                        const signUpAttempt = await Clerk.client.signUp.create({
                             emailAddress: email,
                             password,
                             firstName,

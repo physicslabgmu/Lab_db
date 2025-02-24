@@ -117,7 +117,6 @@
     </div>
 
     <script>
-        // Wait for Clerk to load
         window.addEventListener('load', async () => {
             const errorAlert = document.getElementById('errorAlert');
             const successAlert = document.getElementById('successAlert');
@@ -129,11 +128,13 @@
             successAlert.style.display = 'none';
 
             try {
-                // Wait for Clerk to be available
-                await window.Clerk.load();
+                // Make sure Clerk is loaded
+                if (!window.Clerk) {
+                    throw new Error('Clerk not initialized');
+                }
 
                 // Check if already signed in
-                if (window.Clerk.isSignedIn) {
+                if (Clerk.client.isSignedIn) {
                     window.location.href = 'mainpage.html';
                     return;
                 }
@@ -150,13 +151,13 @@
                         const password = document.getElementById('password').value;
 
                         // Sign in with Clerk
-                        const signInAttempt = await window.Clerk.signIn.create({
+                        const signInAttempt = await Clerk.client.signIn.create({
                             identifier: email,
                             password
                         });
 
                         if (signInAttempt.status === 'complete') {
-                            await window.Clerk.setActive({
+                            await Clerk.client.setActive({
                                 session: signInAttempt.createdSessionId,
                             });
 
