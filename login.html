@@ -117,33 +117,29 @@
     </div>
 
     <script>
-        // Initialize Clerk properly
-        const startClerk = async () => {
-            await new Promise((resolve) => {
-                if (window.Clerk) {
-                    resolve();
-                } else {
-                    document.addEventListener('load', () => resolve());
-                }
-            });
+        // Wait for Clerk to load
+        window.addEventListener('load', async () => {
+            const errorAlert = document.getElementById('errorAlert');
+            const successAlert = document.getElementById('successAlert');
+            const loadingSpinner = document.getElementById('loading-spinner');
+            const loginForm = document.getElementById('loginForm');
+
+            // Hide alerts initially
+            errorAlert.style.display = 'none';
+            successAlert.style.display = 'none';
 
             try {
-                const clerk = await window.Clerk.init({
-                    publishableKey: 'pk_test_cG93ZXJmdWwtbG9ic3Rlci0zMC5jbGVyay5hY2NvdW50cy5kZXYk'
-                });
+                // Wait for Clerk to be available
+                await window.Clerk.load();
 
-                // Check if already logged in
-                if (await clerk.session.getToken()) {
+                // Check if already signed in
+                if (window.Clerk.isSignedIn) {
                     window.location.href = 'mainpage.html';
                     return;
                 }
 
-                document.getElementById('loginForm').addEventListener('submit', async (e) => {
+                loginForm.addEventListener('submit', async (e) => {
                     e.preventDefault();
-                    
-                    const errorAlert = document.getElementById('errorAlert');
-                    const successAlert = document.getElementById('successAlert');
-                    const loadingSpinner = document.getElementById('loading-spinner');
                     
                     errorAlert.style.display = 'none';
                     successAlert.style.display = 'none';
@@ -154,15 +150,14 @@
                         const password = document.getElementById('password').value;
 
                         // Sign in with Clerk
-                        const signInAttempt = await clerk.signIn.create({
+                        const signInAttempt = await window.Clerk.signIn.create({
                             identifier: email,
-                            password: password,
+                            password
                         });
 
                         if (signInAttempt.status === 'complete') {
-                            // Create session
-                            await clerk.session.create({ 
-                                signIn: signInAttempt.createdSessionId
+                            await window.Clerk.setActive({
+                                session: signInAttempt.createdSessionId,
                             });
 
                             successAlert.textContent = 'Login successful! Redirecting...';
@@ -171,30 +166,29 @@
                             setTimeout(() => {
                                 window.location.href = 'mainpage.html';
                             }, 1500);
-                        } else if (signInAttempt.status === 'needs_email_verification') {
-                            errorAlert.textContent = 'Please verify your email first';
+                        } else if (signInAttempt.status === 'needs_identifier_verification') {
+                            errorAlert.textContent = 'Please verify your email first. Check your inbox for a verification email.';
+                            errorAlert.style.display = 'block';
+                        } else if (signInAttempt.status === 'needs_first_factor') {
+                            errorAlert.textContent = 'Invalid email or password. Please try again.';
                             errorAlert.style.display = 'block';
                         } else {
-                            throw new Error('Login failed. Please check your credentials.');
+                            throw new Error('Login failed. Please check your credentials and try again.');
                         }
                     } catch (error) {
-                        errorAlert.textContent = error.message || 'An error occurred during login';
+                        console.error('Login error:', error);
+                        errorAlert.textContent = error.message || 'Failed to login. Please try again.';
                         errorAlert.style.display = 'block';
                     } finally {
                         loadingSpinner.style.display = 'none';
                     }
                 });
             } catch (error) {
-                console.error('Error initializing Clerk:', error);
+                console.error('Clerk initialization error:', error);
+                errorAlert.textContent = 'Failed to initialize authentication. Please refresh the page.';
+                errorAlert.style.display = 'block';
             }
-        };
-
-        // Start Clerk when the page loads
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', startClerk);
-        } else {
-            startClerk();
-        }
+        });
     </script>
 </body>
 </html>

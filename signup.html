@@ -133,50 +133,51 @@
     </div>
 
     <script>
-        // Initialize Clerk properly
-        const startClerk = async () => {
-            await new Promise((resolve) => {
-                if (window.Clerk) {
-                    resolve();
-                } else {
-                    document.addEventListener('load', () => resolve());
-                }
-            });
+        // Wait for Clerk to load
+        window.addEventListener('load', async () => {
+            const errorAlert = document.getElementById('errorAlert');
+            const successAlert = document.getElementById('successAlert');
+            const loadingSpinner = document.getElementById('loading-spinner');
+            const signupForm = document.getElementById('signupForm');
+            const verificationForm = document.getElementById('verificationForm');
+
+            // Hide alerts initially
+            errorAlert.style.display = 'none';
+            successAlert.style.display = 'none';
 
             try {
-                const clerk = await window.Clerk.init({
-                    publishableKey: 'pk_test_cG93ZXJmdWwtbG9ic3Rlci0zMC5jbGVyay5hY2NvdW50cy5kZXYk'
-                });
+                // Wait for Clerk to be available
+                await window.Clerk.load();
 
                 document.getElementById('signupForm').addEventListener('submit', async (e) => {
                     e.preventDefault();
-            
-                    const errorAlert = document.getElementById('errorAlert');
-                    const successAlert = document.getElementById('successAlert');
-                    const loadingSpinner = document.getElementById('loading-spinner');
-                    const signupForm = document.getElementById('signupForm');
-                    const verificationForm = document.getElementById('verificationForm');
-            
+                    
                     errorAlert.style.display = 'none';
                     successAlert.style.display = 'none';
                     loadingSpinner.style.display = 'block';
-            
+                    
                     try {
                         const email = document.getElementById('email').value;
                         const password = document.getElementById('password').value;
                         const name = document.getElementById('name').value;
                         const [firstName, ...lastNameParts] = name.split(' ');
-                        const lastName = lastNameParts.join(' ');
+                        const lastName = lastNameParts.join(' ') || ''; // Handle single name
 
                         // Create user with Clerk
-                        const signUpAttempt = await clerk.signUp.create({
+                        const signUpAttempt = await window.Clerk.signUp.create({
                             emailAddress: email,
                             password,
                             firstName,
                             lastName
                         });
 
-                        if (signUpAttempt.status === 'missing_requirements') {
+                        if (signUpAttempt.status === 'complete') {
+                            successAlert.textContent = 'Account created successfully! Redirecting to login...';
+                            successAlert.style.display = 'block';
+                            setTimeout(() => {
+                                window.location.href = 'login.html';
+                            }, 1500);
+                        } else if (signUpAttempt.status === 'missing_requirements') {
                             signupForm.style.display = 'none';
                             verificationForm.style.display = 'block';
                             
@@ -184,6 +185,7 @@
                             document.getElementById('verifyButton').addEventListener('click', async () => {
                                 const code = document.getElementById('verificationCode').value;
                                 try {
+                                    loadingSpinner.style.display = 'block';
                                     const completeSignUp = await signUpAttempt.attemptEmailAddressVerification({
                                         code
                                     });
@@ -198,39 +200,40 @@
                                 } catch (error) {
                                     errorAlert.textContent = 'Invalid verification code';
                                     errorAlert.style.display = 'block';
+                                } finally {
+                                    loadingSpinner.style.display = 'none';
                                 }
                             });
 
                             // Handle resend code
                             document.getElementById('resendCode').addEventListener('click', async () => {
                                 try {
+                                    loadingSpinner.style.display = 'block';
                                     await signUpAttempt.prepareEmailAddressVerification();
-                                    successAlert.textContent = 'New verification code sent!';
+                                    successAlert.textContent = 'Verification code resent!';
                                     successAlert.style.display = 'block';
                                 } catch (error) {
-                                    errorAlert.textContent = 'Failed to resend code';
+                                    errorAlert.textContent = 'Failed to resend verification code';
                                     errorAlert.style.display = 'block';
+                                } finally {
+                                    loadingSpinner.style.display = 'none';
                                 }
                             });
                         }
                     } catch (error) {
-                        errorAlert.textContent = error.message || 'An error occurred during signup';
+                        console.error('Signup error:', error);
+                        errorAlert.textContent = error.message || 'Failed to create account. Please try again.';
                         errorAlert.style.display = 'block';
                     } finally {
                         loadingSpinner.style.display = 'none';
                     }
                 });
             } catch (error) {
-                console.error('Error initializing Clerk:', error);
+                console.error('Clerk initialization error:', error);
+                errorAlert.textContent = 'Failed to initialize authentication. Please refresh the page.';
+                errorAlert.style.display = 'block';
             }
-        };
-
-        // Start Clerk when the page loads
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', startClerk);
-        } else {
-            startClerk();
-        }
+        });
     </script>
 </body>
 </html>
