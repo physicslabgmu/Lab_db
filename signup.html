@@ -85,7 +85,7 @@
             <div class="alert alert-danger" id="errorAlert" role="alert"></div>
             <div class="alert alert-success" id="successAlert" role="alert"></div>
             
-            <form id="signupForm">
+            <form id="signupForm" style="display: block;">
                 <div class="mb-3">
                     <label for="name" class="form-label">Full Name</label>
                     <input type="text" class="form-control" id="name" required>
@@ -99,6 +99,15 @@
                     <input type="password" class="form-control" id="password" required>
                 </div>
                 <button type="submit" class="btn btn-primary w-100">Sign Up</button>
+            </form>
+            
+            <form id="verificationForm" style="display: none;">
+                <div class="mb-3">
+                    <label for="verificationCode" class="form-label">Verification Code</label>
+                    <input type="text" class="form-control" id="verificationCode" required>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Verify</button>
+                <button type="button" id="resendCode" class="btn btn-link">Resend Code</button>
             </form>
             
             <div id="loading-spinner" style="display: none; text-align: center; margin-top: 20px;">
@@ -120,6 +129,8 @@
             const errorAlert = document.getElementById('errorAlert');
             const successAlert = document.getElementById('successAlert');
             const loadingSpinner = document.getElementById('loading-spinner');
+            const signupForm = document.getElementById('signupForm');
+            const verificationForm = document.getElementById('verificationForm');
     
             // Reset alerts
             errorAlert.style.display = 'none';
@@ -137,43 +148,115 @@
                     throw new Error("All fields are required.");
                 }
     
-                // Make API request
-                const response = await fetch('https://lab-backend-nwko.onrender.com/api/auth/register', {
+                // Request verification code
+                const response = await fetch('https://lab-backend-nwko.onrender.com/api/auth/request-verification', {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json'
+                        'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({ name, email, password })
                 });
+
+                const data = await response.json();
     
-                // Handle API response
-                let data;
-                if (response.ok) {
-                    data = await response.json();
-                } else {
-                    const errorResponse = await response.json();
-                    throw new Error(errorResponse.error || 'Registration failed');
+                if (!response.ok) {
+                    throw new Error(data.error || 'Failed to send verification code');
                 }
-    
-                // Store token and user data
-                localStorage.setItem('token', data.token);
-                localStorage.setItem('user', JSON.stringify(data.user));
-    
-                // Show success message
-                successAlert.textContent = 'Registration successful! Redirecting...';
+
+                // Hide signup form and show verification form
+                signupForm.style.display = 'none';
+                verificationForm.style.display = 'block';
+                successAlert.textContent = 'Verification code sent to your email!';
                 successAlert.style.display = 'block';
+                
+            } catch (error) {
+                errorAlert.textContent = error.message;
+                errorAlert.style.display = 'block';
+            } finally {
                 loadingSpinner.style.display = 'none';
-    
-                // Redirect to index page after 1.5 seconds
+            }
+        });
+
+        // Handle verification code submission
+        document.getElementById('verificationForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const errorAlert = document.getElementById('errorAlert');
+            const successAlert = document.getElementById('successAlert');
+            const loadingSpinner = document.getElementById('loading-spinner');
+            const verificationCode = document.getElementById('verificationCode').value.trim();
+            
+            errorAlert.style.display = 'none';
+            successAlert.style.display = 'none';
+            loadingSpinner.style.display = 'block';
+            
+            try {
+                const email = document.getElementById('email').value.trim();
+                const response = await fetch('https://lab-backend-nwko.onrender.com/api/auth/verify-email', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        email,
+                        verificationCode
+                    })
+                });
+
+                const data = await response.json();
+                
+                if (!response.ok) {
+                    throw new Error(data.error || 'Invalid verification code');
+                }
+
+                // Show success message
+                successAlert.textContent = 'Email verified! Redirecting to login...';
+                successAlert.style.display = 'block';
+
+                // Redirect to login page after 1.5 seconds
                 setTimeout(() => {
                     window.location.href = 'login.html';
                 }, 1500);
-    
+                
             } catch (error) {
-                // Display error message
                 errorAlert.textContent = error.message;
                 errorAlert.style.display = 'block';
+            } finally {
+                loadingSpinner.style.display = 'none';
+            }
+        });
+
+        // Handle resend code button
+        document.getElementById('resendCode').addEventListener('click', async () => {
+            const errorAlert = document.getElementById('errorAlert');
+            const successAlert = document.getElementById('successAlert');
+            const loadingSpinner = document.getElementById('loading-spinner');
+            const email = document.getElementById('email').value.trim();
+            
+            errorAlert.style.display = 'none';
+            successAlert.style.display = 'none';
+            loadingSpinner.style.display = 'block';
+            
+            try {
+                const response = await fetch('https://lab-backend-nwko.onrender.com/api/auth/resend-code', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ email })
+                });
+
+                if (!response.ok) {
+                    const data = await response.json();
+                    throw new Error(data.error || 'Failed to resend code');
+                }
+
+                successAlert.textContent = 'New verification code sent!';
+                successAlert.style.display = 'block';
+            } catch (error) {
+                errorAlert.textContent = error.message;
+                errorAlert.style.display = 'block';
+            } finally {
                 loadingSpinner.style.display = 'none';
             }
         });

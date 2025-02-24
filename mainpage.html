@@ -51,6 +51,19 @@
             transition: 0.3s;
             padding-top: 60px;
             z-index: 1040;
+            overflow-y: auto;
+            position: sticky;
+            top: 0;
+            padding-top: 1rem;
+        }
+
+        .sidebar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .sidebar {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
         }
 
         .sidebar.active {
@@ -152,6 +165,9 @@
             .sidebar {
                 width: 100%;
                 left: -100%;
+                height: auto;
+                max-height: 50vh;
+                position: relative;
             }
 
             .content.active {
