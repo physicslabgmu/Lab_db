@@ -133,7 +133,7 @@
     </div>
 
     <script>
-        window.addEventListener('load', async () => {
+        document.addEventListener("DOMContentLoaded", function() {
             const errorAlert = document.getElementById('errorAlert');
             const successAlert = document.getElementById('successAlert');
             const loadingSpinner = document.getElementById('loading-spinner');
@@ -144,12 +144,16 @@
             errorAlert.style.display = 'none';
             successAlert.style.display = 'none';
 
-            try {
-                // Make sure Clerk is loaded
-                if (!window.Clerk) {
-                    throw new Error('Clerk not initialized');
-                }
+            // Wait for Clerk to be loaded
+            if (window.Clerk) {
+                initializeClerk();
+            } else {
+                // If Clerk isn't loaded yet, wait for it
+                const script = document.querySelector('script[data-clerk-publishable-key]');
+                script.addEventListener('load', initializeClerk);
+            }
 
+            function initializeClerk() {
                 signupForm.addEventListener('submit', async (e) => {
                     e.preventDefault();
                     
@@ -165,7 +169,7 @@
                         const lastName = lastNameParts.join(' ') || '';
 
                         // Create user with Clerk
-                        const signUpAttempt = await Clerk.client.signUp.create({
+                        const signUpAttempt = await window.Clerk.client.signUp.create({
                             emailAddress: email,
                             password,
                             firstName,
@@ -229,10 +233,6 @@
                         loadingSpinner.style.display = 'none';
                     }
                 });
-            } catch (error) {
-                console.error('Clerk initialization error:', error);
-                errorAlert.textContent = 'Failed to initialize authentication. Please refresh the page.';
-                errorAlert.style.display = 'block';
             }
         });
     </script>
