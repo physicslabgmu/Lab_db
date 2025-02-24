@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Login - GMU Physics Lab</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
@@ -72,9 +72,45 @@
             display: none;
             margin-bottom: 15px;
         }
+        
+        .spinner-border {
+            display: none;
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+        
+        #loginButton {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 120px;
+        }
     </style>
 </head>
 <body>
+    <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">GMU Physics Lab</a>npm install bootstrap@5.3.0
+            node js/server.js
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <button class="btn-close btn-close-white d-lg-none ms-auto" id="navbarClose" type="button" aria-label="Close"></button>
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Pricing</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav> -->
     <div class="container">
         <div class="auth-container">
             <div class="text-center">
@@ -82,8 +118,8 @@
                 <h2 class="mb-4">Login</h2>
             </div>
             
-            <div class="alert alert-danger" id="errorAlert" role="alert" style="display: none;"></div>
-            <div class="alert alert-success" id="successAlert" role="alert" style="display: none;"></div>
+            <div class="alert alert-danger" id="errorAlert" role="alert"></div>
+            <div class="alert alert-success" id="successAlert" role="alert"></div>
             
             <form id="loginForm">
                 <div class="mb-3">
@@ -94,14 +130,13 @@
                     <label for="password" class="form-label">Password</label>
                     <input type="password" class="form-control" id="password" required>
                 </div>
-                <button type="submit" class="btn btn-primary w-100">Login</button>
+                <button type="submit" class="btn btn-primary w-100" id="loginButton">
+                    <span>Login</span>
+                    <div class="spinner-border spinner-border-sm text-light" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </button>
             </form>
-            
-            <div id="loading-spinner" style="display: none; text-align: center; margin-top: 20px;">
-                <div class="spinner-border text-primary" role="status">
-                    <span class="visually-hidden">Loading...</span>
-                </div>
-            </div>
             
             <div class="auth-links">
                 <p>Don't have an account? <a href="signup.html">Sign up</a></p>
@@ -110,67 +145,92 @@
     </div>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const errorAlert = document.getElementById('errorAlert');
-            const successAlert = document.getElementById('successAlert');
-            const loadingSpinner = document.getElementById('loading-spinner');
-            const loginForm = document.getElementById('loginForm');
-
-            // Hide alerts initially
-            errorAlert.style.display = 'none';
-            successAlert.style.display = 'none';
-
-            // Check if already logged in
+        // Check if already logged in
+        function checkAuth() {
             const token = localStorage.getItem('token');
-            if (token) {
-                window.location.href = 'mainpage.html';
-                return;
+            const user = JSON.parse(localStorage.getItem('user') || '{}');
+            
+            if (token && user) {
+                window.location.href = 'index.html';
             }
+        }
 
-            loginForm.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                
-                errorAlert.style.display = 'none';
-                successAlert.style.display = 'none';
-                loadingSpinner.style.display = 'block';
-                
-                try {
-                    const email = document.getElementById('email').value;
-                    const password = document.getElementById('password').value;
+        // Check authentication on page load
+        checkAuth();
 
-                    // Sign in with backend
-                    const response = await fetch('/api/auth/login', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            email,
-                            password
-                        })
-                    });
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const loginButton = document.getElementById('loginButton');
+            const spinner = loginButton.querySelector('.spinner-border');
+            
+            // Show loading spinner
+            loginButton.disabled = true;
+            spinner.style.display = 'inline-block';
+            
+            try {
+                const response = await fetch('https://lab-backend-nwko.onrender.com/api/auth/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        email: email,
+                        password: password
+                    })
+                });
 
+                if (!response.ok) {
                     const data = await response.json();
+                    throw new Error(data.error || 'Login failed');
+                }
 
-                    if (!response.ok) {
-                        throw new Error(data.error || 'Login failed');
-                    }
+                const data = await response.json();
 
-                    // Store the token
-                    localStorage.setItem('token', data.token);
-                    localStorage.setItem('user', JSON.stringify(data.user));
+                // Store token and user data
+                localStorage.setItem('token', data.token);
+                localStorage.setItem('user', JSON.stringify(data.user));
 
-                    successAlert.textContent = 'Login successful! Redirecting...';
-                    successAlert.style.display = 'block';
-                    
-                    setTimeout(() => {
-                        window.location.href = 'mainpage.html';
-                    }, 1500);
-                } catch (error) {
-                    errorAlert.textContent = error.message;
-                    errorAlert.style.display = 'block';
-                } finally {
-                    loadingSpinner.style.display = 'none';
+                // Show success message
+                const successAlert = document.getElementById('successAlert');
+                successAlert.textContent = 'Login successful! Redirecting...';
+                successAlert.style.display = 'block';
+
+                // Redirect to index page
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 1500);
+
+            } catch (error) {
+                const errorAlert = document.getElementById('errorAlert');
+                errorAlert.textContent = error.message;
+                errorAlert.style.display = 'block';
+            } finally {
+                // Hide loading spinner
+                loginButton.disabled = false;
+                spinner.style.display = 'none';
+            }
+        });
+        
+        document.getElementById('navbarClose').addEventListener('click', () => {
+            document.getElementById('navbarNav').classList.remove('show');
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Navbar close functionality
+            const navbarCollapse = document.getElementById('navbarNav');
+            const navbarCloseBtn = document.getElementById('navbarClose');
+
+            navbarCloseBtn?.addEventListener('click', () => {
+                new bootstrap.Collapse(navbarCollapse).hide();
+            });
+
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest('.navbar') && navbarCollapse.classList.contains('show')) {
+                    new bootstrap.Collapse(navbarCollapse).hide();
                 }
             });
         });
