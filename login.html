@@ -27,14 +27,17 @@
         
         .logo {
             width: 350px;
-            /* margin-bottom: 0; */
+            margin-bottom: 0;
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(0, 102, 51, 0.25);
         }
         
         .btn-primary {
             background-color: var(--primary-color);
             border-color: var(--primary-color);
-            padding: 12px;
-            font-weight: 500;
         }
         
         .btn-primary:hover {
@@ -42,88 +45,75 @@
             border-color: #004d26;
         }
         
-        .form-control {
-            padding: 12px;
-            margin-bottom: 15px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-        }
-        
-        .form-label {
-            font-weight: 500;
-            color: #333;
-        }
-        
-        .auth-links {
-            margin-top: 20px;
-            text-align: center;
-        }
-        
-        .auth-links a {
-            color: var(--primary-color);
-            text-decoration: none;
-        }
-        
-        .auth-links a:hover {
-            text-decoration: underline;
-        }
-        
         .alert {
             display: none;
-            margin-bottom: 15px;
+            margin-top: 1rem;
         }
         
         .spinner-border {
             display: none;
-            margin-left: 10px;
-            vertical-align: middle;
+            width: 1rem;
+            height: 1rem;
+            margin-right: 0.5rem;
+        }
+
+        .otp-inputs {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: center;
+            margin: 1rem 0;
         }
         
-        #loginButton {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            min-width: 120px;
+        .otp-inputs input {
+            width: 40px;
+            height: 40px;
+            text-align: center;
+            font-size: 1.2rem;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+        }
+        
+        .otp-inputs input:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(0, 102, 51, 0.25);
+            outline: none;
+        }
+
+        #otpForm, #resendContainer {
+            display: none;
+        }
+
+        .countdown {
+            color: #666;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        .resend-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .resend-link.disabled {
+            color: #999;
+            cursor: not-allowed;
+            pointer-events: none;
         }
     </style>
 </head>
 <body>
-    <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">GMU Physics Lab</a>npm install bootstrap@5.3.0
-            node js/server.js
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <button class="btn-close btn-close-white d-lg-none ms-auto" id="navbarClose" type="button" aria-label="Close"></button>
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Features</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Pricing</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav> -->
     <div class="container">
         <div class="auth-container">
             <div class="text-center">
                 <img src="logo.png" alt="GMU Physics Lab" class="logo">
-                <h2 class="mb-4">Login</h2>
+                <h2 class="mt-4 mb-4">Login</h2>
             </div>
-            
-            <div class="alert alert-danger" id="errorAlert" role="alert"></div>
-            <div class="alert alert-success" id="successAlert" role="alert"></div>
-            
+
+            <!-- Login Form -->
             <form id="loginForm">
                 <div class="mb-3">
-                    <label for="email" class="form-label">Email address</label>
+                    <label for="email" class="form-label">Email</label>
                     <input type="email" class="form-control" id="email" required>
                 </div>
                 <div class="mb-3">
@@ -131,25 +121,80 @@
                     <input type="password" class="form-control" id="password" required>
                 </div>
                 <button type="submit" class="btn btn-primary w-100" id="loginButton">
-                    <span>Login</span>
-                    <div class="spinner-border spinner-border-sm text-light" role="status">
-                        <span class="visually-hidden">Loading...</span>
-                    </div>
+                    <span class="spinner-border" role="status"></span>
+                    Login
                 </button>
+                <div class="text-center mt-3">
+                    <a href="signup.html">Don't have an account? Sign up</a>
+                </div>
             </form>
-            
-            <div class="auth-links">
-                <p>Don't have an account? <a href="signup.html">Sign up</a></p>
-            </div>
+
+            <!-- OTP Verification Form -->
+            <form id="otpForm" class="mt-4">
+                <h4 class="text-center mb-3">Email Verification</h4>
+                <p class="text-center">Enter the verification code sent to your email</p>
+                <div class="otp-inputs">
+                    <input type="text" maxlength="1" pattern="[0-9]" inputmode="numeric">
+                    <input type="text" maxlength="1" pattern="[0-9]" inputmode="numeric">
+                    <input type="text" maxlength="1" pattern="[0-9]" inputmode="numeric">
+                    <input type="text" maxlength="1" pattern="[0-9]" inputmode="numeric">
+                    <input type="text" maxlength="1" pattern="[0-9]" inputmode="numeric">
+                    <input type="text" maxlength="1" pattern="[0-9]" inputmode="numeric">
+                </div>
+                <button type="submit" class="btn btn-primary w-100" id="verifyButton">
+                    <span class="spinner-border" role="status"></span>
+                    Verify
+                </button>
+                <div id="resendContainer" class="text-center mt-3">
+                    <div class="countdown"></div>
+                    <a class="resend-link">Resend Code</a>
+                </div>
+            </form>
+
+            <div class="alert alert-danger" id="errorAlert"></div>
+            <div class="alert alert-success" id="successAlert"></div>
         </div>
     </div>
 
     <script>
         const apiBaseUrl = 'https://lab-backend-nwko.onrender.com/api/auth';
         const loginForm = document.getElementById('loginForm');
-        const submitButton = document.getElementById('loginButton');
+        const otpForm = document.getElementById('otpForm');
+        const loginButton = document.getElementById('loginButton');
+        const verifyButton = document.getElementById('verifyButton');
         const errorAlert = document.getElementById('errorAlert');
         const successAlert = document.getElementById('successAlert');
+        const resendContainer = document.getElementById('resendContainer');
+        const resendLink = document.querySelector('.resend-link');
+        const otpInputs = document.querySelectorAll('.otp-inputs input');
+        
+        let countdownInterval = null;
+        let otpExpiry = null;
+        let userEmail = null;
+
+        // Function to start countdown timer
+        function startCountdown(minutes) {
+            const countdownDisplay = document.querySelector('.countdown');
+            otpExpiry = new Date(Date.now() + minutes * 60000);
+            
+            resendLink.classList.add('disabled');
+            
+            countdownInterval = setInterval(() => {
+                const now = new Date().getTime();
+                const distance = otpExpiry - now;
+                
+                if (distance <= 0) {
+                    clearInterval(countdownInterval);
+                    countdownDisplay.textContent = 'Code expired';
+                    resendLink.classList.remove('disabled');
+                    return;
+                }
+                
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                countdownDisplay.textContent = `Resend code in ${minutes}:${seconds.toString().padStart(2, '0')}`;
+            }, 1000);
+        }
 
         // Function to show error message
         function showError(message) {
@@ -171,20 +216,70 @@
             successAlert.style.display = 'none';
         }
 
-        // Handle form submission
+        // Function to show OTP form
+        function showOTPForm() {
+            loginForm.style.display = 'none';
+            otpForm.style.display = 'block';
+            resendContainer.style.display = 'block';
+            otpInputs[0].focus();
+            startCountdown(5);
+        }
+
+        // Function to get OTP value
+        function getOTPValue() {
+            return Array.from(otpInputs).map(input => input.value).join('');
+        }
+
+        // Handle OTP input behavior
+        otpInputs.forEach((input, index) => {
+            input.addEventListener('keyup', (e) => {
+                if (e.key === 'Backspace' && !input.value && index > 0) {
+                    otpInputs[index - 1].focus();
+                    return;
+                }
+                
+                if (input.value && index < otpInputs.length - 1) {
+                    otpInputs[index + 1].focus();
+                }
+            });
+            
+            input.addEventListener('keydown', (e) => {
+                if (e.key === 'Backspace' && !input.value && index > 0) {
+                    otpInputs[index - 1].focus();
+                }
+            });
+            
+            input.addEventListener('paste', (e) => {
+                e.preventDefault();
+                const pastedData = e.clipboardData.getData('text').slice(0, 6);
+                
+                if (!/^\d+$/.test(pastedData)) return;
+                
+                Array.from(pastedData).forEach((digit, i) => {
+                    if (otpInputs[i]) {
+                        otpInputs[i].value = digit;
+                        if (i < otpInputs.length - 1) {
+                            otpInputs[i + 1].focus();
+                        }
+                    }
+                });
+            });
+        });
+
+        // Handle login form submission
         loginForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
+            userEmail = email;
             
             // Show loading spinner
-            submitButton.disabled = true;
-            submitButton.querySelector('.spinner-border').style.display = 'inline-block';
+            loginButton.disabled = true;
+            loginButton.querySelector('.spinner-border').style.display = 'inline-block';
             hideAlerts();
             
             try {
-                // Make API request
                 const response = await fetch(`${apiBaseUrl}/login`, {
                     method: 'POST',
                     headers: {
@@ -193,22 +288,22 @@
                     },
                     body: JSON.stringify({ email, password })
                 });
-    
-                // Handle API response
-                let data;
+
+                const data = await response.json();
+                
                 if (response.ok) {
-                    data = await response.json();
-                } else {
-                    const errorResponse = await response.json();
+                    // Store token and user data
+                    localStorage.setItem('token', data.token);
+                    localStorage.setItem('user', JSON.stringify(data.user));
                     
-                    // Check if the user is not verified
-                    if (errorResponse.error === 'Email not verified') {
-                        // Show verification message
-                        const successAlert = document.getElementById('successAlert');
-                        successAlert.textContent = 'Your email is not verified. Sending verification code...';
-                        successAlert.style.display = 'block';
-                        
-                        // Send OTP to user's email
+                    // Show success message and redirect
+                    showSuccess('Login successful! Redirecting...');
+                    setTimeout(() => {
+                        window.location.href = 'index.html';
+                    }, 1500);
+                } else {
+                    if (data.error === 'Email not verified') {
+                        // Send OTP for verification
                         const otpResponse = await fetch(`${apiBaseUrl}/send-otp`, {
                             method: 'POST',
                             headers: {
@@ -217,66 +312,110 @@
                             },
                             body: JSON.stringify({ email })
                         });
+
+                        const otpData = await otpResponse.json();
                         
                         if (otpResponse.ok) {
-                            // Store email in session storage for verification page
-                            sessionStorage.setItem('verifyEmail', email);
-                            
-                            // Redirect to verification page
-                            setTimeout(() => {
-                                window.location.href = 'verify.html';
-                            }, 1500);
-                            return;
+                            showSuccess('Please verify your email address');
+                            showOTPForm();
+                        } else {
+                            throw new Error(otpData.error || 'Failed to send verification code');
                         }
+                    } else {
+                        throw new Error(data.error || 'Invalid email or password');
                     }
-                    
-                    throw new Error(errorResponse.error || 'Login failed');
                 }
-    
-                // Store token and user data
-                localStorage.setItem('token', data.token);
-                localStorage.setItem('user', JSON.stringify(data.user));
-    
-                // Show success message
-                const successAlert = document.getElementById('successAlert');
-                successAlert.textContent = 'Login successful! Redirecting...';
-                successAlert.style.display = 'block';
-    
-                // Redirect to index page after 1.5 seconds
-                setTimeout(() => {
-                    window.location.href = 'index.html';
-                }, 1500);
-    
             } catch (error) {
-                // Display error message
-                const errorAlert = document.getElementById('errorAlert');
-                errorAlert.textContent = error.message;
-                errorAlert.style.display = 'block';
+                showError(error.message);
             } finally {
-                // Hide loading spinner
-                submitButton.disabled = false;
-                submitButton.querySelector('.spinner-border').style.display = 'none';
+                loginButton.disabled = false;
+                loginButton.querySelector('.spinner-border').style.display = 'none';
             }
         });
-        
-        document.getElementById('navbarClose').addEventListener('click', () => {
-            document.getElementById('navbarNav').classList.remove('show');
+
+        // Handle OTP form submission
+        otpForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const otp = getOTPValue();
+            
+            // Show loading spinner
+            verifyButton.disabled = true;
+            verifyButton.querySelector('.spinner-border').style.display = 'inline-block';
+            hideAlerts();
+            
+            try {
+                if (otp.length !== 6) {
+                    throw new Error('Please enter the complete 6-digit verification code');
+                }
+
+                // Verify OTP and complete registration
+                const response = await fetch(`${apiBaseUrl}/verify-otp`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        email: userEmail,
+                        otp
+                    })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    // Clear countdown
+                    clearInterval(countdownInterval);
+                    
+                    // Show success message
+                    showSuccess('Email verified successfully! Please log in.');
+                    
+                    // Reset forms
+                    setTimeout(() => {
+                        otpForm.style.display = 'none';
+                        loginForm.style.display = 'block';
+                        loginForm.reset();
+                        Array.from(otpInputs).forEach(input => input.value = '');
+                    }, 1500);
+                } else {
+                    throw new Error(data.error || 'Invalid verification code');
+                }
+            } catch (error) {
+                showError(error.message);
+            } finally {
+                verifyButton.disabled = false;
+                verifyButton.querySelector('.spinner-border').style.display = 'none';
+            }
         });
 
-        document.addEventListener('DOMContentLoaded', () => {
-            // Navbar close functionality
-            const navbarCollapse = document.getElementById('navbarNav');
-            const navbarCloseBtn = document.getElementById('navbarClose');
+        // Handle resend link click
+        resendLink.addEventListener('click', async () => {
+            if (resendLink.classList.contains('disabled')) {
+                return;
+            }
+            
+            try {
+                const response = await fetch(`${apiBaseUrl}/send-otp`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify({ email: userEmail })
+                });
 
-            navbarCloseBtn?.addEventListener('click', () => {
-                new bootstrap.Collapse(navbarCollapse).hide();
-            });
-
-            document.addEventListener('click', (e) => {
-                if (!e.target.closest('.navbar') && navbarCollapse.classList.contains('show')) {
-                    new bootstrap.Collapse(navbarCollapse).hide();
+                const data = await response.json();
+                
+                if (response.ok) {
+                    showSuccess('Verification code resent');
+                    startCountdown(5);
+                } else {
+                    throw new Error(data.error || 'Failed to resend code');
                 }
-            });
+            } catch (error) {
+                showError(error.message);
+            }
         });
     </script>
 </body>
