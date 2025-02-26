@@ -13,10 +13,8 @@ document.addEventListener('DOMContentLoaded', function() {
             <div id="chat-messages" class="chat-container"></div>
             <div id="typing-indicator">Assistant is typing...</div>
             <div id="chat-input">
-                <form id="chatForm">
-                    <input type="text" id="user-input" placeholder="Ask about physics courses and labs...">
-                    <button id="send-button">Send</button>
-                </form>
+                <input type="text" id="user-input" placeholder="Ask about physics courses and labs...">
+                <button id="send-button">Send</button>
             </div>
         </div>
         <button id="chat-toggle" class="chat-toggle-button">
@@ -378,18 +376,19 @@ document.addEventListener('DOMContentLoaded', function() {
             if (hostname === 'localhost' || hostname === '127.0.0.1') {
                 apiUrl = 'http://localhost:3000/api/chat';
             } else {
+                // For production, use the full URL
                 apiUrl = 'https://lab-backend-nwko.onrender.com/api/chat';
             }
 
             console.log('Using API URL:', apiUrl); // Debug log
 
+            // Make the API request
             const response = await fetch(apiUrl, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                     'Accept': 'application/json'
                 },
-                credentials: 'include',
                 body: JSON.stringify({ prompt: message })
             });
 
@@ -429,7 +428,11 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Function to handle sending message
-    function handleSendMessage() {
+    function handleSendMessage(event) {
+        if (event) {
+            event.preventDefault();
+        }
+        
         const message = userInput.value.trim();
         if (message) {
             sendMessage(message);
@@ -445,17 +448,12 @@ document.addEventListener('DOMContentLoaded', function() {
     userInput.addEventListener('keypress', (e) => {
         if (e.key === 'Enter' && !e.shiftKey) {
             e.preventDefault(); // Prevent default to avoid newline
-            handleSendMessage();
+            handleSendMessage(e);
         }
     });
 
     // Handle input focus
     userInput.addEventListener('focus', () => {
         chatMessages.scrollTop = chatMessages.scrollHeight;
-    });
-
-    // Prevent form submission
-    document.querySelector('#chatForm')?.addEventListener('submit', (e) => {
-        e.preventDefault();
     });
 });
