@@ -203,7 +203,7 @@
                         successAlert.style.display = 'block';
                         
                         // Send OTP to user's email
-                        const otpResponse = await fetch('https://lab-backend-nwko.onrender.com/auth/send-otp', {
+                        const otpResponse = await fetch('https://lab-backend-nwko.onrender.com/api/auth/send-otp', {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json',
