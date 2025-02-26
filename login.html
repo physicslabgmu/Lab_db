@@ -222,7 +222,7 @@
             otpForm.style.display = 'block';
             resendContainer.style.display = 'block';
             otpInputs[0].focus();
-            startCountdown(5);
+            startCountdown(1); // Changed from 5 to 1 minute
         }
 
         // Function to get OTP value
@@ -302,7 +302,7 @@
                         window.location.href = 'index.html';
                     }, 1500);
                 } else {
-                    if (data.error === 'Email not verified') {
+                    if (response.status === 401 && data.needsVerification) {
                         // Send OTP for verification
                         const otpResponse = await fetch(`${apiBaseUrl}/send-otp`, {
                             method: 'POST',
@@ -409,7 +409,7 @@
                 
                 if (response.ok) {
                     showSuccess('Verification code resent');
-                    startCountdown(5);
+                    startCountdown(1);
                 } else {
                     throw new Error(data.error || 'Failed to resend code');
                 }
