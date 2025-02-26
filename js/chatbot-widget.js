@@ -374,13 +374,16 @@ document.addEventListener('DOMContentLoaded', function() {
             // Determine API URL based on hostname
             let apiUrl;
             if (hostname === 'localhost' || hostname === '127.0.0.1') {
-                apiUrl = 'http://localhost:3000/api/chat';
+                apiUrl = 'http://localhost:3000/api/auth/chat';
             } else {
                 // For production, use the full URL
-                apiUrl = 'https://lab-backend-nwko.onrender.com/api/chat';
+                apiUrl = 'https://lab-backend-nwko.onrender.com/api/auth/chat';
             }
 
             console.log('Using API URL:', apiUrl); // Debug log
+
+            // Show typing indicator
+            typingIndicator.style.display = 'block';
 
             // Make the API request
             const response = await fetch(apiUrl, {
@@ -397,7 +400,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             const data = await response.json();
-
+            
             // Hide typing indicator
             typingIndicator.style.display = 'none';
 
