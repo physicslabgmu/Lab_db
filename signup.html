@@ -79,11 +79,57 @@
             vertical-align: middle;
         }
         
-        #signupButton {
+        #signupButton, #verifyButton {
             display: inline-flex;
             align-items: center;
             justify-content: center;
             min-width: 120px;
+        }
+        
+        .otp-container {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px 0;
+        }
+        
+        .otp-input {
+            width: 45px;
+            height: 50px;
+            text-align: center;
+            font-size: 20px;
+            font-weight: 500;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+        
+        .timer {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #666;
+        }
+        
+        #countdown {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+        
+        .resend-link {
+            text-align: center;
+            margin-top: 15px;
+        }
+        
+        .resend-link a {
+            color: var(--primary-color);
+            text-decoration: none;
+            cursor: pointer;
+        }
+        
+        .resend-link a:hover {
+            text-decoration: underline;
+        }
+        
+        .hidden {
+            display: none !important;
         }
     </style>
 </head>
@@ -98,6 +144,7 @@
             <div class="alert alert-danger" id="errorAlert" role="alert"></div>
             <div class="alert alert-success" id="successAlert" role="alert"></div>
             
+            <!-- Signup Form -->
             <form id="signupForm">
                 <div class="mb-3">
                     <label for="name" class="form-label">Full Name</label>
@@ -119,6 +166,35 @@
                 </button>
             </form>
             
+            <!-- OTP Verification Form -->
+            <form id="otpForm" class="hidden">
+                <p class="text-center mb-3">We've sent a verification code to your email. Please enter it below:</p>
+                
+                <div class="otp-container">
+                    <input type="text" class="otp-input" maxlength="1" autofocus>
+                    <input type="text" class="otp-input" maxlength="1">
+                    <input type="text" class="otp-input" maxlength="1">
+                    <input type="text" class="otp-input" maxlength="1">
+                    <input type="text" class="otp-input" maxlength="1">
+                    <input type="text" class="otp-input" maxlength="1">
+                </div>
+                
+                <div class="timer">
+                    <span id="countdown">05:00</span> remaining
+                </div>
+                
+                <button type="submit" class="btn btn-primary w-100" id="verifyButton">
+                    <span>Verify</span>
+                    <div class="spinner-border spinner-border-sm text-light" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </button>
+                
+                <div class="resend-link">
+                    <a id="resendLink">Didn't receive the code? Resend</a>
+                </div>
+            </form>
+            
             <div class="auth-links">
                 <p>Already have an account? <a href="login.html">Login</a></p>
             </div>
@@ -126,92 +202,272 @@
     </div>
 
     <script>
-        document.getElementById('signupForm').addEventListener('submit', async (e) => {
+        // DOM Elements
+        const signupForm = document.getElementById('signupForm');
+        const otpForm = document.getElementById('otpForm');
+        const errorAlert = document.getElementById('errorAlert');
+        const successAlert = document.getElementById('successAlert');
+        const signupButton = document.getElementById('signupButton');
+        const verifyButton = document.getElementById('verifyButton');
+        const resendLink = document.getElementById('resendLink');
+        const countdownEl = document.getElementById('countdown');
+        const otpInputs = document.querySelectorAll('.otp-input');
+        
+        // Store user data temporarily
+        let userData = {};
+        let otpExpiry = null;
+        let countdownInterval = null;
+        const apiBaseUrl = 'https://lab-backend-nwko.onrender.com/auth';
+        
+        // Handle OTP input behavior
+        otpInputs.forEach((input, index) => {
+            // Auto-focus next input when a digit is entered
+            input.addEventListener('input', (e) => {
+                if (e.target.value.length === 1) {
+                    if (index < otpInputs.length - 1) {
+                        otpInputs[index + 1].focus();
+                    }
+                }
+            });
+            
+            // Handle backspace
+            input.addEventListener('keydown', (e) => {
+                if (e.key === 'Backspace' && !e.target.value && index > 0) {
+                    otpInputs[index - 1].focus();
+                }
+            });
+        });
+        
+        // Start countdown timer
+        function startCountdown(minutes) {
+            clearInterval(countdownInterval);
+            
+            const now = new Date().getTime();
+            otpExpiry = now + minutes * 60 * 1000;
+            
+            countdownInterval = setInterval(() => {
+                const currentTime = new Date().getTime();
+                const timeLeft = otpExpiry - currentTime;
+                
+                if (timeLeft <= 0) {
+                    clearInterval(countdownInterval);
+                    countdownEl.textContent = '00:00';
+                    // OTP expired, show message
+                    showError('Verification code has expired. Please request a new one.');
+                    return;
+                }
+                
+                const minutesLeft = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                const secondsLeft = Math.floor((timeLeft % (1000 * 60)) / 1000);
+                
+                countdownEl.textContent = `${minutesLeft.toString().padStart(2, '0')}:${secondsLeft.toString().padStart(2, '0')}`;
+            }, 1000);
+        }
+        
+        // Get OTP value from inputs
+        function getOTPValue() {
+            return Array.from(otpInputs).map(input => input.value).join('');
+        }
+        
+        // Clear OTP inputs
+        function clearOTPInputs() {
+            otpInputs.forEach(input => {
+                input.value = '';
+            });
+            otpInputs[0].focus();
+        }
+        
+        // Show error message
+        function showError(message) {
+            errorAlert.textContent = message;
+            errorAlert.style.display = 'block';
+            successAlert.style.display = 'none';
+        }
+        
+        // Show success message
+        function showSuccess(message) {
+            successAlert.textContent = message;
+            successAlert.style.display = 'block';
+            errorAlert.style.display = 'none';
+        }
+        
+        // Hide alerts
+        function hideAlerts() {
+            errorAlert.style.display = 'none';
+            successAlert.style.display = 'none';
+        }
+        
+        // Show form and hide others
+        function showForm(formToShow) {
+            if (formToShow === 'signup') {
+                signupForm.classList.remove('hidden');
+                otpForm.classList.add('hidden');
+            } else if (formToShow === 'otp') {
+                signupForm.classList.add('hidden');
+                otpForm.classList.remove('hidden');
+            }
+        }
+        
+        // Handle signup form submission
+        signupForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             
             const name = document.getElementById('name').value.trim();
             const email = document.getElementById('email').value.trim();
             const password = document.getElementById('password').value.trim();
-            const signupButton = document.getElementById('signupButton');
-            const spinner = signupButton.querySelector('.spinner-border');
             
             // Show loading spinner
             signupButton.disabled = true;
-            spinner.style.display = 'inline-block';
+            signupButton.querySelector('.spinner-border').style.display = 'inline-block';
+            hideAlerts();
             
             try {
-                // Get user input values
-                
                 // Basic input validation
                 if (!name || !email || !password) {
                     throw new Error("All fields are required.");
                 }
-    
-                // Make API request
-                const response = await fetch('https://lab-backend-nwko.onrender.com/api/auth/register', {
+                
+                if (password.length < 6) {
+                    throw new Error("Password must be at least 6 characters long.");
+                }
+                
+                // Store user data temporarily
+                userData = { name, email, password };
+                
+                // Send request to backend to send OTP
+                const response = await fetch(`${apiBaseUrl}/send-otp`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                         'Accept': 'application/json'
                     },
-                    body: JSON.stringify({ name, email, password })
+                    body: JSON.stringify({ email })
                 });
-    
-                // Handle API response
-                let data;
+                
+                const data = await response.json();
+                
                 if (response.ok) {
-                    data = await response.json();
+                    // Show OTP verification form
+                    showForm('otp');
+                    // Start 5-minute countdown
+                    startCountdown(5);
+                    // Focus on first OTP input
+                    otpInputs[0].focus();
+                    // Show success message
+                    showSuccess(data.message || 'Verification code sent to your email');
                 } else {
-                    const errorResponse = await response.json();
-                    throw new Error(errorResponse.error || 'Registration failed');
+                    throw new Error(data.error || 'Failed to send verification code');
                 }
-    
-                // Store token and user data
-                localStorage.setItem('token', data.token);
-                localStorage.setItem('user', JSON.stringify(data.user));
-    
-                // Show success message
-                const successAlert = document.getElementById('successAlert');
-                successAlert.textContent = 'Registration successful! Redirecting...';
-                successAlert.style.display = 'block';
-    
-                // Redirect to index page after 1.5 seconds
-                setTimeout(() => {
-                    window.location.href = 'login.html';
-                }, 1500);
-    
             } catch (error) {
-                // Display error message
-                const errorAlert = document.getElementById('errorAlert');
-                errorAlert.textContent = error.message;
-                errorAlert.style.display = 'block';
+                showError(error.message);
             } finally {
                 // Hide loading spinner
                 signupButton.disabled = false;
-                spinner.style.display = 'none';
+                signupButton.querySelector('.spinner-border').style.display = 'none';
+            }
+        });
+        
+        // Handle OTP verification form submission
+        otpForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const otp = getOTPValue();
+            
+            // Show loading spinner
+            verifyButton.disabled = true;
+            verifyButton.querySelector('.spinner-border').style.display = 'inline-block';
+            hideAlerts();
+            
+            try {
+                if (otp.length !== 6) {
+                    throw new Error('Please enter the complete 6-digit verification code');
+                }
+                
+                // Register user with OTP
+                const registerResponse = await fetch(`${apiBaseUrl}/register`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        name: userData.name,
+                        email: userData.email,
+                        password: userData.password,
+                        otp
+                    })
+                });
+                
+                const registerData = await registerResponse.json();
+                
+                if (registerResponse.ok) {
+                    // Clear countdown
+                    clearInterval(countdownInterval);
+                    
+                    // Store token and user data
+                    localStorage.setItem('token', registerData.token);
+                    localStorage.setItem('user', JSON.stringify(registerData.user));
+                    
+                    // Show success message
+                    showSuccess('Registration successful! Redirecting...');
+                    
+                    // Redirect to login page after 1.5 seconds
+                    setTimeout(() => {
+                        window.location.href = 'login.html';
+                    }, 1500);
+                } else {
+                    throw new Error(registerData.error || 'Registration failed');
+                }
+            } catch (error) {
+                showError(error.message);
+            } finally {
+                // Hide loading spinner
+                verifyButton.disabled = false;
+                verifyButton.querySelector('.spinner-border').style.display = 'none';
+            }
+        });
+        
+        // Handle resend link click
+        resendLink.addEventListener('click', async () => {
+            if (resendLink.classList.contains('disabled')) {
+                return;
+            }
+            
+            resendLink.classList.add('disabled');
+            hideAlerts();
+            
+            try {
+                const response = await fetch(`${apiBaseUrl}/resend-otp`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify({ email: userData.email })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    // Reset countdown
+                    startCountdown(5);
+                    // Clear OTP inputs
+                    clearOTPInputs();
+                    // Show success message
+                    showSuccess(data.message || 'A new verification code has been sent to your email');
+                    
+                    // Disable resend for 30 seconds
+                    setTimeout(() => {
+                        resendLink.classList.remove('disabled');
+                    }, 30000);
+                } else {
+                    throw new Error(data.error || 'Failed to resend verification code');
+                }
+            } catch (error) {
+                showError(error.message);
+                resendLink.classList.remove('disabled');
             }
         });
     </script>
-    
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-        const navbarCollapse = document.getElementById('navbarNav');
-        const navbarCloseBtn = document.getElementById('navbarClose');
-    
-        if (navbarCloseBtn && navbarCollapse) { // Ensure elements exist before using them
-            navbarCloseBtn.addEventListener('click', () => {
-                new bootstrap.Collapse(navbarCollapse).hide();
-            });
-    
-            document.addEventListener('click', (e) => {
-                if (!e.target.closest('.navbar') && navbarCollapse.classList.contains('show')) {
-                    new bootstrap.Collapse(navbarCollapse).hide();
-                }
-            });
-        }
-    });
-
-    </script>
-
 </body>
 </html>
