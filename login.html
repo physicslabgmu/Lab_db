@@ -310,7 +310,7 @@
                                 'Content-Type': 'application/json',
                                 'Accept': 'application/json'
                             },
-                            body: JSON.stringify({ email })
+                            body: JSON.stringify({ email, isRegistration: false })
                         });
 
                         const otpData = await otpResponse.json();
