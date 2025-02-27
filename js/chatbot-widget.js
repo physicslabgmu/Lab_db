@@ -374,59 +374,48 @@ document.addEventListener('DOMContentLoaded', function() {
             // Determine API URL based on hostname
             let apiUrl;
             if (hostname === 'localhost' || hostname === '127.0.0.1') {
-                apiUrl = 'http://localhost:3000/api/chat';
-            } else if (window.location.href.includes('127.0.0.1:5500')) {
-                apiUrl = 'http://127.0.0.1:5500/api/chat';
+                apiUrl = 'http://localhost:3000/api/auth/chat';
+            } else if (hostname === 'physicslabgmu.github.io') {
+                apiUrl = 'https://lab-backend-nwko.onrender.com/api/auth/chat';
             } else {
-                apiUrl = 'https://lab-backend-nwko.onrender.com/api/chat';
+                apiUrl = '/api/auth/chat'; // Default fallback
             }
 
             console.log('Using API URL:', apiUrl); // Debug log
 
+            // Show typing indicator
+            typingIndicator.style.display = 'block';
+
+            // Make the API request
             const response = await fetch(apiUrl, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    'Accept': 'application/json'
                 },
                 body: JSON.stringify({ prompt: message })
             });
 
-            const data = await response.json();
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
 
+            const data = await response.json();
+            
             // Hide typing indicator
             typingIndicator.style.display = 'none';
 
-            if (!response.ok || data.error) {
-                console.error('Server error:', data);
-                throw new Error(data.message || 'An error occurred while processing your request');
-            }
+            // Add bot response to chat
+            const botMessageDiv = document.createElement('div');
+            botMessageDiv.className = 'message assistant';
+            botMessageDiv.textContent = data.response || data.message;
+            chatMessages.appendChild(botMessageDiv);
+            addToHistory('assistant', data.response || data.message);
 
-            // Add assistant message to chat
-            const assistantMessageDiv = document.createElement('div');
-            assistantMessageDiv.className = 'message assistant';
+            // Save chat history
+            saveChatHistory();
             
-            if (!data.message) {
-                throw new Error('No response received from server');
-            }
-
-            let messageText = data.message;
-
-            // Convert markdown links to HTML
-            messageText = messageText.replace(
-                /\[([^\]]+)\]\(([^)]+)\)/g,
-                (match, text, url) => {
-                    const cleanUrl = url.trim();
-                    const fileExt = cleanUrl.split('.').pop().toLowerCase();
-                    const icon = fileExt === 'pdf' ? '📄' : 
-                               ['jpg', 'jpeg', 'png', 'gif'].includes(fileExt) ? '🖼️' : '🔗';
-                    return `${icon} <a href="${cleanUrl}" target="_blank" rel="noopener noreferrer">${text}</a>`;
-                }
-            );
-
-            assistantMessageDiv.innerHTML = messageText;
-            chatMessages.appendChild(assistantMessageDiv);
-            addToHistory('assistant', messageText);
-            
+            // Scroll to bottom
             chatMessages.scrollTop = chatMessages.scrollHeight;
         } catch (error) {
             console.error('Error:', error);
@@ -442,23 +431,33 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Handle send button click
-    sendButton.addEventListener('click', () => {
+    // Function to handle sending message
+    function handleSendMessage(event) {
+        if (event) {
+            event.preventDefault();
+        }
+        
         const message = userInput.value.trim();
         if (message) {
             sendMessage(message);
             userInput.value = '';
+            userInput.focus();
         }
-    });
+    }
+
+    // Handle send button click
+    sendButton.addEventListener('click', handleSendMessage);
 
     // Handle enter key
     userInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
-            const message = userInput.value.trim();
-            if (message) {
-                sendMessage(message);
-                userInput.value = '';
-            }
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault(); // Prevent default to avoid newline
+            handleSendMessage(e);
         }
+    });
+
+    // Handle input focus
+    userInput.addEventListener('focus', () => {
+        chatMessages.scrollTop = chatMessages.scrollHeight;
     });
 });
