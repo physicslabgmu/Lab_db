@@ -419,6 +419,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 scripts[i].remove();
             }
             
+            // Fix link formatting issues - remove trailing parentheses from links
+            const links = tempDiv.getElementsByTagName('a');
+            for (let i = 0; i < links.length; i++) {
+                const link = links[i];
+                const href = link.getAttribute('href');
+                if (href && href.endsWith(')')) {
+                    link.setAttribute('href', href.slice(0, -1));
+                }
+            }
+            
             // Set the sanitized HTML content
             botMessageDiv.innerHTML = tempDiv.innerHTML;
             
