@@ -150,22 +150,63 @@ document.addEventListener('DOMContentLoaded', function() {
             border-radius: 8px;
             max-width: 85%;
             font-size: 14px;
-            line-height: 1.5;
+            line-height: 1.4;
             word-wrap: break-word;
-            overflow-wrap: break-word;
         }
 
-        .user {
-            background-color: #e3f2fd;
+        .message.user {
+            background: #E3F2FD;
             margin-left: auto;
             color: #000;
         }
 
-        .assistant {
-            background-color: #f5f5f5;
+        .message.assistant {
+            background: #F5F5F5;
             margin-right: auto;
-            white-space: pre-wrap;
             color: #000;
+        }
+
+        .message img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 10px auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .message .chat-image-container {
+            margin: 10px 0;
+            text-align: center;
+            background: #fff;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .message .chat-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .message .image-caption {
+            margin-top: 8px;
+            color: #666;
+            font-size: 0.9em;
+            text-align: center;
+        }
+
+        .message .image-error {
+            color: #dc3545;
+            background: #f8d7da;
+            padding: 8px;
+            border-radius: 4px;
+            margin: 5px 0;
+            text-align: center;
+            font-size: 0.9em;
         }
 
         .message a {
@@ -417,6 +458,22 @@ document.addEventListener('DOMContentLoaded', function() {
             const scripts = tempDiv.getElementsByTagName('script');
             for (let i = scripts.length - 1; i >= 0; i--) {
                 scripts[i].remove();
+            }
+            
+            // Process images to ensure they load properly
+            const images = tempDiv.getElementsByTagName('img');
+            for (let i = 0; i < images.length; i++) {
+                const img = images[i];
+                img.onerror = () => {
+                    img.style.display = 'none';
+                    const errorText = document.createElement('div');
+                    errorText.className = 'image-error';
+                    errorText.textContent = 'Failed to load image';
+                    img.parentNode.appendChild(errorText);
+                };
+                img.onload = () => {
+                    chatMessages.scrollTop = chatMessages.scrollHeight;
+                };
             }
             
             // Fix link formatting issues - remove trailing parentheses from links
