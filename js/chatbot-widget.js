@@ -361,7 +361,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Add user message to chat and history
         const userMessageDiv = document.createElement('div');
         userMessageDiv.className = 'message user';
-        userMessageDiv.textContent = message;
+        userMessageDiv.textContent = message;  
         chatMessages.appendChild(userMessageDiv);
         addToHistory('user', message);
         
@@ -408,7 +408,27 @@ document.addEventListener('DOMContentLoaded', function() {
             // Add bot response to chat
             const botMessageDiv = document.createElement('div');
             botMessageDiv.className = 'message assistant';
-            botMessageDiv.textContent = data.response || data.message;
+            
+            // Create a temporary div to sanitize the HTML content
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = data.response || data.message;
+            
+            // Remove any script tags for security
+            const scripts = tempDiv.getElementsByTagName('script');
+            for (let i = scripts.length - 1; i >= 0; i--) {
+                scripts[i].remove();
+            }
+            
+            // Set the sanitized HTML content
+            botMessageDiv.innerHTML = tempDiv.innerHTML;
+            
+            // Apply any styles from the response
+            if (data.styles) {
+                const styleElement = document.createElement('style');
+                styleElement.textContent = data.styles;
+                document.head.appendChild(styleElement);
+            }
+            
             chatMessages.appendChild(botMessageDiv);
             addToHistory('assistant', data.response || data.message);
 
