@@ -148,7 +148,28 @@ nav a.navbar-brand img {
     background-color: white;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
-    overflow: hidden;
+    overflow-x: auto;
+    display: block;
+}
+
+.lab-table img {
+    max-width: 200px;
+    width: 100%;
+    height: auto;
+}
+
+.lab-table th:nth-child(1) { width: 5%; }
+.lab-table th:nth-child(2) { width: 25%; }
+.lab-table th:nth-child(3) { width: 30%; }
+.lab-table th:nth-child(4) { width: 20%; }
+.lab-table th:nth-child(5) { width: 20%; }
+
+@media (max-width: 768px) {
+    .lab-table th:nth-child(1) { width: 10%; }
+    .lab-table th:nth-child(2) { width: 30%; }
+    .lab-table th:nth-child(3) { width: 60%; }
+    .lab-table th:nth-child(4),
+    .lab-table th:nth-child(5) { width: 100%; }
 }
 
 .lab-table th {
@@ -272,6 +293,24 @@ nav a.navbar-brand img {
     .btn {
         padding: 0.375rem 0.75rem;
         font-size: 0.875rem;
+    }
+
+    .lab-table td,
+    .lab-table th {
+        padding: 0.5rem;
+        font-size: 0.875rem;
+    }
+
+    .lab-table img {
+        max-width: 150px;
+    }
+
+    .header-content h1 {
+        font-size: 1.75rem;
+    }
+
+    .header-content p {
+        font-size: 1rem;
     }
 }
 
