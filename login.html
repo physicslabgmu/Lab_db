@@ -157,7 +157,13 @@
     </div>
 
     <script>
-        const apiBaseUrl = 'https://lab-backend-nwko.onrender.com/api/auth';
+        const apiBaseUrl = (function () {
+            var h = window.location.hostname;
+            if (h === 'localhost' || h === '127.0.0.1') {
+                return 'http://localhost:3000/api/auth';
+            }
+            return 'https://lab-backend-nwko.onrender.com/api/auth';
+        })();
         const loginForm = document.getElementById('loginForm');
         const otpForm = document.getElementById('otpForm');
         const loginButton = document.getElementById('loginButton');

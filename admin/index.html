@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Admin — Lab file upload</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        :root { --primary-color: #006633; }
+        body {
+            background: #f0f2f5;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            min-height: 100vh;
+        }
+        .admin-card {
+            max-width: 520px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+        }
+        h1 { color: var(--primary-color); font-size: 1.5rem; }
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+        .btn-primary:hover {
+            background-color: #004d26;
+            border-color: #004d26;
+        }
+        .hint { font-size: 0.85rem; color: #6c757d; }
+        code { font-size: 0.85rem; }
+    </style>
+</head>
+<body>
+    <div class="container py-4">
+        <div class="admin-card">
+            <h1 class="mb-1">Lab admin — upload</h1>
+            <p class="text-muted small mb-4">Not linked from the public site. Uses the same admin credentials as <code>/api/upload</code> on the backend.</p>
+
+            <div class="mb-3">
+                <label class="form-label" for="adminUser">Admin username</label>
+                <input type="text" id="adminUser" class="form-control" autocomplete="username" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="adminPass">Admin password</label>
+                <input type="password" id="adminPass" class="form-control" autocomplete="current-password" required>
+            </div>
+
+            <div class="mb-3">
+                <button type="button" class="btn btn-outline-secondary btn-sm" id="btnPing">Test API connection</button>
+                <span class="hint ms-2">GET <code>/api/admin/ping</code></span>
+            </div>
+
+            <hr>
+
+            <form id="uploadForm">
+                <div class="mb-3">
+                    <label class="form-label" for="course">Course</label>
+                    <select id="course" class="form-select" required>
+                        <option value="" disabled selected>Select course…</option>
+                        <option value="phy103">PHY 103</option>
+                        <option value="phy104">PHY 104</option>
+                        <option value="phy161">PHY 161</option>
+                        <option value="phy244">PHY 244</option>
+                        <option value="phy246">PHY 246</option>
+                        <option value="phy261">PHY 261</option>
+                        <option value="phy263">PHY 263</option>
+                        <option value="phy311">PHY 311</option>
+                        <option value="phy312">PHY 312</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="assetName">Lab Activity name</label>
+                    <input type="text" id="assetName" class="form-control" required
+                           placeholder="e.g. Magnetic Induction">
+                    <div class="form-text hint">One row per activity name. Pictures and PDFs attach to the <strong>same</strong> row; repeat upload with the same name to append more.</div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="assetDesc">Description</label>
+                    <textarea id="assetDesc" class="form-control" rows="2"
+                              placeholder="Optional caption or details (shown under Pictures)"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="file">Pictures (column)</label>
+                    <input type="file" id="file" name="file" class="form-control" multiple accept="image/*">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="manual">Lab manuals (PDF)</label>
+                    <input type="file" id="manual" name="manual" class="form-control" multiple accept=".pdf,application/pdf">
+                    <div class="form-text hint">At least one <strong>picture</strong> and/or one <strong>PDF</strong> required per submit.</div>
+                </div>
+                <button type="submit" class="btn btn-primary">Upload to R2</button>
+            </form>
+
+            <div id="status" class="alert mt-3 d-none" role="status"></div>
+
+            <p class="hint mt-4 mb-0">
+                <strong>API URL:</strong> edit <code>window.__LAB_API_BASE__</code> below.
+                Local backend: <code>http://localhost:3000</code>.
+                Production: your Render (or other) API origin, no trailing slash.
+            </p>
+            <p class="hint mt-2 mb-0">
+                <a href="../index.html">← Back to lab site</a>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        (function () {
+            var h = window.location.hostname;
+            if (h === 'localhost' || h === '127.0.0.1') {
+                window.__LAB_API_BASE__ = 'http://localhost:3000';
+            } else {
+                window.__LAB_API_BASE__ = 'https://lab-backend-nwko.onrender.com';
+            }
+        })();
+    </script>
+    <script src="../js/admin-upload.js"></script>
+</body>
+</html>
