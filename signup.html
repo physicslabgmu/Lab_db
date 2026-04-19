@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Sign Up - GMU Physics Lab</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
     <style>
         :root {
             --primary-color: #006633;
@@ -47,6 +48,17 @@
             margin-bottom: 15px;
             border: 1px solid #ddd;
             border-radius: 8px;
+        }
+
+        .input-group .form-control {
+            margin-bottom: 0;
+        }
+
+        #passwordToggle {
+            border-color: #ddd;
+        }
+        #passwordToggle:focus {
+            box-shadow: 0 0 0 0.2rem rgba(0, 102, 51, 0.15);
         }
         
         .form-label {
@@ -156,7 +168,12 @@
                 </div>
                 <div class="mb-3">
                     <label for="password" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="password" required>
+                    <div class="input-group">
+                        <input type="password" class="form-control" id="password" name="password" required autocomplete="new-password" minlength="6">
+                        <button type="button" class="btn btn-outline-secondary" id="passwordToggle" aria-label="Show password" aria-pressed="false" title="Show password">
+                            <i class="bi bi-eye" id="passwordToggleIcon" aria-hidden="true"></i>
+                        </button>
+                    </div>
                 </div>
                 <button type="submit" class="btn btn-primary w-100" id="signupButton">
                     <span>Sign Up</span>
@@ -223,6 +240,23 @@
                 return 'http://localhost:3000/api/auth';
             }
             return 'https://lab-backend-nwko.onrender.com/api/auth';
+        })();
+
+        (function wirePasswordVisibilityToggle() {
+            const pwd = document.getElementById('password');
+            const btn = document.getElementById('passwordToggle');
+            const icon = document.getElementById('passwordToggleIcon');
+            if (!pwd || !btn || !icon) return;
+            btn.addEventListener('click', () => {
+                const visible = pwd.type === 'text';
+                pwd.type = visible ? 'password' : 'text';
+                icon.classList.toggle('bi-eye', visible);
+                icon.classList.toggle('bi-eye-slash', !visible);
+                const show = visible;
+                btn.setAttribute('aria-pressed', show ? 'false' : 'true');
+                btn.setAttribute('aria-label', show ? 'Show password' : 'Hide password');
+                btn.setAttribute('title', show ? 'Show password' : 'Hide password');
+            });
         })();
         
         // Handle OTP input behavior
